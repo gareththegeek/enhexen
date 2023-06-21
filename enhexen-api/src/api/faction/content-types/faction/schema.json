@@ -1,0 +1,64 @@
+{
+  "kind": "collectionType",
+  "collectionName": "factions",
+  "info": {
+    "singularName": "faction",
+    "pluralName": "factions",
+    "displayName": "Faction",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "cunning": {
+      "type": "integer"
+    },
+    "force": {
+      "type": "integer"
+    },
+    "wealth": {
+      "type": "integer"
+    },
+    "income": {
+      "type": "integer"
+    },
+    "magic": {
+      "type": "enumeration",
+      "enum": [
+        "None",
+        "Low",
+        "Medium",
+        "High"
+      ]
+    },
+    "treasure": {
+      "type": "integer"
+    },
+    "hitPoints": {
+      "type": "integer"
+    },
+    "hq": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::hex.hex"
+    },
+    "assets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::unit.unit"
+    },
+    "npcs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::npc.npc"
+    }
+  }
+}

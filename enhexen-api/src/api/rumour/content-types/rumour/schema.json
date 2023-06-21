@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rumours",
+  "info": {
+    "singularName": "rumour",
+    "pluralName": "rumours",
+    "displayName": "Rumour",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "text": {
+      "type": "text"
+    },
+    "roll": {
+      "type": "integer"
+    },
+    "done": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

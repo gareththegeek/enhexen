@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "adventures",
+  "info": {
+    "singularName": "adventure",
+    "pluralName": "adventures",
+    "displayName": "Adventure",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "hyperlink": {
+      "type": "string",
+      "regex": "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)"
+    },
+    "level": {
+      "type": "string"
+    },
+    "rumours": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::rumour.rumour"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "encounters",
+  "info": {
+    "singularName": "encounter",
+    "pluralName": "encounters",
+    "displayName": "Encounter",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "description": {
+      "type": "text"
+    },
+    "roll": {
+      "type": "string"
+    }
+  }
+}
