@@ -5,7 +5,7 @@ import Label from '../atoms/Label'
 const Field = (props) => (
   <>
     <Label htmlFor={props.name}>{props.label}</Label>
-    {React.cloneElement(props.children, { ...props })}
+    {props.children}
   </>
 )
 

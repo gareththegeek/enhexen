@@ -50,7 +50,7 @@ interface StrapiResponse {
     data: {
         data: {
             id: number
-            attributes: Record<string, string | number | boolean | { data: StrapiResponse[] }>
+            attributes: { name: string, [key: string]: string | number | boolean | { data: StrapiResponse[] }}
         }
     }
 }
@@ -111,7 +111,7 @@ const insertAllTheThings = async (entityType: string, records: any[], mapper = (
     const responses: StrapiResponse[] = []
     for(const x of records) {
         // Apparently if I go too quickly strapi breaks
-        delay(800)
+        //delay(800)
         responses.push(await post(entityType, mapper(x)))
     }
     return responses
@@ -119,7 +119,8 @@ const insertAllTheThings = async (entityType: string, records: any[], mapper = (
 
 const importEncounterTable = async ([key, csv]: [string, string]): Promise<void> => {
     const encountersFromCsv = await readCsv<EncounterRecord>(csv)
-    const encounterResponses = await insertAllTheThings('encounters', encountersFromCsv)
+    const encountersToInsert = encountersFromCsv.map(x => ({ roll: x.Roll, description: x.Encounter }))
+    const encounterResponses = await insertAllTheThings('encounters', encountersToInsert)
     encounters[key] = encounterResponses.map(x => x.data.data.id)
     console.log(encounters)
 }
@@ -150,12 +151,13 @@ const importHexes = async () => {
             ))
         ).sort((a, b) => a.name.localeCompare(b.name))
 
-    const regionResponses = await insertAllTheThings('regions', regionsFromCsv, (x) => ({ data: { name: x }}))
+    const regionResponses = await insertAllTheThings('regions', regionsFromCsv, (x) => ({ data: { name: x, encounters: encounters[x] }}))
     const regions = regionResponses
         .map(x => x.data.data) // I don't know why there's two datas :/
-        .map(x => ({
-            id: x.id,
-            name: x.attributes.name as string
+        .map(({id, attributes: { name }}) => ({
+            id,
+            name,
+            encounters: encounters[name]
         }))
         .reduce((a, c) => {
             a[c.name] = c
@@ -203,6 +205,7 @@ const importHexes = async () => {
         await wipe('regions')
         await wipe('adventures')
         await wipe('hexes')
+        await delay(2000)
         console.log('Done')
 
         await importEncounters()
