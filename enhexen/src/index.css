@@ -7,4 +7,17 @@
         @apply font-sans;
         font-size: 20px;
     }
+
+    .text-outline {
+        @apply text-transparent;
+        -webkit-text-stroke: 2px #000;
+    }
+
+    .centred-absolute {
+        @apply absolute;
+        @apply top-[50%];
+        @apply left-[50%];
+        @apply transform -translate-x-[50%] -translate-y-[50%];
+        @aply transform-gpu;
+    }
 }

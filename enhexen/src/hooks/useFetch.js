@@ -6,7 +6,7 @@ const useFetch = (endpoint, shouldFetch = true) => {
     shouldFetch
       ? `http://localhost:1337/api/${endpoint}`
       : null,
-    fetcher
+    fetcher,
   )
   return data
 }

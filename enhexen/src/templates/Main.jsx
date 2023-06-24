@@ -1,15 +1,15 @@
 import { Routes, Route } from 'react-router-dom'
 import Header from '../components/organisms/Header'
-import Hex from '../pages/Hex'
-import Adventure from '../pages/Adventure'
+import HexPage from '../pages/HexPage'
+import AdventurePage from '../pages/AdventurePage'
 
 const Main = () => (
   <>
     <Header />
     <main>
       <Routes>
-        <Route path="/" element={<Hex />} />
-        <Route path="/adventures" element={<Adventure />} />
+        <Route path="/:reference?" element={<HexPage />} />
+        <Route path="/adventures" element={<AdventurePage />} />
       </Routes>
     </main>
   </>
