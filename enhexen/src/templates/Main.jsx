@@ -9,7 +9,7 @@ const Main = () => (
     <main>
       <Routes>
         <Route path="/:reference?" element={<HexPage />} />
-        <Route path="/adventures" element={<AdventurePage />} />
+        <Route path="/adventures/:id?" element={<AdventurePage />} />
       </Routes>
     </main>
   </>

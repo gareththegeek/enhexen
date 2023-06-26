@@ -15,12 +15,12 @@
     "text": {
       "type": "text"
     },
-    "roll": {
-      "type": "integer"
-    },
     "done": {
       "type": "boolean",
       "default": false
+    },
+    "roll": {
+      "type": "string"
     }
   }
 }

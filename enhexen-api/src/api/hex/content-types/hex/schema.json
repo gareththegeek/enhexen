@@ -41,6 +41,11 @@
     },
     "secret": {
       "type": "text"
+    },
+    "settlement": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::settlement.settlement"
     }
   }
 }

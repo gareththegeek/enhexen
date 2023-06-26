@@ -3,6 +3,9 @@ const mapStrapiEntity = (entity) => {
   const result = { id, ...attributes }
 
   for (const [key, value] of Object.entries(result)) {
+    if (!value) {
+      continue
+    }
     if (!Object.prototype.hasOwnProperty.call(value, 'data')) {
       continue
     }

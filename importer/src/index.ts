@@ -1,213 +1,218 @@
 require('dotenv').config()
-import axios from 'axios'
-import fs from 'fs'
-import csvParser from 'csv-parser'
+import {
+  equals,
+  filter,
+  identity,
+  indexBy,
+  map,
+  mergeDeepRight,
+  path,
+  pipe,
+  prop,
+  reject,
+  uniq,
+  uniqBy,
+} from 'ramda'
+import readCsv, {
+  CsvRecord,
+  EncounterRecord,
+  HexRecord,
+  RumourRecord,
+} from './csv'
+import {
+  get,
+  put,
+  delet3,
+  postMany,
+  authenticate,
+  StrapiEntity,
+  StrapiResponse,
+  Region,
+} from './api'
 
-const encounterTables: [any, any][] = [
-    ['Flutewood', 'flutewood.csv']
-]
+const insert = async <T extends CsvRecord>(
+  entityType: string,
+  records: T[],
+  mapping: (x: T) => unknown = identity,
+  index: string
+): Promise<EntityLookup> => {
+  const entities = pipe(
+    map(mapping),
+    uniqBy(JSON.stringify),
+    reject(pipe(prop(index), equals('')))
+  )(records)
 
-interface EncounterRecord {
-    Roll: string
-    Encounter: string
+  const responses = await postMany(entityType, entities)
+  console.log(`Inserted ${responses.length} ${entityType}`)
+  return indexBy<StrapiEntity, string>(
+    path(['attributes', index]) as (foo: StrapiEntity) => string,
+    responses
+  ) as EntityLookup
 }
 
-interface HexRecord {
-    Index: string
-    Region: string
-    Landmark: string
-    Hidden: string
-    Secret: string
-    Adventure: string
-    Level: string
-    Link: string
+const wipe = async (entityType: string): Promise<StrapiResponse[]> => {
+  console.log(`Wiping ${entityType}`)
+  const entities = await get(entityType)
+  return Promise.all(
+    (entities.data.data as unknown as any[]).map((e) =>
+      delet3(entityType, e.id)
+    )
+  )
 }
 
-interface Hex {
-    id: number
-    reference: string
-    region: number
-    domain?: number
-    adventure?: number
-    landmark: string
-    hidden: string
-    secret: string
+type EntityLookup = { [key: string]: StrapiEntity }
+
+const insertRegions = async (records: HexRecord[]) =>
+  insert('regions', records, ({ Region }) => ({ name: Region }), 'name')
+
+const insertAdventures = async (records: HexRecord[]) =>
+  insert(
+    'adventures',
+    records,
+    ({ Adventure, Level, Link }) => ({
+      name: Adventure,
+      level: Level,
+      link: Link,
+    }),
+    'name'
+  )
+
+const insertSettlements = async (records: HexRecord[]) =>
+  insert(
+    'settlements',
+    records,
+    ({ Settlement }) => ({ name: Settlement }),
+    'name'
+  )
+
+const insertHexes = async (
+  records: HexRecord[],
+  adventures: EntityLookup,
+  regions: EntityLookup,
+  settlements: EntityLookup
+) =>
+  insert(
+    'hexes',
+    records,
+    ({ Index, Region, Settlement, Adventure, Landmark, Hidden, Secret }) => ({
+      reference: Index,
+      landmark: Landmark,
+      hidden: Hidden,
+      secret: Secret,
+      region: regions[Region]?.id,
+      settlement: settlements[Settlement]?.id,
+      adventure: adventures[Adventure]?.id,
+    }),
+    'reference'
+  )
+
+const processHexSheet = async (
+  filename: string
+): Promise<{
+  adventures: EntityLookup
+  hexes: EntityLookup
+  regions: EntityLookup
+  settlements: EntityLookup
+}> => {
+  const records = await readCsv<HexRecord>(filename)
+  const adventures = await insertAdventures(records)
+  const regions = await insertRegions(records)
+  const settlements = await insertSettlements(records)
+  const hexes = await insertHexes(records, adventures, regions, settlements)
+
+  return {
+    adventures,
+    regions,
+    settlements,
+    hexes,
+  }
 }
 
-interface Region {
-    id: number
-    name: string
+const insertEncounters = async (records: EncounterRecord[]) =>
+  insert(
+    'encounters',
+    records,
+    ({ Roll, Encounter }) => ({ roll: Roll, description: Encounter }),
+    'roll'
+  )
+
+const insertRumours = async (records: RumourRecord[]) =>
+  insert(
+    'rumours',
+    records,
+    ({ Roll, Rumour }) => ({ roll: Roll, text: Rumour, done: false }),
+    'roll'
+  )
+
+const processEncounterSheet = async (
+  records: EncounterRecord[],
+  region: StrapiEntity
+) => {
+  const encounters = await insertEncounters(records)
+  const entity = mergeDeepRight(region, {
+    attributes: {
+      encounters: map(prop('id'), Object.values(encounters)),
+    },
+  })
+  return put('regions', entity)
 }
 
-interface Adventure {
-    id: number
-    name: string
-    level: string
-    hyperlink: string
+const processRumourSheet = async (
+  records: RumourRecord[],
+  adventure: StrapiEntity
+) => {
+  const encounters = await insertRumours(records)
+  const entity = mergeDeepRight(adventure, {
+    attributes: {
+      rumours: map(prop('id'), Object.values(encounters)),
+    },
+  })
+  return put('adventures', entity)
 }
 
-interface StrapiResponse {
-    data: {
-        data: {
-            id: number
-            attributes: { name: string, [key: string]: string | number | boolean | { data: StrapiResponse[] }}
-        }
-    }
+const processNested = async <T extends CsvRecord>(
+  filename: string,
+  column: keyof T,
+  lookup: EntityLookup,
+  processor: (records: T[], parent: StrapiEntity) => Promise<StrapiResponse>
+) => {
+  const records = (await readCsv(filename)) as T[]
+  const uniqueParents = pipe(
+    map(prop(column) as (x: T) => string),
+    uniq
+  )(records) as string[]
+
+  return Promise.all(
+    map((parent) => {
+      const isCurrent = (x: T) => equals(prop(column, x) as string, parent)
+      return processor(filter(isCurrent, records), lookup[parent])
+    }, uniqueParents)
+  )
 }
 
-const FILENAME = 'test.csv'
-const BASE = process.env.API_BASE ?? 'http://127.0.0.1:1337/api'
-
-let user: string
-let jwt: string
-
-const getHeaders = () => ({
-    headers: {
-        Authorization: `Bearer ${jwt}`
-    }
-})
-
-const get = (entityType: string): Promise<StrapiResponse> =>
-    axios.get(
-        `${BASE}/${entityType}?pagination[pageSize]=10000`,
-        getHeaders())
-
-const post = <T>(entityType: string, entity: T): Promise<StrapiResponse> =>
-    axios.post(
-        `${BASE}/${entityType}`,
-        entity,
-        getHeaders())
-    
-const delet3 = (entityType: string, id: string): Promise<void> => {
-    return axios.delete(
-        `${BASE}/${entityType}/${id}`,
-        getHeaders())
-    }
-
-const wipe = async (entityType: string): Promise<void[]> => {
-    console.log(`Wiping ${entityType}`)
-    const entities = await get(entityType)
-    return Promise.all((entities.data.data as unknown as any[]).map(e => delet3(entityType, e.id)))
+const processEncounters = async (filename: string, regions: EntityLookup) => {
+  console.log('Inserting encounters')
+  return processNested(filename, 'Region', regions, processEncounterSheet)
 }
 
-const encounters: {[key: string]: number[]} = {}
-
-const readCsv = <T>(filename: string): Promise<T[]> =>
-    new Promise((resolve) => {
-        const result: T[] = []
-        fs.createReadStream(filename)
-            .pipe(csvParser())
-            .on('data', data => {
-                result.push(data as T)
-            })
-            .on('end', () => {
-                resolve(result)
-            })
-    })
-
-const delay = async (period: number) => new Promise<void>((resolve) => setTimeout(() => resolve(), period))
-
-const insertAllTheThings = async (entityType: string, records: any[], mapper = (y: any) => ({data:y})): Promise<StrapiResponse[]> => {
-    const responses: StrapiResponse[] = []
-    for(const x of records) {
-        // Apparently if I go too quickly strapi breaks
-        //delay(800)
-        responses.push(await post(entityType, mapper(x)))
-    }
-    return responses
+const processRumours = async (filename: string, adventures: EntityLookup) => {
+  console.log('Inserting adventures')
+  return processNested(filename, 'Adventure', adventures, processRumourSheet)
 }
 
-const importEncounterTable = async ([key, csv]: [string, string]): Promise<void> => {
-    const encountersFromCsv = await readCsv<EncounterRecord>(csv)
-    const encountersToInsert = encountersFromCsv.map(x => ({ roll: x.Roll, description: x.Encounter }))
-    const encounterResponses = await insertAllTheThings('encounters', encountersToInsert)
-    encounters[key] = encounterResponses.map(x => x.data.data.id)
-    console.log(encounters)
-}
+;(async () => {
+  await authenticate()
 
-const importEncounters = async () => { 
-    console.log("Importing Encounter Tables")
-    for (const x of encounterTables) {
-        await importEncounterTable(x)
-    }
-}
+  await wipe('encounters')
+  await wipe('rumours')
+  await wipe('regions')
+  await wipe('adventures')
+  await wipe('settlements')
+  await wipe('hexes')
+  console.log('Done')
 
-const importHexes = async () => {
-    const data = await readCsv<HexRecord>(FILENAME)
-
-    const regionsFromCsv = [...new Set(data.map(x => x.Region))].sort()
-    const adventuresFromCsv = data
-        .filter(x => x.Adventure !== '')
-        .map(x => ({
-            name: x.Adventure,
-            hyperlink: x.Link,
-            level: x.Level
-        }))
-        .filter((x, i, self) =>
-            i === self.findIndex((y) => (
-                x.name === y.name &&
-                x.level === y.level &&
-                x.hyperlink === y.hyperlink
-            ))
-        ).sort((a, b) => a.name.localeCompare(b.name))
-
-    const regionResponses = await insertAllTheThings('regions', regionsFromCsv, (x) => ({ data: { name: x, encounters: encounters[x] }}))
-    const regions = regionResponses
-        .map(x => x.data.data) // I don't know why there's two datas :/
-        .map(({id, attributes: { name }}) => ({
-            id,
-            name,
-            encounters: encounters[name]
-        }))
-        .reduce((a, c) => {
-            a[c.name] = c
-            return a
-        }, {} as { [name: string]: Region })
-    console.log(`Inserted ${Object.keys(regions).length} regions`)
-
-    const adventureResponses = await insertAllTheThings('adventures', adventuresFromCsv)
-    const adventures = adventureResponses
-        .map(x => x.data.data) // I don't know why there's two datas :/
-        .map(({ id, attributes: { name, level, hyperlink } }) => ({
-            id,
-            name: name as string,
-            level: level as string,
-            hyperlink: hyperlink as string
-        }))
-        .reduce((a: { [name: string]: Adventure }, c: Adventure) => {
-            a[c.name] = c
-            return a
-        }, {} as { [name: string]: Adventure })
-    console.log(`Inserted ${Object.keys(adventures).length} adventures`)
-
-    const hexesFromCsv: Omit<Hex, 'id'>[] = data.map(x => ({
-        reference: x.Index,
-        region: regions[x.Region].id,
-        adventure: Object.keys(adventures).some(y => y === x.Adventure) ? adventures[x.Adventure].id : undefined,
-        landmark: x.Landmark,
-        hidden: x.Hidden,
-        secret: x.Secret
-    }))
-
-    const hexResponses = await insertAllTheThings('hexes', hexesFromCsv)
-    console.log(`Inserted ${hexResponses.length} hexes`)
-}
-
-    ; (async () => {
-        const authResponse = await axios.post(`${BASE}/auth/local`, {
-            identifier: process.env.IMPORTER_USERNAME ?? '',
-            password: process.env.IMPORTER_PASSWORD ?? '',
-        })
-        user = authResponse.data.user
-        jwt = authResponse.data.jwt
-
-        await wipe('encounters')
-        await wipe('regions')
-        await wipe('adventures')
-        await wipe('hexes')
-        await delay(2000)
-        console.log('Done')
-
-        await importEncounters()
-        await importHexes()
-    })()
+  const lookups = await processHexSheet('test.csv')
+  await processEncounters('encounters.csv', lookups.regions)
+  await processRumours('rumours.csv', lookups.adventures)
+  console.log('Done')
+})()
