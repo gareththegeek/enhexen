@@ -23,6 +23,21 @@
           "path": "${workspaceFolder}/enhexen/src"
         }
       ]
+    },
+    {
+      "name": "Strapi",
+      "program": "",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node",
+      "args": [
+        "--inspect=0.0.0.0",
+        "./node_modules/@strapi/strapi/bin/strapi.js",
+        "develop"
+      ],
+      "cwd": "${workspaceFolder}/enhexen-api"
     }
   ]
 }

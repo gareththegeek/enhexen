@@ -21,6 +21,11 @@
     },
     "roll": {
       "type": "string"
+    },
+    "adventure": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::adventure.adventure"
     }
   }
 }

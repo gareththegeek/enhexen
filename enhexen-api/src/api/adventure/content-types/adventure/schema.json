@@ -26,6 +26,14 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::rumour.rumour"
+    },
+    "done": {
+      "type": "boolean"
+    },
+    "hex": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::hex.hex"
     }
   }
 }

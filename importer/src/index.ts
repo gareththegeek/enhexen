@@ -2,8 +2,11 @@ require('dotenv').config()
 import {
   equals,
   filter,
+  find,
   identity,
   indexBy,
+  innerJoin,
+  isNil,
   map,
   mergeDeepRight,
   path,
@@ -73,6 +76,7 @@ const insertAdventures = async (records: HexRecord[]) =>
       name: Adventure,
       level: Level,
       link: Link,
+      done: false,
     }),
     'name'
   )
@@ -106,6 +110,31 @@ const insertHexes = async (
     'reference'
   )
 
+const createMapAdventureHexId =
+  (adventures: EntityLookup, hexes: EntityLookup) =>
+  (record: HexRecord): StrapiEntity | undefined => {
+    const match = find(
+      (entity: StrapiEntity) => record.Adventure === entity.attributes.name,
+      Object.values(adventures)
+    )
+    if (!match) {
+      return undefined
+    }
+    return mergeDeepRight(match, { attributes: { hex: hexes[record.Index].id } })
+  }
+
+const updateAdventureHexes = async (
+  adventures: EntityLookup,
+  records: HexRecord[],
+  hexes: EntityLookup
+) => {
+  const mapAdventureHexId = createMapAdventureHexId(adventures, hexes)
+  const entities = pipe(map(mapAdventureHexId), reject(isNil))(records) as StrapiEntity[]
+  for (const entity of entities) {
+    await put('adventures', entity)
+  }
+}
+
 const processHexSheet = async (
   filename: string
 ): Promise<{
@@ -119,6 +148,8 @@ const processHexSheet = async (
   const regions = await insertRegions(records)
   const settlements = await insertSettlements(records)
   const hexes = await insertHexes(records, adventures, regions, settlements)
+
+  await updateAdventureHexes(adventures, records, hexes)
 
   return {
     adventures,
@@ -136,11 +167,16 @@ const insertEncounters = async (records: EncounterRecord[]) =>
     'roll'
   )
 
-const insertRumours = async (records: RumourRecord[]) =>
+const insertRumours = async (records: RumourRecord[], adventureId: number) =>
   insert(
     'rumours',
     records,
-    ({ Roll, Rumour }) => ({ roll: Roll, text: Rumour, done: false }),
+    ({ Roll, Rumour }) => ({
+      roll: Roll,
+      text: Rumour,
+      done: false,
+      adventure: adventureId,
+    }),
     'roll'
   )
 
@@ -161,7 +197,7 @@ const processRumourSheet = async (
   records: RumourRecord[],
   adventure: StrapiEntity
 ) => {
-  const encounters = await insertRumours(records)
+  const encounters = await insertRumours(records, adventure.id)
   const entity = mergeDeepRight(adventure, {
     attributes: {
       rumours: map(prop('id'), Object.values(encounters)),
