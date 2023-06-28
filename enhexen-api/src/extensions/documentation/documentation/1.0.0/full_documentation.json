@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-06-27T20:33:51.039Z"
+    "x-generation-date": "2023-06-28T16:05:30.387Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -1091,6 +1091,15 @@
                                                       }
                                                     }
                                                   }
+                                                },
+                                                "landmarkRevealed": {
+                                                  "type": "boolean"
+                                                },
+                                                "hiddenRevealed": {
+                                                  "type": "boolean"
+                                                },
+                                                "secretRevealed": {
+                                                  "type": "boolean"
                                                 },
                                                 "createdAt": {
                                                   "type": "string",
@@ -2225,6 +2234,15 @@
                                         }
                                       }
                                     }
+                                  },
+                                  "landmarkRevealed": {
+                                    "type": "boolean"
+                                  },
+                                  "hiddenRevealed": {
+                                    "type": "boolean"
+                                  },
+                                  "secretRevealed": {
+                                    "type": "boolean"
                                   },
                                   "createdAt": {
                                     "type": "string",
@@ -4102,6 +4120,15 @@
                           }
                         }
                       },
+                      "landmarkRevealed": {
+                        "type": "boolean"
+                      },
+                      "hiddenRevealed": {
+                        "type": "boolean"
+                      },
+                      "secretRevealed": {
+                        "type": "boolean"
+                      },
                       "createdAt": {
                         "type": "string",
                         "format": "date-time"
@@ -4331,6 +4358,15 @@
                   }
                 ],
                 "example": "string or id"
+              },
+              "landmarkRevealed": {
+                "type": "boolean"
+              },
+              "hiddenRevealed": {
+                "type": "boolean"
+              },
+              "secretRevealed": {
+                "type": "boolean"
               }
             }
           }
@@ -5164,6 +5200,15 @@
                                                   }
                                                 }
                                               },
+                                              "landmarkRevealed": {
+                                                "type": "boolean"
+                                              },
+                                              "hiddenRevealed": {
+                                                "type": "boolean"
+                                              },
+                                              "secretRevealed": {
+                                                "type": "boolean"
+                                              },
                                               "createdAt": {
                                                 "type": "string",
                                                 "format": "date-time"
@@ -5502,6 +5547,15 @@
                 }
               }
             }
+          },
+          "landmarkRevealed": {
+            "type": "boolean"
+          },
+          "hiddenRevealed": {
+            "type": "boolean"
+          },
+          "secretRevealed": {
+            "type": "boolean"
           },
           "createdAt": {
             "type": "string",
@@ -7476,6 +7530,15 @@
                                         }
                                       }
                                     }
+                                  },
+                                  "landmarkRevealed": {
+                                    "type": "boolean"
+                                  },
+                                  "hiddenRevealed": {
+                                    "type": "boolean"
+                                  },
+                                  "secretRevealed": {
+                                    "type": "boolean"
                                   },
                                   "createdAt": {
                                     "type": "string",

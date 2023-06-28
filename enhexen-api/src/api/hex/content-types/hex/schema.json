@@ -46,6 +46,15 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::settlement.settlement"
+    },
+    "landmarkRevealed": {
+      "type": "boolean"
+    },
+    "hiddenRevealed": {
+      "type": "boolean"
+    },
+    "secretRevealed": {
+      "type": "boolean"
     }
   }
 }

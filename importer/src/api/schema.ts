@@ -7,6 +7,9 @@ export interface Hex {
   landmark: string
   hidden: string
   secret: string
+  landmarkRevealed: boolean
+  hiddenRevealed: boolean
+  secretRevealed: boolean
 }
 
 export interface Region {

@@ -4,8 +4,13 @@
 
 import { factories } from "@strapi/strapi";
 import {
+  equals,
   map,
   mergeLeft,
+  mergeRight,
+  none,
+  pick,
+  pluck,
   prop,
   reduceWhile,
   sum,
@@ -86,12 +91,23 @@ const buildRumourTable = (
   tableSize = 8
 ): Rumour[] => {
   const withDistances = map(withDistance(reference), adventures);
-  const total = sum(map(prop("distance"), withDistances));
+  const total = sum(pluck("distance", withDistances));
   const getRumour = createGetRumour(withDistances, total);
   let i = 0;
+  let j = 0;
   const results: Rumour[] = [];
-  while (i++ < tableSize) {
-    results.push(getRumour());
+  const maxTries = 10;
+  while (results.length < tableSize) {
+    var rumour = getRumour();
+    if (none(equals(rumour.id), pluck("id", results))) {
+      j = 0;
+      results.push(mergeRight(rumour, { roll: (++i).toString() }));
+    } else {
+      j += 1;
+      if (j > maxTries) {
+        break;
+      }
+    }
   }
   return results;
 };
@@ -127,8 +143,9 @@ export default factories.createCoreController(
 
       const adventures = await getAdventuresWithRumours();
       const rumourTable = buildRumourTable(adventures, reference, tableSize);
+      const sanitised = await this.sanitizeOutput(rumourTable, ctx);
 
-      return { data: rumourTable };
+      return this.transformResponse(sanitised);
     },
   })
 );

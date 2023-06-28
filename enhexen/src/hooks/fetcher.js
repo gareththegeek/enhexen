@@ -37,7 +37,7 @@ const fetcher = async (...args) => {
     return data
   }
 
-  return data.length === 1 ? data[0] : undefined
+  return data.length === 1 ? data[0] : data.length > 1 ? data : undefined
 }
 
 export default fetcher

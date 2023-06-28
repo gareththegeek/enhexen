@@ -12,8 +12,8 @@ const RandomTable = ({ items }) =>
         </tr>
       </thead>
       <tbody>
-        {items.map(({ roll, description }) => (
-          <tr key={`${roll}_${description}`}>
+        {items.map(({ id, roll, description }) => (
+          <tr key={`${id}`}>
             <td>{roll}</td>
             <td>{description}</td>
           </tr>

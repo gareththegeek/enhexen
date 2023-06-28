@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import Placeholder from '../atoms/Placeholder'
-import Hex from '../molecules/Hex'
+import Hex from '../atoms/Hex'
 
 const parseReference = (reference) => {
   const parts = reference.split('.')
@@ -38,7 +38,6 @@ const HexNavigation = ({ reference }) => {
   const navigate = useNavigate()
   const handleNavigate = (reference) => {
     navigate(`/${reference}`)
-    //navigate(0)
   }
 
   if (!reference) {

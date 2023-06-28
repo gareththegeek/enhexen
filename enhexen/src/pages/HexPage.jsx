@@ -1,13 +1,13 @@
 import { useContext, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import useFetch from '../hooks/useFetch'
+import { HexContext } from '../contexts/HexContext'
+import useFetchHex from '../hooks/useFetchHex'
 import H1 from '../components/atoms/H1'
 import Placeholder from '../components/atoms/Placeholder'
 import HexDetails from '../components/organisms/HexDetails'
 import RegionDetails from '../components/organisms/RegionDetails'
 import AdventureDetails from '../components/organisms/AdventureDetails'
 import HexNavigation from '../components/organisms/HexNavigation'
-import { HexContext } from '../contexts/HexContext'
 import SettlementDetails from '../components/organisms/SettlementDetails'
 
 const HexPage = () => {
@@ -24,17 +24,14 @@ const HexPage = () => {
     }
   }, [navigate, reference, referenceParam, setReference])
 
-  const hex = useFetch(
-    `hexes?populate=region&populate=adventure&populate=settlement&filters[reference]=${reference}`,
-    !!reference
-  )
+  const hex = useFetchHex(reference)
 
   return (
     <>
       <H1>Hex</H1>
       <HexNavigation reference={reference} />
-      {hex && <HexDetails {...hex} />}
-      {hex?.settlement && <SettlementDetails settlement={hex.settlement} />}
+      {hex && <HexDetails hex={hex} />}
+      {hex?.settlement && <SettlementDetails settlement={hex.settlement} reference={hex.reference} />}
       {hex?.region && !hex?.settlement && (
         <RegionDetails stubRegion={hex.region} id={hex.region.id} />
       )}
