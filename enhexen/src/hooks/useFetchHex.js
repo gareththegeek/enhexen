@@ -1,8 +1,8 @@
-import useFetch from "./useFetch";
+import useFetch from './useFetch'
 
 const useFetchHex = (reference) =>
   useFetch(
-    `hexes?populate=region&populate=adventure&populate=settlement&filters[reference]=${reference}`,
+    `hexes?populate=region&populate=adventure&populate=settlement&populate[domain][populate][0]=faction&populate=assets&filters[reference]=${reference}`,
     !!reference
   )
 

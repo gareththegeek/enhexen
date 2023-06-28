@@ -17,8 +17,15 @@
     },
     "faction": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::faction.faction"
+      "relation": "manyToOne",
+      "target": "api::faction.faction",
+      "inversedBy": "domains"
+    },
+    "hexes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::hex.hex",
+      "mappedBy": "domain"
     }
   }
 }

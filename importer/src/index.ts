@@ -19,6 +19,7 @@ import {
 import readCsv, {
   CsvRecord,
   EncounterRecord,
+  FactionRecord,
   HexRecord,
   RumourRecord,
 } from './csv'
@@ -89,16 +90,37 @@ const insertSettlements = async (records: HexRecord[]) =>
     'name'
   )
 
+const insertDomains = async (records: HexRecord[], factions: EntityLookup) =>
+  insert(
+    'domains',
+    records,
+    ({ Domain, Faction }) => ({
+      name: Domain,
+      faction: Faction ? factions[Faction].id : undefined,
+    }),
+    'name'
+  )
+
 const insertHexes = async (
   records: HexRecord[],
   adventures: EntityLookup,
   regions: EntityLookup,
-  settlements: EntityLookup
+  settlements: EntityLookup,
+  domains: EntityLookup
 ) =>
   insert(
     'hexes',
     records,
-    ({ Index, Region, Settlement, Adventure, Landmark, Hidden, Secret }) => ({
+    ({
+      Index,
+      Region,
+      Settlement,
+      Adventure,
+      Landmark,
+      Hidden,
+      Secret,
+      Domain,
+    }) => ({
       reference: Index,
       landmark: Landmark,
       hidden: Hidden,
@@ -109,39 +131,42 @@ const insertHexes = async (
       region: regions[Region]?.id,
       settlement: settlements[Settlement]?.id,
       adventure: adventures[Adventure]?.id,
+      domain: domains[Domain]?.id,
     }),
     'reference'
   )
 
-const createMapAdventureHexId =
-  (adventures: EntityLookup, hexes: EntityLookup) =>
-  (record: HexRecord): StrapiEntity | undefined => {
-    const match = find(
-      (entity: StrapiEntity) => record.Adventure === entity.attributes.name,
-      Object.values(adventures)
-    )
-    if (!match) {
-      return undefined
-    }
-    return mergeDeepRight(match, { attributes: { hex: hexes[record.Index].id } })
-  }
+// const createMapAdventureHexId =
+//   (adventures: EntityLookup, hexes: EntityLookup) =>
+//   (record: HexRecord): StrapiEntity | undefined => {
+//     const match = find(
+//       (entity: StrapiEntity) => record.Adventure === entity.attributes.name,
+//       Object.values(adventures)
+//     )
+//     if (!match) {
+//       return undefined
+//     }
+//     return mergeDeepRight(match, { attributes: { hex: hexes[record.Index].id } })
+//   }
 
-const updateAdventureHexes = async (
-  adventures: EntityLookup,
-  records: HexRecord[],
-  hexes: EntityLookup
-) => {
-  const mapAdventureHexId = createMapAdventureHexId(adventures, hexes)
-  const entities = pipe(map(mapAdventureHexId), reject(isNil))(records) as StrapiEntity[]
-  for (const entity of entities) {
-    await put('adventures', entity)
-  }
-}
+// const updateAdventureHexes = async (
+//   adventures: EntityLookup,
+//   records: HexRecord[],
+//   hexes: EntityLookup
+// ) => {
+//   const mapAdventureHexId = createMapAdventureHexId(adventures, hexes)
+//   const entities = pipe(map(mapAdventureHexId), reject(isNil))(records) as StrapiEntity[]
+//   for (const entity of entities) {
+//     await put('adventures', entity)
+//   }
+// }
 
 const processHexSheet = async (
-  filename: string
+  filename: string,
+  factions: EntityLookup
 ): Promise<{
   adventures: EntityLookup
+  domains: EntityLookup
   hexes: EntityLookup
   regions: EntityLookup
   settlements: EntityLookup
@@ -150,12 +175,20 @@ const processHexSheet = async (
   const adventures = await insertAdventures(records)
   const regions = await insertRegions(records)
   const settlements = await insertSettlements(records)
-  const hexes = await insertHexes(records, adventures, regions, settlements)
+  const domains = await insertDomains(records, factions)
+  const hexes = await insertHexes(
+    records,
+    adventures,
+    regions,
+    settlements,
+    domains
+  )
 
-  await updateAdventureHexes(adventures, records, hexes)
+  //await updateAdventureHexes(adventures, records, hexes)
 
   return {
     adventures,
+    domains,
     regions,
     settlements,
     hexes,
@@ -239,9 +272,43 @@ const processRumours = async (filename: string, adventures: EntityLookup) => {
   return processNested(filename, 'Adventure', adventures, processRumourSheet)
 }
 
+const processFactions = async (filename: string): Promise<EntityLookup> => {
+  console.log('Inserting factions')
+  const records: FactionRecord[] = await readCsv(filename)
+  return insert(
+    'factions',
+    records,
+    ({
+      Faction,
+      Description,
+      Cunning,
+      Force,
+      Wealth,
+      Income,
+      Magic,
+      Treasure,
+      HitPoints,
+    }) => ({
+      name: Faction,
+      description: Description,
+      cunning: Cunning,
+      force: Force,
+      wealth: Wealth,
+      income: Income,
+      magic: Magic,
+      treasure: Treasure,
+      hitPoints: HitPoints,
+      maxHitPoints: HitPoints,
+    }),
+    'name'
+  )
+}
+
 ;(async () => {
   await authenticate()
 
+  await wipe('domains')
+  await wipe('factions')
   await wipe('encounters')
   await wipe('rumours')
   await wipe('regions')
@@ -250,7 +317,8 @@ const processRumours = async (filename: string, adventures: EntityLookup) => {
   await wipe('hexes')
   console.log('Done')
 
-  const lookups = await processHexSheet('test.csv')
+  const factions = await processFactions('factions.csv')
+  const lookups = await processHexSheet('test.csv', factions)
   await processEncounters('encounters.csv', lookups.regions)
   await processRumours('rumours.csv', lookups.adventures)
   console.log('Done')

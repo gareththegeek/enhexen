@@ -14,6 +14,18 @@
   "attributes": {
     "name": {
       "type": "string"
+    },
+    "faction": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::faction.faction",
+      "inversedBy": "npcs"
+    },
+    "hex": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::hex.hex",
+      "inversedBy": "npcs"
     }
   }
 }

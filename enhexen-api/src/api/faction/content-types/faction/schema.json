@@ -39,9 +39,6 @@
         "High"
       ]
     },
-    "treasure": {
-      "type": "integer"
-    },
     "hitPoints": {
       "type": "integer"
     },
@@ -53,12 +50,23 @@
     "assets": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::unit.unit"
+      "target": "api::unit.unit",
+      "mappedBy": "faction"
+    },
+    "domains": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::domain.domain",
+      "mappedBy": "faction"
     },
     "npcs": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::npc.npc"
+      "target": "api::npc.npc",
+      "mappedBy": "faction"
+    },
+    "treasure": {
+      "type": "string"
     }
   }
 }

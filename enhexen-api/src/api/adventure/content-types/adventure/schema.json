@@ -22,18 +22,20 @@
     "level": {
       "type": "string"
     },
-    "rumours": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::rumour.rumour"
-    },
     "done": {
       "type": "boolean"
     },
     "hex": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::hex.hex"
+      "target": "api::hex.hex",
+      "inversedBy": "adventure"
+    },
+    "rumours": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::rumour.rumour",
+      "mappedBy": "adventure"
     }
   }
 }

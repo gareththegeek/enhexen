@@ -4,12 +4,18 @@ import H2 from '../atoms/H2'
 import P from '../atoms/P'
 import Field from '../molecules/Field'
 import RandomTable from '../molecules/RandomTable'
+import putRumour from '../../hooks/putRumour'
 
 const SettlementDetails = ({
   settlement: { name, marketClass },
   reference,
 }) => {
   const rumours = useFetchRumours(reference)
+
+  const handleRoll = ({ item }) => {
+    putRumour({ ...item, done: true })
+  }
+
   return (
     <section>
       <H2>{name}</H2>
@@ -17,7 +23,13 @@ const SettlementDetails = ({
         <P>{marketClass}</P>
       </Field>
       <RandomTable
-        items={rumours?.map(({ id, roll, text }) => ({ id, roll, description: text }))}
+        heading="Rumours"
+        onRoll={handleRoll}
+        items={rumours?.map(({ id, roll, text }) => ({
+          id,
+          roll,
+          description: text,
+        }))}
       />
     </section>
   )

@@ -20,4 +20,9 @@
         @apply transform -translate-x-[50%] -translate-y-[50%];
         @aply transform-gpu;
     }
+
+    .selected-tr {
+        @apply bg-black;
+        @apply text-white;
+    }
 }

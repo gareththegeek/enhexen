@@ -8,7 +8,10 @@ const RegionDetails = ({ stubRegion, id }) => {
   return (
     <section>
       <H2>{stubRegion.name}</H2>
-      <RandomTable items={region?.encounters}></RandomTable>
+      <RandomTable
+        heading="Encounters"
+        items={region?.encounters}
+      ></RandomTable>
     </section>
   )
 }

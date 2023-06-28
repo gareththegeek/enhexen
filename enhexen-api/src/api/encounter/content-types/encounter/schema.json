@@ -16,7 +16,13 @@
       "type": "text"
     },
     "roll": {
-      "type": "string"
+      "type": "integer"
+    },
+    "region": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::region.region",
+      "inversedBy": "encounters"
     }
   }
 }

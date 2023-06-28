@@ -20,12 +20,13 @@
       "default": false
     },
     "roll": {
-      "type": "string"
+      "type": "integer"
     },
     "adventure": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::adventure.adventure"
+      "relation": "manyToOne",
+      "target": "api::adventure.adventure",
+      "inversedBy": "rumours"
     }
   }
 }

@@ -18,21 +18,6 @@
       "unique": true,
       "regex": "[0-9]{1,3}\\.[0-9]{1,3}"
     },
-    "region": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::region.region"
-    },
-    "domain": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::domain.domain"
-    },
-    "adventure": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::adventure.adventure"
-    },
     "landmark": {
       "type": "text"
     },
@@ -42,11 +27,6 @@
     "secret": {
       "type": "text"
     },
-    "settlement": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::settlement.settlement"
-    },
     "landmarkRevealed": {
       "type": "boolean"
     },
@@ -55,6 +35,42 @@
     },
     "secretRevealed": {
       "type": "boolean"
+    },
+    "region": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::region.region",
+      "inversedBy": "hexes"
+    },
+    "adventure": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::adventure.adventure",
+      "mappedBy": "hex"
+    },
+    "assets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::unit.unit",
+      "mappedBy": "hex"
+    },
+    "domain": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::domain.domain",
+      "inversedBy": "hexes"
+    },
+    "settlement": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::settlement.settlement",
+      "mappedBy": "hex"
+    },
+    "npcs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::npc.npc",
+      "mappedBy": "hex"
     }
   }
 }

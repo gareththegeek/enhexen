@@ -15,10 +15,17 @@
     "name": {
       "type": "string"
     },
+    "hexes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::hex.hex",
+      "mappedBy": "region"
+    },
     "encounters": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::encounter.encounter"
+      "target": "api::encounter.encounter",
+      "mappedBy": "region"
     }
   }
 }

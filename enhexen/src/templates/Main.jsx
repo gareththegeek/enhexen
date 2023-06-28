@@ -1,7 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 import Header from '../components/organisms/Header'
+import DelvePage from '../pages/DelvePage'
+import FactionPage from '../pages/FactionPage'
 import HexPage from '../pages/HexPage'
-import AdventurePage from '../pages/AdventurePage'
 
 const Main = () => (
   <>
@@ -9,7 +10,8 @@ const Main = () => (
     <main>
       <Routes>
         <Route path="/:reference?" element={<HexPage />} />
-        <Route path="/adventures/:id?" element={<AdventurePage />} />
+        <Route path="/delve" element={<DelvePage />} />
+        <Route path="/faction" element={<FactionPage />} />
       </Routes>
     </main>
   </>
