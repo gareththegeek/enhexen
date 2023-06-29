@@ -26,6 +26,15 @@
       "relation": "manyToOne",
       "target": "api::hex.hex",
       "inversedBy": "npcs"
+    },
+    "position": {
+      "type": "string"
+    },
+    "sourceOfPower": {
+      "type": "string"
+    },
+    "residence": {
+      "type": "string"
     }
   }
 }

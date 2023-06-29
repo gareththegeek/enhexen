@@ -11,6 +11,10 @@ export interface FactionRecord extends CsvRecord {
   Treasure: number
   HitPoints: number
   Hq: string
+  Theme: string
+  "External Conflict": string
+  "Internal Conflict": string
+  Tags: string
 }
 
 export interface EncounterRecord extends CsvRecord {
@@ -49,4 +53,13 @@ export interface AssetRecord extends CsvRecord {
   Attack: string
   Counter: string
   Qualities: string
+}
+
+export interface NpcRecord extends CsvRecord {
+  Faction: string
+  Name: string
+  Position: string
+  "Source of Power": string
+  Residence: string
+  Reference: string
 }

@@ -6,6 +6,7 @@ import H1 from '../components/atoms/H1'
 import FactionDetail from '../components/organisms/FactionDetail'
 import DomainDetails from '../components/organisms/DomainDetails'
 import AssetList from '../components/organisms/AssetList'
+import NpcList from '../components/organisms/NpcList'
 
 const FactionPage = () => {
   const navigate = useNavigate()
@@ -29,7 +30,12 @@ const FactionPage = () => {
       {faction?.domains?.map((domain) => (
         <DomainDetails key={domain.id} domain={domain} faction={faction} />
       ))}
-      {faction?.assets && <AssetList assets={faction.assets} faction={faction} showHex={true} />}
+      {faction?.assets && (
+        <AssetList assets={faction.assets} faction={faction} showHex={true} />
+      )}
+      {faction?.npcs && (
+        <NpcList npcs={faction.npcs} faction={faction} showHex={true} />
+      )}
     </>
   )
 }

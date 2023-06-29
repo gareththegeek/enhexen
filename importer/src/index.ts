@@ -22,6 +22,7 @@ import readCsv, {
   EncounterRecord,
   FactionRecord,
   HexRecord,
+  NpcRecord,
   RumourRecord,
 } from './csv'
 import {
@@ -238,6 +239,31 @@ const insertAssets = async (
     'type'
   )
 
+const insertNpcs = async (
+  records: NpcRecord[],
+  factionId: number,
+  hexes: EntityLookup
+) =>
+  insert(
+    'npcs',
+    records,
+    ({
+      Name,
+      Position,
+      'Source of Power': SourceOfPower,
+      Residence,
+      Reference,
+    }) => ({
+      name: Name,
+      position: Position,
+      sourceOfPower: SourceOfPower,
+      residence: Residence,
+      faction: factionId,
+      hex: hexes[Reference]?.id,
+    }),
+    'name'
+  )
+
 const processEncounterSheet = async (
   records: EncounterRecord[],
   region: StrapiEntity
@@ -267,10 +293,23 @@ const processAssetSheet = async (
   faction: StrapiEntity,
   hexes: EntityLookup
 ) => {
-  const assets = insertAssets(records, faction.id, hexes)
+  const assets = await insertAssets(records, faction.id, hexes)
   return mergeDeepRight(faction, {
     attributes: {
-      rumours: map(prop('id'), Object.values(assets)),
+      assets: map(prop('id'), Object.values(assets)),
+    },
+  })
+}
+
+const processNpcSheet = async (
+  records: NpcRecord[],
+  faction: StrapiEntity,
+  hexes: EntityLookup
+) => {
+  const npcs = await insertNpcs(records, faction.id, hexes)
+  return mergeDeepRight(faction, {
+    attributes: {
+      npcs: map(prop('id'), Object.values(npcs)),
     },
   })
 }
@@ -321,6 +360,10 @@ const processFactions = async (filename: string): Promise<EntityLookup> => {
       Magic,
       Treasure,
       HitPoints,
+      Theme,
+      'Internal Conflict': InternalConflict,
+      'External Conflict': ExternalConflict,
+      Tags,
     }) => ({
       name: Faction,
       description: Description,
@@ -332,19 +375,41 @@ const processFactions = async (filename: string): Promise<EntityLookup> => {
       treasure: Treasure,
       hitPoints: HitPoints,
       maxHitPoints: HitPoints,
+      theme: Theme,
+      internalConflict: InternalConflict,
+      externalConflict: ExternalConflict,
+      tags: Tags,
     }),
     'name'
   )
 }
 
-const processAssets = (
+const processAssets = async (
   filename: string,
   factions: EntityLookup,
   hexes: EntityLookup
 ) => {
   console.log('Inserting assets')
-  return processNested(filename, 'Faction', factions, (records: AssetRecord[], parent) =>
-    processAssetSheet(records, parent, hexes)
+  return processNested(
+    filename,
+    'Faction',
+    factions,
+    async (records: AssetRecord[], parent) =>
+      processAssetSheet(records, parent, hexes)
+  )
+}
+
+const processNpcs = async (
+  filename: string,
+  factions: EntityLookup,
+  hexes: EntityLookup
+) => {
+  console.log('Inserting NPCs')
+  return processNested(
+    filename,
+    'Faction',
+    factions,
+    async (records: NpcRecord[], parent) => processNpcSheet(records, parent, hexes)
   )
 }
 
@@ -353,6 +418,7 @@ const processAssets = (
 
   await wipe('assets')
   await wipe('domains')
+  await wipe('npcs')
   await wipe('factions')
   await wipe('encounters')
   await wipe('rumours')
@@ -367,5 +433,6 @@ const processAssets = (
   const assets = await processAssets('assets.csv', factions, lookups.hexes)
   await processEncounters('encounters.csv', lookups.regions)
   await processRumours('rumours.csv', lookups.adventures)
+  await processNpcs('npcs.csv', factions, lookups.hexes)
   console.log('Done')
 })()

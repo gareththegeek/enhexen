@@ -11,6 +11,7 @@ import HexNavigation from '../components/organisms/HexNavigation'
 import SettlementDetails from '../components/organisms/SettlementDetails'
 import DomainDetails from '../components/organisms/DomainDetails'
 import AssetList from '../components/organisms/AssetList'
+import NpcList from '../components/organisms/NpcList'
 
 const HexPage = () => {
   const navigate = useNavigate()
@@ -43,8 +44,11 @@ const HexPage = () => {
         <RegionDetails stubRegion={hex.region} id={hex.region.id} />
       )}
       {hex?.adventure && <AdventureDetails adventure={hex.adventure} />}
-      {hex?.domain && <DomainDetails domain={hex.domain} faction={hex.domain.faction} />}
+      {hex?.domain && (
+        <DomainDetails domain={hex.domain} faction={hex.domain.faction} />
+      )}
       {hex?.assets && <AssetList assets={hex.assets} />}
+      {hex?.npcs && <NpcList npcs={hex.npcs} />}
       {!hex && reference && (
         <Placeholder>No hex found with reference {reference}</Placeholder>
       )}

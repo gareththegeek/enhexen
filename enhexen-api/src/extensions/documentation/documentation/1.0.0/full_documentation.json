@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-06-29T13:08:08.246Z"
+    "x-generation-date": "2023-06-29T19:28:43.335Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -988,6 +988,15 @@
                                                                   }
                                                                 }
                                                               }
+                                                            },
+                                                            "position": {
+                                                              "type": "string"
+                                                            },
+                                                            "sourceOfPower": {
+                                                              "type": "string"
+                                                            },
+                                                            "residence": {
+                                                              "type": "string"
                                                             },
                                                             "createdAt": {
                                                               "type": "string",
@@ -2624,6 +2633,15 @@
                                                     }
                                                   }
                                                 },
+                                                "position": {
+                                                  "type": "string"
+                                                },
+                                                "sourceOfPower": {
+                                                  "type": "string"
+                                                },
+                                                "residence": {
+                                                  "type": "string"
+                                                },
                                                 "createdAt": {
                                                   "type": "string",
                                                   "format": "date-time"
@@ -4082,6 +4100,15 @@
                                                     }
                                                   }
                                                 },
+                                                "position": {
+                                                  "type": "string"
+                                                },
+                                                "sourceOfPower": {
+                                                  "type": "string"
+                                                },
+                                                "residence": {
+                                                  "type": "string"
+                                                },
                                                 "createdAt": {
                                                   "type": "string",
                                                   "format": "date-time"
@@ -5244,6 +5271,15 @@
                                                                                 }
                                                                               }
                                                                             }
+                                                                          },
+                                                                          "position": {
+                                                                            "type": "string"
+                                                                          },
+                                                                          "sourceOfPower": {
+                                                                            "type": "string"
+                                                                          },
+                                                                          "residence": {
+                                                                            "type": "string"
                                                                           },
                                                                           "createdAt": {
                                                                             "type": "string",
@@ -6914,6 +6950,15 @@
                                                                 }
                                                               }
                                                             },
+                                                            "position": {
+                                                              "type": "string"
+                                                            },
+                                                            "sourceOfPower": {
+                                                              "type": "string"
+                                                            },
+                                                            "residence": {
+                                                              "type": "string"
+                                                            },
                                                             "createdAt": {
                                                               "type": "string",
                                                               "format": "date-time"
@@ -8364,6 +8409,15 @@
                                                                               }
                                                                             }
                                                                           },
+                                                                          "position": {
+                                                                            "type": "string"
+                                                                          },
+                                                                          "sourceOfPower": {
+                                                                            "type": "string"
+                                                                          },
+                                                                          "residence": {
+                                                                            "type": "string"
+                                                                          },
                                                                           "createdAt": {
                                                                             "type": "string",
                                                                             "format": "date-time"
@@ -9187,6 +9241,15 @@
                   }
                 ],
                 "example": "string or id"
+              },
+              "position": {
+                "type": "string"
+              },
+              "sourceOfPower": {
+                "type": "string"
+              },
+              "residence": {
+                "type": "string"
               }
             }
           }
@@ -10183,6 +10246,15 @@
                                                     }
                                                   }
                                                 },
+                                                "position": {
+                                                  "type": "string"
+                                                },
+                                                "sourceOfPower": {
+                                                  "type": "string"
+                                                },
+                                                "residence": {
+                                                  "type": "string"
+                                                },
                                                 "createdAt": {
                                                   "type": "string",
                                                   "format": "date-time"
@@ -10538,6 +10610,15 @@
                 }
               }
             }
+          },
+          "position": {
+            "type": "string"
+          },
+          "sourceOfPower": {
+            "type": "string"
+          },
+          "residence": {
+            "type": "string"
           },
           "createdAt": {
             "type": "string",
@@ -11498,6 +11579,15 @@
                                                                     }
                                                                   }
                                                                 }
+                                                              },
+                                                              "position": {
+                                                                "type": "string"
+                                                              },
+                                                              "sourceOfPower": {
+                                                                "type": "string"
+                                                              },
+                                                              "residence": {
+                                                                "type": "string"
                                                               },
                                                               "createdAt": {
                                                                 "type": "string",
@@ -12813,6 +12903,15 @@
                                                                               }
                                                                             }
                                                                           }
+                                                                        },
+                                                                        "position": {
+                                                                          "type": "string"
+                                                                        },
+                                                                        "sourceOfPower": {
+                                                                          "type": "string"
+                                                                        },
+                                                                        "residence": {
+                                                                          "type": "string"
                                                                         },
                                                                         "createdAt": {
                                                                           "type": "string",
@@ -14407,6 +14506,15 @@
                                                                   }
                                                                 }
                                                               }
+                                                            },
+                                                            "position": {
+                                                              "type": "string"
+                                                            },
+                                                            "sourceOfPower": {
+                                                              "type": "string"
+                                                            },
+                                                            "residence": {
+                                                              "type": "string"
                                                             },
                                                             "createdAt": {
                                                               "type": "string",
