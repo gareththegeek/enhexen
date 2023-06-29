@@ -4,7 +4,7 @@ import Link from '../atoms/Link'
 import Table from '../atoms/Table'
 import Placeholder from '../atoms/Placeholder'
 
-const AssetList = ({ assets }) => (
+const AssetList = ({ assets, faction, showHex }) => (
   <section>
     <H2>Assets</H2>
     {assets.length > 0 ? (
@@ -16,7 +16,7 @@ const AssetList = ({ assets }) => (
             <th>Attack</th>
             <th>Counter</th>
             <th>Qualities</th>
-            <th>Faction</th>
+            {showHex ? <th>Hex</th> : <th>Faction</th>}
           </tr>
         </thead>
         <tbody>
@@ -29,9 +29,17 @@ const AssetList = ({ assets }) => (
               <td>{x.attack}</td>
               <td>{x.counter}</td>
               <td>{x.qualities}</td>
-              <td>
-                <Link to={`factions/${x.faction.id}`}>{x.faction.name}</Link>
-              </td>
+              {showHex ? (
+                <td>
+                  <Link to={`/${x.hex?.reference}`}>{x.hex?.reference}</Link>
+                </td>
+              ) : (
+                <td>
+                  <Link to={`/factions/${x.faction?.id ?? faction.id}`}>
+                    {x.faction?.name ?? faction.name}
+                  </Link>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>
@@ -44,6 +52,8 @@ const AssetList = ({ assets }) => (
 
 AssetList.propTypes = {
   assets: PropTypes.array,
+  faction: PropTypes.object,
+  showHex: PropTypes.bool,
 }
 
 export default AssetList

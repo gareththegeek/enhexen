@@ -7,10 +7,10 @@ const Nav = () => (
         <Link to="">Hex</Link>
       </li>
       <li>
-        <Link to="delve">Delve</Link>
+        <Link to="/delve">Delve</Link>
       </li>
       <li>
-        <Link to="faction">Faction</Link>
+        <Link to="/factions">Factions</Link>
       </li>
     </ul>
   </nav>

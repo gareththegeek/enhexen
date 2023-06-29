@@ -17,6 +17,7 @@ import {
   uniqBy,
 } from 'ramda'
 import readCsv, {
+  AssetRecord,
   CsvRecord,
   EncounterRecord,
   FactionRecord,
@@ -216,37 +217,69 @@ const insertRumours = async (records: RumourRecord[], adventureId: number) =>
     'roll'
   )
 
+const insertAssets = async (
+  records: AssetRecord[],
+  factionId: number,
+  hexes: EntityLookup
+) =>
+  insert(
+    'assets',
+    records,
+    ({ Type, Reference, HP, Max, Attack, Counter, Qualities }) => ({
+      name: Type,
+      hp: HP,
+      maxHp: Max,
+      attack: Attack,
+      counter: Counter,
+      qualities: Qualities,
+      faction: factionId,
+      hex: hexes[Reference]?.id,
+    }),
+    'type'
+  )
+
 const processEncounterSheet = async (
   records: EncounterRecord[],
   region: StrapiEntity
 ) => {
   const encounters = await insertEncounters(records)
-  const entity = mergeDeepRight(region, {
+  return mergeDeepRight(region, {
     attributes: {
       encounters: map(prop('id'), Object.values(encounters)),
     },
   })
-  return put('regions', entity)
 }
 
 const processRumourSheet = async (
   records: RumourRecord[],
   adventure: StrapiEntity
 ) => {
-  const encounters = await insertRumours(records, adventure.id)
-  const entity = mergeDeepRight(adventure, {
+  const rumours = await insertRumours(records, adventure.id)
+  return mergeDeepRight(adventure, {
     attributes: {
-      rumours: map(prop('id'), Object.values(encounters)),
+      rumours: map(prop('id'), Object.values(rumours)),
     },
   })
-  return put('adventures', entity)
+}
+
+const processAssetSheet = async (
+  records: AssetRecord[],
+  faction: StrapiEntity,
+  hexes: EntityLookup
+) => {
+  const assets = insertAssets(records, faction.id, hexes)
+  return mergeDeepRight(faction, {
+    attributes: {
+      rumours: map(prop('id'), Object.values(assets)),
+    },
+  })
 }
 
 const processNested = async <T extends CsvRecord>(
   filename: string,
   column: keyof T,
   lookup: EntityLookup,
-  processor: (records: T[], parent: StrapiEntity) => Promise<StrapiResponse>
+  processor: (records: T[], parent: StrapiEntity) => Promise<StrapiEntity>
 ) => {
   const records = (await readCsv(filename)) as T[]
   const uniqueParents = pipe(
@@ -304,9 +337,21 @@ const processFactions = async (filename: string): Promise<EntityLookup> => {
   )
 }
 
+const processAssets = (
+  filename: string,
+  factions: EntityLookup,
+  hexes: EntityLookup
+) => {
+  console.log('Inserting assets')
+  return processNested(filename, 'Faction', factions, (records: AssetRecord[], parent) =>
+    processAssetSheet(records, parent, hexes)
+  )
+}
+
 ;(async () => {
   await authenticate()
 
+  await wipe('assets')
   await wipe('domains')
   await wipe('factions')
   await wipe('encounters')
@@ -319,6 +364,7 @@ const processFactions = async (filename: string): Promise<EntityLookup> => {
 
   const factions = await processFactions('factions.csv')
   const lookups = await processHexSheet('test.csv', factions)
+  const assets = await processAssets('assets.csv', factions, lookups.hexes)
   await processEncounters('encounters.csv', lookups.regions)
   await processRumours('rumours.csv', lookups.adventures)
   console.log('Done')

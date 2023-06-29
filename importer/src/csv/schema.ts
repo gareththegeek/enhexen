@@ -38,3 +38,15 @@ export interface RumourRecord extends CsvRecord {
   Roll: string
   Rumour: string
 }
+
+export interface AssetRecord extends CsvRecord {
+  Faction: string
+  Type: string
+  Reference: string
+  Location: string
+  HP: string
+  Max: string
+  Attack: string
+  Counter: string
+  Qualities: string
+}

@@ -43,7 +43,7 @@ const HexPage = () => {
         <RegionDetails stubRegion={hex.region} id={hex.region.id} />
       )}
       {hex?.adventure && <AdventureDetails adventure={hex.adventure} />}
-      {hex?.domain && <DomainDetails domain={hex.domain} />}
+      {hex?.domain && <DomainDetails domain={hex.domain} faction={hex.domain.faction} />}
       {hex?.assets && <AssetList assets={hex.assets} />}
       {!hex && reference && (
         <Placeholder>No hex found with reference {reference}</Placeholder>

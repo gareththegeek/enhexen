@@ -47,12 +47,6 @@
       "relation": "oneToOne",
       "target": "api::hex.hex"
     },
-    "assets": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::unit.unit",
-      "mappedBy": "faction"
-    },
     "domains": {
       "type": "relation",
       "relation": "oneToMany",
@@ -67,6 +61,12 @@
     },
     "treasure": {
       "type": "string"
+    },
+    "assets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::asset.asset",
+      "mappedBy": "faction"
     }
   }
 }

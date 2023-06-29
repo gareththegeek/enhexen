@@ -1,9 +1,9 @@
 {
   "kind": "collectionType",
-  "collectionName": "units",
+  "collectionName": "assets",
   "info": {
-    "singularName": "unit",
-    "pluralName": "units",
+    "singularName": "asset",
+    "pluralName": "assets",
     "displayName": "Asset",
     "description": ""
   },
