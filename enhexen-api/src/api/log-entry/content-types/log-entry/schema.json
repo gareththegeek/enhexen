@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "log_entries",
+  "info": {
+    "singularName": "log-entry",
+    "pluralName": "log-entries",
+    "displayName": "LogEntry"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "text": {
+      "type": "text"
+    },
+    "created": {
+      "type": "datetime"
+    }
+  }
+}

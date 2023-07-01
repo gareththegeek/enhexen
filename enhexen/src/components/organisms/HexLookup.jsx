@@ -5,8 +5,8 @@ import { useState } from 'react'
 const HexLookup = ({ onSearch, initialValue }) => {
   const [value, setValue] = useState(initialValue)
 
-  const handleOnChange = (e) => {
-    setValue(e.target.value)
+  const handleOnChange = (value) => {
+    setValue(value)
   }
 
   const handleClick = () => {
@@ -26,7 +26,7 @@ const HexLookup = ({ onSearch, initialValue }) => {
 
 HexLookup.propTypes = {
   onSearch: PropTypes.func.isRequired,
-  initialValue: PropTypes.string
+  initialValue: PropTypes.string,
 }
 
 export default HexLookup

@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types'
 import { HexProvider } from './HexContext'
 import { FactionProvider } from './FactionContext'
+import { ClockProvider } from './ClockContext'
 
-const providers = [HexProvider, FactionProvider]
+const providers = [HexProvider, FactionProvider, ClockProvider]
 
 const Providers = ({ children }) => (
   <>

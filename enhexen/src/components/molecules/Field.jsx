@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 import Label from '../atoms/Label'
 
-const Field = (props) => (
+const Field = ({ name, label, children }) => (
   <>
-    <Label htmlFor={props.name}>{props.label}</Label>
-    {props.children}
+    <Label htmlFor={name}>{label}</Label>
+    {children}
   </>
 )
 

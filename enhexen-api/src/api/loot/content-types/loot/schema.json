@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "loots",
+  "info": {
+    "singularName": "loot",
+    "pluralName": "loots",
+    "displayName": "Loot"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "value": {
+      "type": "decimal"
+    }
+  }
+}
