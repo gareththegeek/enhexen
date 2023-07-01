@@ -1,10 +1,10 @@
 import { useContext, useEffect } from 'react'
 import { ClockContext } from '../../contexts/ClockContext'
 import useFetchClock from '../../hooks/useFetchClock'
-import { DateTime } from 'luxon'
 import Clock from '../atoms/Clock'
 import TimeAdvance from '../molecules/TimeAdvance'
 import useCurrentPath from '../../hooks/useCurrentPath'
+import { toDateTime } from '../../dates'
 
 const timeAdvanceOptions = {
   hexes: [
@@ -43,7 +43,7 @@ const TimeControl = () => {
 
   useEffect(() => {
     if (!now && nextNow) {
-      setNow(DateTime.fromISO(nextNow, { zone: 'utc' }))
+      setNow(toDateTime(nextNow))
     }
   }, [nextNow, now, setNow])
 

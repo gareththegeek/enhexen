@@ -1,21 +1,23 @@
 import PropTypes from 'prop-types'
-import { DateTime } from 'luxon'
 import LI from '../atoms/LI'
 import P from '../atoms/P'
 import Button from '../atoms/Button'
 import RelativeTime from '../atoms/RelativeTime'
+import { toDateTime } from '../../dates'
 
-const Entry = ({ entry, onDelete }) => (
+const Entry = ({ entry, onDelete, onRenew }) => (
   <LI className="flex gap-2">
-    <RelativeTime value={DateTime.fromISO(entry.due, { zone: 'utc' })} />
+    <RelativeTime value={toDateTime(entry.due)} />
     <P>{entry.name}</P>
-    <Button onClick={() => onDelete(entry)}>X</Button>
+    {onRenew && <Button onClick={() => onRenew(entry)}>↺</Button>}
+    {onDelete && <Button onClick={() => onDelete(entry)}>X</Button>}
   </LI>
 )
 
 Entry.propTypes = {
   entry: PropTypes.object,
   onDelete: PropTypes.func,
+  onRenew: PropTypes.func,
 }
 
 export default Entry

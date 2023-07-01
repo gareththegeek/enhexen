@@ -16,53 +16,51 @@ const presets = {
   spell: { amount: 1, period: 'hours', name: 'Spell' },
   status: { amount: 1, period: 'days', name: 'Status' },
   torch: { amount: 1, period: 'hours', name: 'Torch' },
+  custom: { amount: '', period: '', name: '' },
+}
+
+const initialState = {
+  due: '',
+  name: '',
+  type: '',
+  period: '',
+  amount: '',
+  duration: '',
 }
 
 const AddTimer = ({ onSave, onCancel }) => {
   const { now } = useContext(ClockContext)
-  const [due, setDue] = useState('')
-  const [name, setName] = useState('')
-  const [type, setType] = useState('')
-  const [period, setPeriod] = useState('')
-  const [amount, setAmount] = useState('')
+  const [timer, setTimer] = useState(initialState)
 
   const clear = () => {
-    setDue(undefined)
-    setName(undefined)
+    setTimer(initialState)
   }
 
-  const updateDue = ({ period, amount }) => {
+  const updateTimer = (nextTimer) => {
+    const { period, amount } = nextTimer
     const duration = Duration.fromObject({ [period]: amount })
-    setDue(now.plus(duration))
+    setTimer({ ...nextTimer, due: now.plus(duration), duration })
+  }
+
+  const handleNameChange = (name) => {
+    updateTimer({ ...timer, name })
   }
 
   const handleTypeChange = (type) => {
-    setType(type)
-
-    const preset = presets[type]
-    if (!preset) {
-      return
-    }
-
-    setName(preset.name)
-    setPeriod(preset.period)
-    setAmount(preset.amount)
-    updateDue(preset)
+    updateTimer({ ...presets[type], type })
   }
 
   const handlePeriodChange = (period) => {
-    setPeriod(period)
-    updateDue({ period, amount })
+    updateTimer({ ...timer, period })
   }
 
   const handleAmountChange = (amount) => {
-    setAmount(amount)
-    updateDue({ period, amount })
+    updateTimer({ ...timer, amount })
   }
 
   const handleSave = () => {
     if (onSave) {
-      onSave({ type, name, due })
+      onSave(timer)
     }
     clear()
   }
@@ -76,10 +74,10 @@ const AddTimer = ({ onSave, onCancel }) => {
   return (
     <form>
       <Field label="Name" name="name">
-        <Input name="name" onChange={setName} value={name} />
+        <Input name="name" onChange={handleNameChange} value={timer.name} />
       </Field>
       <Field label="Type" name="type">
-        <Select name="type" onChange={handleTypeChange} value={type}>
+        <Select name="type" onChange={handleTypeChange} value={timer.type}>
           <option value="custom">Custom</option>
           <option value="disease">Disease</option>
           <option value="faction">Faction</option>
@@ -93,7 +91,11 @@ const AddTimer = ({ onSave, onCancel }) => {
         </Select>
       </Field>
       <Field name="period" label="Period">
-        <Select name="period" onChange={handlePeriodChange} value={period}>
+        <Select
+          name="period"
+          onChange={handlePeriodChange}
+          value={timer.period}
+        >
           <option value="minutes">Minutes</option>
           <option value="hours">Hours</option>
           <option value="days">Days</option>
@@ -107,7 +109,7 @@ const AddTimer = ({ onSave, onCancel }) => {
           name="amount"
           type="number"
           onChange={handleAmountChange}
-          value={amount}
+          value={timer.amount}
         />
       </Field>
       <Button onClick={handleSave}>Save</Button>

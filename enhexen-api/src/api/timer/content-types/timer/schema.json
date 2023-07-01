@@ -32,6 +32,9 @@
         "restock",
         "custom"
       ]
+    },
+    "duration": {
+      "type": "string"
     }
   }
 }
