@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-07-01T12:03:43.627Z"
+    "x-generation-date": "2023-07-01T14:34:58.416Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -16278,16 +16278,16 @@
               "type": {
                 "type": "string",
                 "enum": [
-                  "Torch",
-                  "Rations",
-                  "Spell",
-                  "Rest",
-                  "Rent",
-                  "Status",
-                  "Disease",
-                  "Faction",
-                  "Restock",
-                  "Custom"
+                  "torch",
+                  "rations",
+                  "spell",
+                  "rest",
+                  "rent",
+                  "status",
+                  "disease",
+                  "faction",
+                  "restock",
+                  "custom"
                 ]
               }
             }
@@ -16353,16 +16353,16 @@
           "type": {
             "type": "string",
             "enum": [
-              "Torch",
-              "Rations",
-              "Spell",
-              "Rest",
-              "Rent",
-              "Status",
-              "Disease",
-              "Faction",
-              "Restock",
-              "Custom"
+              "torch",
+              "rations",
+              "spell",
+              "rest",
+              "rent",
+              "status",
+              "disease",
+              "faction",
+              "restock",
+              "custom"
             ]
           },
           "createdAt": {

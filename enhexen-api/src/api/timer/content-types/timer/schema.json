@@ -4,7 +4,8 @@
   "info": {
     "singularName": "timer",
     "pluralName": "timers",
-    "displayName": "Timer"
+    "displayName": "Timer",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,16 +21,16 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "Torch",
-        "Rations",
-        "Spell",
-        "Rest",
-        "Rent",
-        "Status",
-        "Disease",
-        "Faction",
-        "Restock",
-        "Custom"
+        "torch",
+        "rations",
+        "spell",
+        "rest",
+        "rent",
+        "status",
+        "disease",
+        "faction",
+        "restock",
+        "custom"
       ]
     }
   }

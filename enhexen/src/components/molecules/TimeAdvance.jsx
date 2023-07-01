@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import putClock from '../../hooks/putClock'
+import OL from '../atoms/OL'
 import LI from '../atoms/LI'
 import Button from '../atoms/Button'
 import { ClockContext } from '../../contexts/ClockContext'
@@ -36,13 +37,13 @@ const TimeAdvance = ({ options, applyTravelSpeed }) => {
           value={speed}
         />
       </Field>
-      <ol className="flex gap-2">
+      <OL className="flex gap-2">
         {options.map(({ icon, label, amount }) => (
           <LI key={icon}>
             <Button onClick={() => handleClick(amount)}>{label}</Button>
           </LI>
         ))}
-      </ol>
+      </OL>
     </>
   )
 }

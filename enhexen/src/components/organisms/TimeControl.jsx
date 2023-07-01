@@ -43,7 +43,7 @@ const TimeControl = () => {
 
   useEffect(() => {
     if (!now && nextNow) {
-      setNow(DateTime.fromISO(nextNow))
+      setNow(DateTime.fromISO(nextNow, { zone: 'utc' }))
     }
   }, [nextNow, now, setNow])
 
