@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import RevealableText from '../molecules/ReveableText'
+import RevealableText from '../molecules/RevealableText'
 import putHex from '../../hooks/putHex'
 
 const HexDetails = ({ hex }) => {

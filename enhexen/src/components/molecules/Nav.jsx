@@ -7,6 +7,9 @@ const Nav = () => (
         <Link to="">Hex</Link>
       </li>
       <li>
+        <Link to="/settlements">Settlements</Link>
+      </li>
+      <li>
         <Link to="/delve">Delve</Link>
       </li>
       <li>

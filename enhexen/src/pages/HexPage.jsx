@@ -1,31 +1,19 @@
-import { useContext, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { HexContext } from '../contexts/HexContext'
 import useFetchHex from '../hooks/useFetchHex'
+import useReference from '../hooks/useReference'
 import H1 from '../components/atoms/H1'
 import Placeholder from '../components/atoms/Placeholder'
 import HexDetails from '../components/organisms/HexDetails'
 import RegionDetails from '../components/organisms/RegionDetails'
 import AdventureDetails from '../components/organisms/AdventureDetails'
 import HexNavigation from '../components/organisms/HexNavigation'
-import SettlementDetails from '../components/organisms/SettlementDetails'
 import DomainDetails from '../components/organisms/DomainDetails'
 import AssetList from '../components/organisms/AssetList'
 import NpcList from '../components/organisms/NpcList'
+import P from '../components/atoms/P'
+import Link from '../components/atoms/Link'
 
 const HexPage = () => {
-  const navigate = useNavigate()
-  const { reference: referenceParam } = useParams()
-  const { reference, setReference } = useContext(HexContext)
-  useEffect(() => {
-    if (referenceParam) {
-      if (reference !== referenceParam) {
-        setReference(referenceParam)
-      }
-    } else if (reference) {
-      navigate(`/${reference}`)
-    }
-  }, [navigate, reference, referenceParam, setReference])
+  const reference = useReference()
 
   const hex = useFetchHex(reference)
 
@@ -33,14 +21,16 @@ const HexPage = () => {
     <>
       <H1>Hex</H1>
       <HexNavigation reference={reference} />
-      {hex && <HexDetails hex={hex} />}
       {hex?.settlement && (
-        <SettlementDetails
-          settlement={hex.settlement}
-          reference={hex.reference}
-        />
+        <P>
+          Settlement
+          <Link to={`/settlements/${hex.reference}`}>
+            {hex.settlement.name}
+          </Link>
+        </P>
       )}
-      {hex?.region && !hex?.settlement && (
+      {hex && <HexDetails hex={hex} />}
+      {hex?.region && (
         <RegionDetails stubRegion={hex.region} id={hex.region.id} />
       )}
       {hex?.adventure && <AdventureDetails adventure={hex.adventure} />}

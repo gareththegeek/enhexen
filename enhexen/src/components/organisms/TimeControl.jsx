@@ -29,6 +29,12 @@ const timeAdvanceOptions = {
     { icon: 'day', label: 'Day', amount: { days: 1 } },
     { icon: 'week', label: 'Week', amount: { week: 1 } },
   ],
+  settlement: [
+    { icon: 'shift', label: '8 Hours', amount: { hours: 8 } },
+    { icon: 'day', label: 'Day', amount: { days: 1 } },
+    { icon: 'week', label: 'Week', amount: { week: 1 } },
+    { icon: 'month', label: 'Month', amount: { month: 1 } },
+  ],
 }
 
 const TimeControl = () => {

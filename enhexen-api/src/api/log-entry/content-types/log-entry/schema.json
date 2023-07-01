@@ -4,7 +4,8 @@
   "info": {
     "singularName": "log-entry",
     "pluralName": "log-entries",
-    "displayName": "LogEntry"
+    "displayName": "LogEntry",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,6 +17,10 @@
     },
     "created": {
       "type": "datetime"
+    },
+    "pinned": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
