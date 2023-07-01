@@ -15,7 +15,7 @@ import Link from '../components/atoms/Link'
 const HexPage = () => {
   const reference = useReference()
 
-  const hex = useFetchHex(reference)
+  const { hex } = useFetchHex(reference)
 
   return (
     <>

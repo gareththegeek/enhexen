@@ -4,7 +4,7 @@ import H2 from '../atoms/H2'
 import RandomTable from '../molecules/RandomTable'
 
 const RegionDetails = ({ stubRegion, id }) => {
-  const region = useFetchRegion(id)
+  const { region } = useFetchRegion(id)
   return (
     <section>
       <H2>{stubRegion.name}</H2>

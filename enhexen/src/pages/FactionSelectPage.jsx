@@ -6,7 +6,7 @@ import Link from '../components/atoms/Link'
 import Placeholder from '../components/atoms/Placeholder'
 
 const FactionSelectPage = () => {
-  const factions = useFetchFactions()
+  const { factions } = useFetchFactions()
   return (
     <>
       <H1>Factions</H1>

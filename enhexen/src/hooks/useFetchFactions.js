@@ -1,5 +1,8 @@
 import useFetch from './useFetch'
 
-const useFetchFactions = () => useFetch('factions')
+const useFetchFactions = () => {
+  const { data, mutate } = useFetch('factions')
+  return { factions: data, mutateFactions: mutate }
+}
 
 export default useFetchFactions

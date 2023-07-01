@@ -12,7 +12,7 @@ import NpcList from '../components/organisms/NpcList'
 const SettlementPage = () => {
   const reference = useReference('/settlements')
 
-  const hex = useFetchHex(reference)
+  const { hex } = useFetchHex(reference)
 
   return (
     <>

@@ -10,7 +10,7 @@ const SettlementDetails = ({
   settlement: { name, marketClass },
   reference,
 }) => {
-  const rumours = useFetchRumours(reference)
+  const { rumours } = useFetchRumours(reference)
 
   const handleRoll = ({ item }) => {
     putRumour({ ...item, done: true })

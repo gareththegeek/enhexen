@@ -29,15 +29,9 @@ const mapStrapiEntity = (entity) => {
 const fetcher = async (...args) => {
   const response = await fetch(...args)
   const result = await response.json()
-  const data = Array.isArray(result.data)
+  return Array.isArray(result.data)
     ? result.data.map(mapStrapiEntity)
     : mapStrapiEntity(result.data)
-
-  if (!Array.isArray(data)) {
-    return data
-  }
-
-  return data.length === 1 ? data[0] : data.length > 1 ? data : undefined
 }
 
 export default fetcher

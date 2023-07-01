@@ -21,7 +21,7 @@ const FactionPage = () => {
       navigate(`/factions/${id}`)
     }
   }, [navigate, id, idParam, setId])
-  const faction = useFetchFaction(id)
+  const { faction } = useFetchFaction(id)
 
   return (
     <>

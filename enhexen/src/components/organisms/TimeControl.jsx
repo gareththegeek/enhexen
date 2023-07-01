@@ -39,7 +39,7 @@ const timeAdvanceOptions = {
 
 const TimeControl = () => {
   const { now, setNow } = useContext(ClockContext)
-  const nextNow = useFetchClock(!now)
+  const { now: nextNow } = useFetchClock(!now)
 
   useEffect(() => {
     if (!now && nextNow) {

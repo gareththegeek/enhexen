@@ -1,14 +1,25 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import deleteTimer from '../../hooks/deleteTimer'
+import useFetchTimers from '../../hooks/useFetchTimers'
 import H2 from '../atoms/H2'
 import Button from '../atoms/Button'
 import AddTimer from './AddTimer'
 import postTimer from '../../hooks/postTimer'
-import ElapsedTimers from './ElapsedTimers'
-import UpcomingTimers from './UpcomingTimers'
+import TimersList from './TimersList'
+import { ClockContext } from '../../contexts/ClockContext'
+import { DateTime } from 'luxon'
 
 const Timers = () => {
+  const { now } = useContext(ClockContext)
   const [showAdd, setShowAdd] = useState(false)
+  const { timers, mutateTimers } = useFetchTimers()
+  const elapsedTimers = timers?.filter(
+    ({ due }) => now >= DateTime.fromISO(due, { zone: 'utc' })
+  )
+  const upcomingTimers = timers?.filter(
+    ({ due }) => now < DateTime.fromISO(due, { zone: 'utc' })
+  )
+
   const handleAddClick = () => {
     setShowAdd(true)
   }
@@ -19,11 +30,11 @@ const Timers = () => {
 
   const handleSaveClick = (timer) => {
     setShowAdd(false)
-    postTimer(timer)
+    postTimer(timer).then(mutateTimers)
   }
 
   const handleDeleteClick = (timer) => {
-    deleteTimer(timer)
+    deleteTimer(timer).then(mutateTimers)
   }
 
   return (
@@ -33,8 +44,20 @@ const Timers = () => {
       {showAdd && (
         <AddTimer onSave={handleSaveClick} onCancel={handleCancelClick} />
       )}
-      <ElapsedTimers onDelete={handleDeleteClick} />
-      <UpcomingTimers onDelete={handleDeleteClick} />
+      {timers && (
+        <>
+          <TimersList
+            heading="-Elapsed-"
+            onDelete={handleDeleteClick}
+            timers={elapsedTimers}
+          />
+          <TimersList
+            heading="-Up-coming-"
+            onDelete={handleDeleteClick}
+            timers={upcomingTimers}
+          />
+        </>
+      )}
     </section>
   )
 }
