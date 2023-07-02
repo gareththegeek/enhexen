@@ -1,12 +1,10 @@
+import { useState } from 'react'
 import PropTypes from 'prop-types'
+import { randomInteger } from '../../maths'
 import H2 from '../atoms/H2'
 import Button from '../atoms/Button'
 import Table from '../atoms/Table'
 import Placeholder from '../atoms/Placeholder'
-import { useState } from 'react'
-
-const randomInteger = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1)) + min
 
 const RandomTable = ({ heading, items, onRoll }) => {
   const [selected, setSelected] = useState()

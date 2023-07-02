@@ -1,13 +1,14 @@
+import { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
+import { Duration } from 'luxon'
 import { putClock } from '../../hooks/clock'
+import { usePublish } from '../../hooks/pubsub'
+import { ClockContext } from '../../contexts/ClockContext'
 import OL from '../atoms/OL'
 import LI from '../atoms/LI'
 import Button from '../atoms/Button'
-import { ClockContext } from '../../contexts/ClockContext'
-import { useContext, useState } from 'react'
-import { Duration } from 'luxon'
-import Field from './Field'
 import Input from '../atoms/Input'
+import Field from './Field'
 
 const explorationToWildernessSpeedQuotient = 5
 const standardHexesPerDay = 12
@@ -15,17 +16,19 @@ const standardHexesPerDay = 12
 const TimeAdvance = ({ options, applyTravelSpeed }) => {
   const [speed, setSpeed] = useState(60)
   const { now, setNow } = useContext(ClockContext)
+  const publish = usePublish('CLOCK_CHANGE')
 
   const handleClick = (amount) => {
     const travelFactor = applyTravelSpeed
       ? (explorationToWildernessSpeedQuotient * standardHexesPerDay) / speed
       : 1
-    const nextNow = now.plus(
-      Duration.fromObject(amount).mapUnits((x) => x * travelFactor)
+    const duration = Duration.fromObject(amount).mapUnits(
+      (x) => x * travelFactor
     )
+    const nextNow = now.plus(duration)
 
     setNow(nextNow)
-    putClock(nextNow)
+    putClock(nextNow).then(publish({ duration }))
   }
 
   return (
