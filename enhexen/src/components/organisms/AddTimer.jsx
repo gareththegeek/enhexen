@@ -90,7 +90,7 @@ const AddTimer = ({ onSave, onCancel }) => {
           <option value="torch">Torch</option>
         </Select>
       </Field>
-      <Field name="period" label="Period">
+      <Field label="Period" name="period">
         <Select
           name="period"
           onChange={handlePeriodChange}
@@ -104,7 +104,7 @@ const AddTimer = ({ onSave, onCancel }) => {
           <option value="years">Years</option>
         </Select>
       </Field>
-      <Field name="amount" label="Amount">
+      <Field label="Amount" name="amount">
         <Input
           name="amount"
           type="number"

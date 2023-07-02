@@ -15,14 +15,14 @@
     "name": {
       "type": "string"
     },
-    "value": {
+    "amount": {
       "type": "decimal"
     },
     "type": {
       "type": "enumeration",
       "enum": [
-        "SP",
-        "XP"
+        "sp",
+        "xp"
       ]
     }
   }

@@ -1,11 +1,7 @@
-import useSWR from 'swr'
-import fetcher from '../fetcher'
+import useFetch from '../useFetch'
 
 const useFetchTimers = () => {
-  const { data, mutate } = useSWR(`http://localhost:1337/api/timers?sort[0]=due:asc`, fetcher)
-  if (data && !Array.isArray(data)) {
-    return { data: [data], mutate }
-  }
+  const { data, mutate } = useFetch(`timers?sort[0]=due:asc`)
   return { timers: data, mutateTimers: mutate }
 }
 

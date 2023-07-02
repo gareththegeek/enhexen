@@ -7,6 +7,7 @@ import SettlementDetails from '../components/organisms/SettlementDetails'
 import DomainDetails from '../components/organisms/DomainDetails'
 import AssetList from '../components/organisms/AssetList'
 import NpcList from '../components/organisms/NpcList'
+import Loot from '../components/organisms/Loot'
 
 const SettlementPage = () => {
   const reference = useReference('/settlements')
@@ -27,6 +28,7 @@ const SettlementPage = () => {
           reference={hex.reference}
         />
       )}
+      {hex?.settlement && <Loot />}
       {hex?.domain && (
         <DomainDetails domain={hex.domain} faction={hex.domain.faction} />
       )}
