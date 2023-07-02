@@ -1,4 +1,4 @@
-import useFetchFactions from '../hooks/useFetchFactions'
+import { useFetchFactions } from '../hooks/factions'
 import H1 from '../components/atoms/H1'
 import UL from '../components/atoms/UL'
 import LI from '../components/atoms/LI'

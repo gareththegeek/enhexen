@@ -1,4 +1,4 @@
-import post from './post'
+import post from '../post'
 
 const postTimer = (timer) => post('timers', timer)
 

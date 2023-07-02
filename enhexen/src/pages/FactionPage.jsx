@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useFetchFaction } from '../hooks/factions'
 import { FactionContext } from '../contexts/FactionContext'
-import useFetchFaction from '../hooks/useFetchFaction'
 import H1 from '../components/atoms/H1'
 import FactionDetail from '../components/organisms/FactionDetail'
 import DomainDetails from '../components/organisms/DomainDetails'

@@ -1,4 +1,4 @@
-import put from './put'
+import put from '../put'
 
 const putRumour = (rumour) => put(`rumours/${rumour.id}`, rumour)
 

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import useFetchRegion from '../../hooks/useFetchRegion'
+import { useFetchRegion } from '../../hooks/regions'
 import H2 from '../atoms/H2'
 import RandomTable from '../molecules/RandomTable'
 

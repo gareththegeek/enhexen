@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types'
-import useFetchRumours from '../../hooks/useFetchRumours'
+import { putRumour, useFetchRumours } from '../../hooks/rumours'
 import H2 from '../atoms/H2'
 import P from '../atoms/P'
 import Field from '../molecules/Field'
 import RandomTable from '../molecules/RandomTable'
-import putRumour from '../../hooks/putRumour'
 
 const SettlementDetails = ({
   settlement: { name, marketClass },

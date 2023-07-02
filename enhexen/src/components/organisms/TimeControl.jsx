@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react'
 import { ClockContext } from '../../contexts/ClockContext'
-import useFetchClock from '../../hooks/useFetchClock'
+import { useFetchClock } from '../../hooks/clock'
 import Clock from '../atoms/Clock'
 import TimeAdvance from '../molecules/TimeAdvance'
 import useCurrentPath from '../../hooks/useCurrentPath'

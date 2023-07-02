@@ -1,4 +1,4 @@
-import useFetch from './useFetch'
+import useFetch from '../useFetch'
 
 const useFetchHex = (reference) => {
   const { data, mutate } = useFetch(

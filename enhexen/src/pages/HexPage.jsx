@@ -1,7 +1,8 @@
-import useFetchHex from '../hooks/useFetchHex'
-import useReference from '../hooks/useReference'
+import { useFetchHex, useReference } from '../hooks/hexes'
 import H1 from '../components/atoms/H1'
 import Placeholder from '../components/atoms/Placeholder'
+import P from '../components/atoms/P'
+import Link from '../components/atoms/Link'
 import HexDetails from '../components/organisms/HexDetails'
 import RegionDetails from '../components/organisms/RegionDetails'
 import AdventureDetails from '../components/organisms/AdventureDetails'
@@ -9,8 +10,6 @@ import HexNavigation from '../components/organisms/HexNavigation'
 import DomainDetails from '../components/organisms/DomainDetails'
 import AssetList from '../components/organisms/AssetList'
 import NpcList from '../components/organisms/NpcList'
-import P from '../components/atoms/P'
-import Link from '../components/atoms/Link'
 
 const HexPage = () => {
   const reference = useReference()

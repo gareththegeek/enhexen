@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { HexContext } from '../contexts/HexContext'
+import { HexContext } from '../../contexts/HexContext'
 
 const useReference = (route = '') => {
   const navigate = useNavigate()

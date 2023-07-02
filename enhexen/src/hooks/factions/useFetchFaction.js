@@ -1,4 +1,4 @@
-import useFetch from './useFetch'
+import useFetch from '../useFetch'
 
 const useFetchFaction = (id) => {
   const { data, mutate } = useFetch(

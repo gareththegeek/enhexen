@@ -4,7 +4,8 @@
   "info": {
     "singularName": "loot",
     "pluralName": "loots",
-    "displayName": "Loot"
+    "displayName": "Loot",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,6 +17,13 @@
     },
     "value": {
       "type": "decimal"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "SP",
+        "XP"
+      ]
     }
   }
 }

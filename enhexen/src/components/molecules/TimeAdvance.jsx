@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import putClock from '../../hooks/putClock'
+import { putClock } from '../../hooks/clock'
 import OL from '../atoms/OL'
 import LI from '../atoms/LI'
 import Button from '../atoms/Button'

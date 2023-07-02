@@ -1,4 +1,4 @@
-import delet3 from './delet3'
+import delet3 from '../delet3'
 
 const deleteTimer = ({ id }) => delet3(`timers/${id}`)
 

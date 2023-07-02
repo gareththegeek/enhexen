@@ -1,4 +1,4 @@
-import useFetch from './useFetch'
+import useFetch from '../useFetch'
 
 const useFetchClock = (shouldFetch) => {
   const { data, mutate } = useFetch(`global`, shouldFetch)
