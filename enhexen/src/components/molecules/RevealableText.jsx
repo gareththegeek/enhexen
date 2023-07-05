@@ -15,8 +15,9 @@ const RevealableText = ({ text, name, label, revealed, onRevealChange }) => (
         />
       </Field>
     </div>
-    TODO figure out how we want to size these text area thingies
-    <P className="border-2 border-black min-h-[100px]">{text}</P>
+    <P className="border-2 border-black min-h-[8rem] sm:min-h-[4rem] max-h-64 sm:max-h-32 overflow-y-auto">
+      {text}
+    </P>
   </div>
 )
 

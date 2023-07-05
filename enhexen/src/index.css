@@ -5,7 +5,13 @@
 @layer base {
     html {
         @apply font-sans;
+        @apply m-8;
         font-size: 20px;
+    }
+    
+    h1 {
+        @apply flex;
+        @apply flex-wrap;
     }
 
     button {

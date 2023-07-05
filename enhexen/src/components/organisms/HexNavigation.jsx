@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import Placeholder from '../atoms/Placeholder'
 import Hex from '../atoms/Hex'
-import H2 from '../atoms/H2'
 
 const parseReference = (reference) => {
   const parts = reference.split('.')
@@ -47,22 +46,21 @@ const HexNavigation = ({ reference }) => {
   const { upleft, up, upright, downleft, down, downright } =
     getAdjacentReferences(reference)
   return (
-    <section>
-      <H2>Navigation</H2>
+    <div className="w-42 shrink-0 m-auto sm:m-initial">
       <div className="flex">
         <Hex className="relative top-7 left-3" onClick={() => handleNavigate(upleft)}>{upleft}</Hex>
         <Hex onClick={() => handleNavigate(up)}>{up}</Hex>
         <Hex className="relative top-6 right-3" onClick={() => handleNavigate(upright)}>{upright}</Hex>
       </div>
       <div className="flex">
-        <Hex className="relative bottom-1 left-14">{reference}</Hex>
+        <Hex className="relative bottom-1 left-14" selected={true}>{reference}</Hex>
       </div>
       <div className="flex">
         <Hex className="relative bottom-8 left-3" onClick={() => handleNavigate(downleft)}>{downleft}</Hex>
         <Hex className="relative bottom-2" onClick={() => handleNavigate(down)}>{down}</Hex>
         <Hex className="relative bottom-9 right-3" onClick={() => handleNavigate(downright)}>{downright}</Hex>
       </div>
-    </section>
+    </div>
   )
 }
 

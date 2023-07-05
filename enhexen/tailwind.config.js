@@ -7,6 +7,12 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.m-initial': { margin: 'initial' }
+      })
+    }
+  ],
 }
 

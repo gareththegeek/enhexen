@@ -1,7 +1,7 @@
 import { useFetchHex, useReference } from '../hooks/hexes'
 import H1 from '../components/atoms/H1'
 import Placeholder from '../components/atoms/Placeholder'
-import P from '../components/atoms/P'
+import Label from '../components/atoms/Label'
 import Link from '../components/atoms/Link'
 import HexDetails from '../components/organisms/HexDetails'
 import RegionDetails from '../components/organisms/RegionDetails'
@@ -18,37 +18,32 @@ const HexPage = () => {
 
   return (
     <>
-      <div className="flex">
-        <div className="flex flex-col gap-4">
-          <div>
-            <H1>Hex {hex?.reference}</H1>
+      <div className="flex flex-col-reverse sm:flex-row">
+        <div className="flex-1 flex flex-col gap-8">
+          <H1>
+            <Label>{hex?.reference}</Label>
             {hex?.settlement && (
-              <P>
-                Settlement&nbsp;
-                <Link to={`/settlements/${hex.reference}`}>
-                  {hex.settlement.name}
-                </Link>
-              </P>
+              <Link to={`/settlements/${hex.reference}`}>
+                {hex.settlement.name}
+              </Link>
             )}
-          </div>
+          </H1>
           {hex && <HexDetails hex={hex} />}
         </div>
         <HexNavigation reference={reference} />
       </div>
-      <div className="flex flex-col gap-4">
-        {hex?.region && (
-          <RegionDetails stubRegion={hex.region} id={hex.region.id} />
-        )}
-        {hex?.adventure && <AdventureDetails adventure={hex.adventure} />}
-        {hex?.domain && (
-          <DomainDetails domain={hex.domain} faction={hex.domain.faction} />
-        )}
-        {hex?.assets && <AssetList assets={hex.assets} />}
-        {hex?.npcs && <NpcList npcs={hex.npcs} />}
-        {!hex && reference && (
-          <Placeholder>No hex found with reference {reference}</Placeholder>
-        )}
-      </div>
+      {hex?.region && (
+        <RegionDetails stubRegion={hex.region} id={hex.region.id} />
+      )}
+      {hex?.adventure && <AdventureDetails adventure={hex.adventure} />}
+      {hex?.domain && (
+        <DomainDetails domain={hex.domain} faction={hex.domain.faction} />
+      )}
+      {hex?.assets && <AssetList assets={hex.assets} />}
+      {hex?.npcs && <NpcList npcs={hex.npcs} />}
+      {!hex && reference && (
+        <Placeholder>No hex found with reference {reference}</Placeholder>
+      )}
     </>
   )
 }

@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
-import Label from '../atoms/Label'
+import FieldLabel from '../atoms/FieldLabel'
 
 const Field = ({ name, label, children, ...rest }) => (
   <div {...rest}>
-    <Label htmlFor={name}>{label}</Label>
+    <FieldLabel htmlFor={name}>{label}</FieldLabel>
     {children}
   </div>
 )

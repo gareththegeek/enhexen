@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import { putHex } from '../../hooks/hexes'
-import H2 from '../atoms/H2'
 import RevealableText from '../molecules/RevealableText'
 
 const HexDetails = ({ hex }) => {
@@ -10,8 +9,7 @@ const HexDetails = ({ hex }) => {
   }
 
   return (
-    <section>
-      <H2>Hex Details</H2>
+    <>
       <RevealableText
         name="landmark"
         label="Landmark"
@@ -33,7 +31,7 @@ const HexDetails = ({ hex }) => {
         revealed={hex.secretRevealed}
         onRevealChange={handleRevealChange('secretRevealed')}
       />
-    </section>
+    </>
   )
 }
 
