@@ -15,6 +15,7 @@ const HexLookup = ({ onSearch, initialValue }) => {
 
   return (
     <SearchBox
+      className="w-14"
       name="reference"
       label="Reference"
       placeholder="e.g. 21.23"

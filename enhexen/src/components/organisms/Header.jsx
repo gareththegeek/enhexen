@@ -15,7 +15,7 @@ const Header = () => {
   }
 
   return (
-    <header>
+    <header className="flex items-center px-2 gap-4">
       <Nav />
       <HexLookup onSearch={handleSearch} value={reference} />
       <TimeControl />

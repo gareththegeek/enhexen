@@ -16,7 +16,7 @@ const SettlementPage = () => {
 
   return (
     <>
-      <H1>Settlement</H1>
+      <H1>Settlement {hex?.settlement?.name}</H1>
       {hex && (
         <P>
           Hex <Link to={`/${hex.reference}`}>{hex.reference}</Link>

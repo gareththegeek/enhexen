@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
+import { mergeClass, noClass } from '../mergeClass'
 
 const Input = ({ onChange, ...rest }) => (
   <input
-    className="border-2 border-black"
+    className={mergeClass(rest)}
     onChange={(e) => onChange && onChange(e?.target?.value)}
-    {...rest}
+    {...noClass(rest)}
   />
 )
 

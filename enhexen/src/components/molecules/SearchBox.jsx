@@ -1,15 +1,21 @@
 import PropTypes from 'prop-types'
 import Field from './Field'
 import Input from '../atoms/Input'
-import Button from '../atoms/Button'
+import IconButton from '../atoms/IconButton'
+import { mergeClass, noClass } from '../mergeClass'
 
 const SearchBox = ({ name, label, onChange, onClick, ...rest }) => {
   return (
-    <fieldset className="flex gap-2">
-      <Field name={name} label={label} {...rest}>
+    <fieldset className="flex items-end">
+      <Field
+        name={name}
+        label={label}
+        className={mergeClass(rest, 'flex flex-col')}
+        {...noClass(rest)}
+      >
         <Input onChange={onChange} />
       </Field>
-      <Button onClick={onClick}>Find</Button>
+      <IconButton onClick={onClick} className="grayscale" title="Search">🔍</IconButton>
     </fieldset>
   )
 }

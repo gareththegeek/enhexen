@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
 import { useRef } from 'react'
+import { mergeClass, noClass } from '../mergeClass'
 
-const Tickbox = ({ name, value, onChange }) => {
+const Tickbox = ({ name, value, onChange, ...rest }) => {
   const ref = useRef(null)
 
   return (
@@ -11,6 +12,8 @@ const Tickbox = ({ name, value, onChange }) => {
       ref={ref}
       defaultChecked={value}
       onChange={() => onChange(ref.current.checked)}
+      className={mergeClass(rest)}
+      {...noClass(rest)}
     />
   )
 }

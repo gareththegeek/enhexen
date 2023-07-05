@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
+import { mergeClass, noClass } from '../mergeClass'
 
-const Button = ({ onClick, children }) => (
-  <button onClick={onClick} className="border-2 border-black">
+const Button = ({ onClick, children, ...rest }) => (
+  <button onClick={onClick} className={mergeClass(rest)} {...noClass(rest)}>
     {children}
   </button>
 )

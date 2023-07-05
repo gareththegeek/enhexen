@@ -25,7 +25,7 @@ const FactionPage = () => {
 
   return (
     <>
-      <H1>Faction</H1>
+      <H1>Faction {faction?.name}</H1>
       {faction && <FactionDetail faction={faction} />}
       {faction?.domains?.map((domain) => (
         <DomainDetails key={domain.id} domain={domain} faction={faction} />

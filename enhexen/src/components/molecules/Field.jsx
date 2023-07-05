@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import Label from '../atoms/Label'
 
-const Field = ({ name, label, children }) => (
-  <>
+const Field = ({ name, label, children, ...rest }) => (
+  <div {...rest}>
     <Label htmlFor={name}>{label}</Label>
     {children}
-  </>
+  </div>
 )
 
 Field.propTypes = {

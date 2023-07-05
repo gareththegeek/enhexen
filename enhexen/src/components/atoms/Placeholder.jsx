@@ -1,9 +1,14 @@
 import PropTypes from 'prop-types'
+import { mergeClass, noClass } from '../mergeClass'
 
-const Placeholder = ({ children }) => <div>{children}</div>
+const Placeholder = ({ children, ...rest }) => (
+  <div className={mergeClass(rest)} {...noClass(rest)}>
+    {children}
+  </div>
+)
 
 Placeholder.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 }
 
 export default Placeholder
