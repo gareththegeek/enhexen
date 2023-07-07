@@ -197,11 +197,11 @@ const processHexSheet = async (
   }
 }
 
-const insertEncounters = async (records: EncounterRecord[]) =>
+const insertEncounters = async (records: EncounterRecord[], regionId: number) =>
   insert(
     'encounters',
     records,
-    ({ Roll, Encounter }) => ({ roll: Roll, description: Encounter }),
+    ({ Roll, Encounter }) => ({ roll: Roll, description: Encounter, region: regionId }),
     'roll'
   )
 
@@ -268,7 +268,7 @@ const processEncounterSheet = async (
   records: EncounterRecord[],
   region: StrapiEntity
 ) => {
-  const encounters = await insertEncounters(records)
+  const encounters = await insertEncounters(records, region.id)
   return mergeDeepRight(region, {
     attributes: {
       encounters: map(prop('id'), Object.values(encounters)),

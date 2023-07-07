@@ -19,7 +19,7 @@ const HexPage = () => {
   return (
     <>
       <div className="flex flex-col-reverse sm:flex-row">
-        <div className="flex-1 flex flex-col gap-8">
+        <div className="flex-1 flex flex-col gap-4">
           <H1>
             <Label>{hex?.reference}</Label>
             {hex?.settlement && (

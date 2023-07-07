@@ -5,7 +5,7 @@ import P from '../atoms/P'
 
 const RevealableText = ({ text, name, label, revealed, onRevealChange }) => (
   <div>
-    <div className="flex place-content-between">
+    <div className="flex place-content-between sm:place-content-start gap-4">
       <h3>{label}</h3>
       <Field name={`${name}-revealed`} label="Revealed">
         <Tickbox
@@ -15,7 +15,7 @@ const RevealableText = ({ text, name, label, revealed, onRevealChange }) => (
         />
       </Field>
     </div>
-    <P className="border-2 border-black min-h-[8rem] sm:min-h-[4rem] max-h-64 sm:max-h-32 overflow-y-auto">
+    <P className="max-h-64 sm:max-h-32 overflow-y-auto">
       {text}
     </P>
   </div>

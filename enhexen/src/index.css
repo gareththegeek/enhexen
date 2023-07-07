@@ -5,13 +5,19 @@
 @layer base {
     html {
         @apply font-sans;
-        @apply m-8;
-        font-size: 20px;
+        @apply m-4;
+        @apply sm:m-8;
+        font-size: 18px;
+    }
+
+    p {
+        @apply text-justify;
     }
     
     h1 {
         @apply flex;
         @apply flex-wrap;
+        @apply mt-4;
     }
 
     button {
