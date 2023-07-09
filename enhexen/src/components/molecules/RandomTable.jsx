@@ -2,7 +2,7 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { randomInteger } from '../../maths'
 import H2 from '../atoms/H2'
-import Button from '../atoms/Button'
+import IconButton from '../atoms/IconButton'
 import Table from '../atoms/Table'
 import Placeholder from '../atoms/Placeholder'
 
@@ -20,10 +20,10 @@ const RandomTable = ({ heading, items, onRoll }) => {
   }
 
   return (
-    <>
-      <div className="flex">
+    <section className="flex flex-col gap-4">
+      <div className="flex gap-4 justify-between md:justify-start">
         <H2>{heading}</H2>
-        <Button onClick={handleRoll}>Roll</Button>
+        <IconButton onClick={handleRoll}>Roll</IconButton>
       </div>
       {items?.length ? (
         <Table>
@@ -50,7 +50,7 @@ const RandomTable = ({ heading, items, onRoll }) => {
       ) : (
         <Placeholder>No encounters</Placeholder>
       )}
-    </>
+    </section>
   )
 }
 

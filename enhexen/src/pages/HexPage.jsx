@@ -13,15 +13,21 @@ import NpcList from '../components/organisms/NpcList'
 
 const HexPage = () => {
   const reference = useReference()
-
   const { hex } = useFetchHex(reference)
+
+  if (!reference) {
+    return <Placeholder>Loading Hex</Placeholder>
+  }
+  if (!hex) {
+    return <Placeholder>No hex found with reference {reference}</Placeholder>
+  }
 
   return (
     <>
-      <div className="flex flex-col-reverse sm:flex-row">
+      <section className="flex flex-col-reverse sm:flex-row">
         <div className="flex-1 flex flex-col gap-4">
           <H1>
-            <Label>{hex?.reference}</Label>
+            <Label>{reference}</Label>
             {hex?.settlement && (
               <Link to={`/settlements/${hex.reference}`}>
                 {hex.settlement.name}
@@ -31,19 +37,18 @@ const HexPage = () => {
           {hex && <HexDetails hex={hex} />}
         </div>
         <HexNavigation reference={reference} />
-      </div>
+      </section>
       {hex?.region && (
         <RegionDetails stubRegion={hex.region} id={hex.region.id} />
       )}
       {hex?.adventure && <AdventureDetails adventure={hex.adventure} />}
-      {hex?.domain && (
-        <DomainDetails domain={hex.domain} faction={hex.domain.faction} />
-      )}
-      {hex?.assets && <AssetList assets={hex.assets} />}
-      {hex?.npcs && <NpcList npcs={hex.npcs} />}
-      {!hex && reference && (
-        <Placeholder>No hex found with reference {reference}</Placeholder>
-      )}
+      <section className="flex flex-col gap-4">
+        {hex?.domain && (
+          <DomainDetails domain={hex.domain} faction={hex.domain.faction} />
+        )}
+        {hex?.assets && <AssetList assets={hex.assets} />}
+        {hex?.npcs && <NpcList npcs={hex.npcs} />}
+      </section>
     </>
   )
 }

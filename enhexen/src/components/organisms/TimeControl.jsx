@@ -32,6 +32,12 @@ const timeAdvanceOptions = {
     { icon: 'week', title: '1 Week', amount: { week: 1 } },
     { icon: 'month', title: '1 Month', amount: { month: 1 } },
   ],
+  npc: [
+    { icon: 'hour', title: '1 Hour', amount: { hours: 1 } },
+    { icon: 'shift', title: '8 Hours', amount: { hours: 8 } },
+    { icon: 'day', title: '1 Day', amount: { days: 1 } },
+    { icon: 'week', title: '1 Week', amount: { week: 1 } },
+  ],
 }
 
 const TimeControl = () => {
@@ -47,7 +53,7 @@ const TimeControl = () => {
 
   const route = useCurrentPath()
   const options = timeAdvanceOptions[route]
-
+  
   return (
     <>
       <TravelSpeed speed={speed} onChange={setSpeed} />

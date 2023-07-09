@@ -20,6 +20,15 @@
         @apply mt-4;
     }
 
+    th {
+        @apply font-normal;
+    }
+
+    th,td {
+        @apply border-2;
+        @apply border-black;
+    }
+
     button {
         @apply border-2;
         @apply border-black;
