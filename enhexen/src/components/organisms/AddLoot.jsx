@@ -45,7 +45,7 @@ const AddLoot = ({ onSave, onCancel }) => {
   }
 
   return (
-    <form>
+    <form className="flex flex-col gap-4 max-w-sm">
       <Field label="Name" name="name">
         <Input name="name" onChange={handleNameChange} value={loot.name} />
       </Field>
@@ -58,13 +58,20 @@ const AddLoot = ({ onSave, onCancel }) => {
         />
       </Field>
       <Field label="Type" name="type">
-        <Select name="type" onChange={handleTypeChange} value={loot.type}>
+        <Select
+          className="w-20"
+          name="type"
+          onChange={handleTypeChange}
+          value={loot.type}
+        >
           <option value="sp">SP</option>
           <option value="xp">XP</option>
         </Select>
       </Field>
-      <Button onClick={handleSave}>Save</Button>
-      <Button onClick={handleCancel}>Cancel</Button>
+      <div className="flex justify-stretch gap-4">
+        <Button className="grow" onClick={handleSave}>Save</Button>
+        <Button className="grow" onClick={handleCancel}>Cancel</Button>
+      </div>
     </form>
   )
 }

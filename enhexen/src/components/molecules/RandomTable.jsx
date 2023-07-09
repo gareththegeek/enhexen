@@ -5,6 +5,7 @@ import H2 from '../atoms/H2'
 import IconButton from '../atoms/IconButton'
 import Table from '../atoms/Table'
 import Placeholder from '../atoms/Placeholder'
+import ButtonHeading from './ButtonHeading'
 
 const RandomTable = ({ heading, items, onRoll }) => {
   const [selected, setSelected] = useState()
@@ -20,11 +21,13 @@ const RandomTable = ({ heading, items, onRoll }) => {
   }
 
   return (
-    <section className="flex flex-col gap-4">
-      <div className="flex gap-4 justify-between md:justify-start">
-        <H2>{heading}</H2>
-        <IconButton onClick={handleRoll}>Roll</IconButton>
-      </div>
+    <>
+      <ButtonHeading
+        heading={heading}
+        button="Roll"
+        handleClick={handleRoll}
+        showButton={!!items?.length}
+      />
       {items?.length ? (
         <Table>
           <thead>
@@ -50,7 +53,7 @@ const RandomTable = ({ heading, items, onRoll }) => {
       ) : (
         <Placeholder>No encounters</Placeholder>
       )}
-    </section>
+    </>
   )
 }
 

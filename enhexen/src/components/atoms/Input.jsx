@@ -3,7 +3,7 @@ import { mergeClass, noClass } from '../mergeClass'
 
 const Input = ({ onChange, ...rest }) => (
   <input
-    className={mergeClass(rest)}
+    className={mergeClass(rest, "flex-1")}
     onChange={(e) => onChange && onChange(e?.target?.value)}
     {...noClass(rest)}
   />

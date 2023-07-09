@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types'
 import FieldLabel from '../atoms/FieldLabel'
+import { mergeClass, noClass } from '../mergeClass'
 
 const Field = ({ name, label, children, ...rest }) => (
-  <div {...rest}>
-    <FieldLabel htmlFor={name}>{label}</FieldLabel>
+  <div
+    className={mergeClass(rest, 'flex flex-wrap items-center justify-between')}
+    {...noClass(rest)}
+  >
+    <FieldLabel className="w-24" htmlFor={name}>{label}</FieldLabel>
     {children}
   </div>
 )

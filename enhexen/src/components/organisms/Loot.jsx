@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { deleteLoot, postLoot, useFetchLoot } from '../../hooks/loot'
-import Button from '../atoms/Button'
-import H2 from '../atoms/H2'
 import AddLoot from './AddLoot'
-import LootList from './LootList'
+import LootList from '../molecules/LootList'
+import ButtonHeading from '../molecules/ButtonHeading'
 
 const Loot = () => {
   const [showAdd, setShowAdd] = useState(false)
@@ -32,8 +31,7 @@ const Loot = () => {
 
   return (
     <section>
-      <H2>Loot</H2>
-      <Button onClick={handleAddClick}>Add</Button>
+      <ButtonHeading heading="Loot" button="Add" handleClick={handleAddClick} />
       {showAdd && (
         <AddLoot onSave={handleSaveClick} onCancel={handleCancelClick} />
       )}

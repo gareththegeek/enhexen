@@ -10,6 +10,12 @@
         font-size: 18px;
     }
 
+    section {
+        @apply flex;
+        @apply flex-col;
+        @apply gap-4;
+    }
+
     p {
         @apply text-justify;
     }
@@ -18,6 +24,16 @@
         @apply flex;
         @apply flex-wrap;
         @apply mt-4;
+    }
+
+    h2 {
+        @apply flex;
+        @apply flex-wrap;
+    }
+
+    caption {
+        @apply text-base;
+        @apply text-left;
     }
 
     th {
@@ -44,6 +60,11 @@
 
     input[type='checkbox'] {
         @apply ms-1;
+    }
+
+    select {
+        @apply px-2;
+        @apply py-1;
     }
 
     a {

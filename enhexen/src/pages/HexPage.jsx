@@ -22,32 +22,32 @@ const HexPage = () => {
     return <Placeholder>No hex found with reference {reference}</Placeholder>
   }
 
+  const { settlement, region, adventure, domain, assets, npcs } = hex
+
   return (
     <>
-      <section className="flex flex-col-reverse sm:flex-row">
+      <section className="flex-col-reverse sm:flex-row">
         <div className="flex-1 flex flex-col gap-4">
           <H1>
             <Label>{reference}</Label>
-            {hex?.settlement && (
-              <Link to={`/settlements/${hex.reference}`}>
-                {hex.settlement.name}
-              </Link>
+            {settlement && (
+              <Link to={`/settlements/${reference}`}>{settlement.name}</Link>
             )}
           </H1>
           {hex && <HexDetails hex={hex} />}
         </div>
         <HexNavigation reference={reference} />
       </section>
-      {hex?.region && (
-        <RegionDetails stubRegion={hex.region} id={hex.region.id} />
+      {region && (
+        <section>
+          <RegionDetails stubRegion={region} id={region.id} />
+        </section>
       )}
-      {hex?.adventure && <AdventureDetails adventure={hex.adventure} />}
-      <section className="flex flex-col gap-4">
-        {hex?.domain && (
-          <DomainDetails domain={hex.domain} faction={hex.domain.faction} />
-        )}
-        {hex?.assets && <AssetList assets={hex.assets} />}
-        {hex?.npcs && <NpcList npcs={hex.npcs} />}
+      {adventure && <AdventureDetails adventure={adventure} />}
+      <section>
+        {domain && <DomainDetails domain={domain} faction={domain.faction} />}
+        {assets && <AssetList assets={assets} />}
+        {npcs && <NpcList npcs={npcs} />}
       </section>
     </>
   )

@@ -16,8 +16,7 @@ const SettlementDetails = ({
   }
 
   return (
-    <section>
-      <H2>{name}</H2>
+    <>
       <Field name="market-class" label="Market Class">
         <P>{marketClass}</P>
       </Field>
@@ -30,7 +29,7 @@ const SettlementDetails = ({
           description: text,
         }))}
       />
-    </section>
+    </>
   )
 }
 
