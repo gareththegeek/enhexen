@@ -1,17 +1,14 @@
 import PropTypes from 'prop-types'
-import LI from '../atoms/LI'
-import P from '../atoms/P'
-import Button from '../atoms/Button'
 import RelativeTime from '../atoms/RelativeTime'
 import { toDateTime } from '../../dates'
 
 const Entry = ({ entry, onDelete, onRenew }) => (
-  <LI className="flex gap-2">
+  <li className="flex gap-2">
     <RelativeTime value={toDateTime(entry.due)} />
-    <P>{entry.name}</P>
-    {onRenew && <Button onClick={() => onRenew(entry)}>↺</Button>}
-    {onDelete && <Button onClick={() => onDelete(entry)}>X</Button>}
-  </LI>
+    <p>{entry.name}</p>
+    {onRenew && <button onClick={() => onRenew(entry)}>↺</button>}
+    {onDelete && <button onClick={() => onDelete(entry)}>X</button>}
+  </li>
 )
 
 Entry.propTypes = {

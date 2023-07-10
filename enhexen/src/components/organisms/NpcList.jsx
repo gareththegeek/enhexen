@@ -1,6 +1,4 @@
 import PropTypes from 'prop-types'
-import UL from '../atoms/UL'
-import LI from '../atoms/LI'
 import Link from '../atoms/Link'
 import Table from '../atoms/Table'
 import Placeholder from '../atoms/Placeholder'
@@ -17,13 +15,13 @@ const NpcList = ({ npcs, faction, showHex }) => {
     return (
       <div>
         <h3>NPCs</h3>
-        <UL>
+        <ul>
           {npcs.map(({ id, name }) => (
-            <LI key={id}>
+            <li key={id}>
               <Link to={`/npcs/${id}`}>{name}</Link>
-            </LI>
+            </li>
           ))}
-        </UL>
+        </ul>
       </div>
     )
   }

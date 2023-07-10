@@ -2,7 +2,6 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import Field from '../molecules/Field'
 import Input from '../atoms/Input'
-import Button from '../atoms/Button'
 import Select from '../atoms/Select'
 
 const initialState = {
@@ -69,8 +68,8 @@ const AddLoot = ({ onSave, onCancel }) => {
         </Select>
       </Field>
       <div className="flex justify-stretch gap-4">
-        <Button className="grow" onClick={handleSave}>Save</Button>
-        <Button className="grow" onClick={handleCancel}>Cancel</Button>
+        <button className="grow" onClick={handleSave}>Save</button>
+        <button className="grow" onClick={handleCancel}>Cancel</button>
       </div>
     </form>
   )

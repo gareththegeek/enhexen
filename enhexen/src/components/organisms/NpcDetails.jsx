@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types'
-import H1 from '../atoms/H1'
 import Table from '../atoms/Table'
 import KeyValue from '../molecules/KeyValue'
 
 const NpcDetails = ({ npc }) => (
   <>
-    <H1>NPC {npc.name}</H1>
+    <h1>NPC {npc.name}</h1>
     <Table>
       <tbody>
         <KeyValue label="Position" value={npc.position} />

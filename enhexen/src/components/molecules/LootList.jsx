@@ -1,6 +1,4 @@
 import PropTypes from 'prop-types'
-import OL from '../atoms/OL'
-import LI from '../atoms/LI'
 import IconButton from '../atoms/IconButton'
 import Placeholder from '../atoms/Placeholder'
 
@@ -16,22 +14,22 @@ const LootList = ({ loot, onDelete, onClaim }) => {
   }
 
   return (
-    <OL className="flex flex-col gap-2">
+    <ol className="flex flex-col gap-2">
       {loot && (
-        <LI key="total" className="flex gap-4 justify-between">
+        <li key="total" className="flex gap-4 justify-between">
           Total {totalSp}sp {totalXp}xp
           <IconButton className="w-20" onClick={() => onClaim({ sp: totalSp, xp: totalXp })}>
             Claim
           </IconButton>
-        </LI>
+        </li>
       )}
       {loot?.map((loot) => (
-        <LI key={loot.id} className="flex gap-4 justify-between">
+        <li key={loot.id} className="flex gap-4 justify-between">
           {loot.name} {loot.amount} {loot.type}
           <IconButton className="w-20" onClick={() => onDelete(loot)}>Remove</IconButton>
-        </LI>
+        </li>
       ))}
-    </OL>
+    </ol>
   )
 }
 

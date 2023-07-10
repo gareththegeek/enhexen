@@ -1,5 +1,4 @@
 import { useFetchHex, useReference } from '../hooks/hexes'
-import H1 from '../components/atoms/H1'
 import Placeholder from '../components/atoms/Placeholder'
 import Label from '../components/atoms/Label'
 import Link from '../components/atoms/Link'
@@ -28,12 +27,12 @@ const HexPage = () => {
     <>
       <section className="flex-col-reverse sm:flex-row">
         <div className="flex-1 flex flex-col gap-4">
-          <H1>
+          <h1>
             <Label>{reference}</Label>
             {settlement && (
               <Link to={`/settlements/${reference}`}>{settlement.name}</Link>
             )}
-          </H1>
+          </h1>
           {hex && <HexDetails hex={hex} />}
         </div>
         <HexNavigation reference={reference} />

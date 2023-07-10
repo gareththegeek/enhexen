@@ -5,8 +5,6 @@ import {
   putTimer,
   useFetchTimers,
 } from '../../hooks/timers'
-import H2 from '../atoms/H2'
-import Button from '../atoms/Button'
 import AddTimer from './AddTimer'
 import TimersList from './TimersList'
 import { ClockContext } from '../../contexts/ClockContext'

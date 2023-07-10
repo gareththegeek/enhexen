@@ -4,8 +4,6 @@ import { Duration } from 'luxon'
 import { putClock } from '../../hooks/clock'
 import { usePublish } from '../../hooks/pubsub'
 import { ClockContext } from '../../contexts/ClockContext'
-import OL from '../atoms/OL'
-import LI from '../atoms/LI'
 import IconButton from '../atoms/IconButton'
 
 const explorationToWildernessSpeedQuotient = 5
@@ -51,15 +49,15 @@ const TimeAdvance = ({ options, applyTravelSpeed, speed }) => {
   }
 
   return (
-    <OL className="flex gap-2">
+    <ol className="flex gap-2">
       {options.map(({ icon, amount, title }) => (
-        <LI key={icon}>
+        <li key={icon}>
           <IconButton title={title} onClick={() => handleClick(amount)}>
             {formatAmount(amount)}
           </IconButton>
-        </LI>
+        </li>
       ))}
-    </OL>
+    </ol>
   )
 }
 

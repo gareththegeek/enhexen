@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import Field from './Field'
 import Tickbox from '../atoms/Tickbox'
-import P from '../atoms/P'
 
 const RevealableText = ({ text, name, label, revealed, onRevealChange }) => (
   <div>
@@ -15,9 +14,9 @@ const RevealableText = ({ text, name, label, revealed, onRevealChange }) => (
         />
       </Field>
     </div>
-    <P className="max-h-64 sm:max-h-32 overflow-y-auto">
+    <p className="max-h-64 sm:max-h-32 overflow-y-auto">
       {text}
-    </P>
+    </p>
   </div>
 )
 

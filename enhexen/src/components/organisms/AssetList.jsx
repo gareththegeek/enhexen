@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import H2 from '../atoms/H2'
 import Link from '../atoms/Link'
 import Table from '../atoms/Table'
 import Placeholder from '../atoms/Placeholder'

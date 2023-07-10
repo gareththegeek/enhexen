@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useSubscribe } from '../../hooks/pubsub'
 import { randomInteger } from '../../maths'
-import H2 from '../atoms/H2'
 import Dice from '../atoms/Dice'
 
 const EncounterRoll = () => {
@@ -14,7 +13,7 @@ const EncounterRoll = () => {
   
   return (
     <div className="flex flex-row gap-4">
-      <H2>Encounter Roll</H2>
+      <h2>Encounter Roll</h2>
       <Dice roll={encounterRoll} highlight={[1]} />
     </div>
   )

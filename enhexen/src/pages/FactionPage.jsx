@@ -2,7 +2,6 @@ import { useContext, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useFetchFaction } from '../hooks/factions'
 import { FactionContext } from '../contexts/FactionContext'
-import H1 from '../components/atoms/H1'
 import FactionDetail from '../components/organisms/FactionDetail'
 import DomainDetails from '../components/organisms/DomainDetails'
 import AssetList from '../components/organisms/AssetList'
@@ -33,7 +32,7 @@ const FactionPage = () => {
   return (
     <>
       <section>
-        <H1>Faction {name}</H1>
+        <h1>Faction {name}</h1>
         <FactionDetail faction={faction} />
         {domains?.map((domain) => (
           <DomainDetails key={domain.id} domain={domain} faction={faction} />

@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types'
-import H2 from '../atoms/H2'
 import A from '../atoms/A'
 
 const AdventureDetails = ({ adventure }) => {
   return (
     <>
-      <H2>
+      <h2>
         Adventure {adventure.name} ({adventure.level})
-      </H2>
+      </h2>
       <A to={adventure.hyperlink}>{adventure.hyperlink}</A>
     </>
   )

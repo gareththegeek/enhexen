@@ -1,11 +1,8 @@
 import PropTypes from 'prop-types'
-import H2 from '../atoms/H2'
-import P from '../atoms/P'
 import Table from '../atoms/Table'
 
 const FactionDetail = ({
   faction: {
-    name,
     description,
     cunning,
     force,
@@ -17,7 +14,7 @@ const FactionDetail = ({
   },
 }) => (
   <>
-    <P>{description}</P>
+    <p>{description}</p>
     <Table>
       <thead>
         <tr>

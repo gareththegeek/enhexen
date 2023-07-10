@@ -4,7 +4,6 @@ import { Duration } from 'luxon'
 import { ClockContext } from '../../contexts/ClockContext'
 import Field from '../molecules/Field'
 import Input from '../atoms/Input'
-import Button from '../atoms/Button'
 import Select from '../atoms/Select'
 
 const presets = {
@@ -119,12 +118,12 @@ const AddTimer = ({ onSave, onCancel }) => {
         />
       </Field>
       <div className="flex justify-stretch gap-4">
-        <Button className="grow" onClick={handleSave}>
+        <button className="grow" onClick={handleSave}>
           Save
-        </Button>
-        <Button className="grow" onClick={handleCancel}>
+        </button>
+        <button className="grow" onClick={handleCancel}>
           Cancel
-        </Button>
+        </button>
       </div>
     </form>
   )

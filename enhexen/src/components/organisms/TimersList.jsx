@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types'
-import OL from '../atoms/OL'
 import Entry from '../molecules/Entry'
 
 const TimersList = ({ timers, onRenew, onDelete, heading }) => (
   <>
     <h3>{heading}</h3>
-    <OL>
+    <ol>
       {timers?.map((timer) => (
         <Entry
           key={timer.id}
@@ -14,7 +13,7 @@ const TimersList = ({ timers, onRenew, onDelete, heading }) => (
           onDelete={onDelete}
         />
       ))}
-    </OL>
+    </ol>
   </>
 )
 

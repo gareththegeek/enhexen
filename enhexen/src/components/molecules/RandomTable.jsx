@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { randomInteger } from '../../maths'
-import H2 from '../atoms/H2'
-import IconButton from '../atoms/IconButton'
 import Table from '../atoms/Table'
 import Placeholder from '../atoms/Placeholder'
 import ButtonHeading from './ButtonHeading'

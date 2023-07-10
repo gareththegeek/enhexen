@@ -1,23 +1,21 @@
-import LI from '../atoms/LI'
 import Link from '../atoms/Link'
-import UL from '../atoms/UL'
 
 const Nav = () => (
   <nav aria-label="Main">
-    <UL className="flex gap-2">
-      <LI>
+    <ul className="flex gap-2">
+      <li>
         <Link to="">Hex</Link>
-      </LI>
-      <LI>
+      </li>
+      <li>
         <Link to="/settlements">Settlements</Link>
-      </LI>
-      <LI>
+      </li>
+      <li>
         <Link to="/delve">Delve</Link>
-      </LI>
-      <LI>
+      </li>
+      <li>
         <Link to="/factions">Factions</Link>
-      </LI>
-    </UL>
+      </li>
+    </ul>
   </nav>
 )
 

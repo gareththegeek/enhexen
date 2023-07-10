@@ -1,7 +1,5 @@
 import { useFetchHex, useReference } from '../hooks/hexes'
-import H1 from '../components/atoms/H1'
 import Link from '../components/atoms/Link'
-import P from '../components/atoms/P'
 import Placeholder from '../components/atoms/Placeholder'
 import SettlementDetails from '../components/organisms/SettlementDetails'
 import DomainDetails from '../components/organisms/DomainDetails'
@@ -24,10 +22,10 @@ const SettlementPage = () => {
   return (
     <>
       <section>
-        <H1>
+        <h1>
           <Label>{settlement.name}</Label>
           {hex && <Link to={`/${reference}`}>{reference}</Link>}
-        </H1>
+        </h1>
         {settlement && (
           <SettlementDetails settlement={settlement} reference={reference} />
         )}

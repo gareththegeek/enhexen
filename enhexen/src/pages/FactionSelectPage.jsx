@@ -1,7 +1,4 @@
 import { useFetchFactions } from '../hooks/factions'
-import H1 from '../components/atoms/H1'
-import UL from '../components/atoms/UL'
-import LI from '../components/atoms/LI'
 import Link from '../components/atoms/Link'
 import Placeholder from '../components/atoms/Placeholder'
 
@@ -9,15 +6,15 @@ const FactionSelectPage = () => {
   const { factions } = useFetchFactions()
   return (
     <>
-      <H1>Factions</H1>
+      <h1>Factions</h1>
       {factions ? (
-        <UL>
+        <ul>
           {factions.map((faction) => (
-            <LI key={faction.id}>
+            <li key={faction.id}>
               <Link to={`/factions/${faction.id}`}>{faction.name}</Link>
-            </LI>
+            </li>
           ))}
-        </UL>
+        </ul>
       ) : (
         <Placeholder>Loading factions..</Placeholder>
       )}

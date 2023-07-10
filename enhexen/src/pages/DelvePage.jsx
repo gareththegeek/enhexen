@@ -1,4 +1,3 @@
-import H1 from '../components/atoms/H1'
 import EncounterRoll from '../components/organisms/EncounterRoll'
 import Loot from '../components/organisms/Loot'
 import Timers from '../components/organisms/Timers'
@@ -6,7 +5,7 @@ import Timers from '../components/organisms/Timers'
 const DelvePage = () => (
   <>
     <section>
-      <H1>Delve</H1>
+      <h1>Delve</h1>
       <EncounterRoll />
     </section>
     <div className="flex flex-col gap-8 md:flex-row">

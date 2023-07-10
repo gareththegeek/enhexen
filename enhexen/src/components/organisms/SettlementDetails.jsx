@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import { putRumour, useFetchRumours } from '../../hooks/rumours'
-import P from '../atoms/P'
 import Field from '../molecules/Field'
 import RandomTable from '../molecules/RandomTable'
 
@@ -17,7 +16,7 @@ const SettlementDetails = ({
   return (
     <>
       <Field name="market-class" label="Market Class">
-        <P>{marketClass}</P>
+        <p>{marketClass}</p>
       </Field>
       <RandomTable
         heading="Rumours"
