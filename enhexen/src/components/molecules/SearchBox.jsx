@@ -6,14 +6,14 @@ import { mergeClass, noClass } from '../mergeClass'
 
 const SearchBox = ({ name, label, onChange, onClick, ...rest }) => {
   return (
-    <fieldset className="flex items-end">
+    <fieldset className="flex items-end max-w-xs md:w-16">
       <Field
         name={name}
         label={label}
         className={mergeClass(rest, 'flex flex-col')}
         {...noClass(rest)}
       >
-        <Input onChange={onChange} />
+        <Input className="w-[100%]" onChange={onChange} />
       </Field>
       <IconButton onClick={onClick} className="grayscale" title="Search">🔍</IconButton>
     </fieldset>

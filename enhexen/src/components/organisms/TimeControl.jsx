@@ -55,7 +55,7 @@ const TimeControl = () => {
   const options = timeAdvanceOptions[route]
   
   return (
-    <>
+    <div className="flex gap-4">
       <TravelSpeed speed={speed} onChange={setSpeed} />
       <div>
         <Clock value={now} />
@@ -65,7 +65,7 @@ const TimeControl = () => {
           speed={speed}
         />
       </div>
-    </>
+    </div>
   )
 }
 

@@ -15,10 +15,12 @@ const Header = () => {
   }
 
   return (
-    <header className="flex items-center px-2 gap-4">
+    <header className="flex flex-col md:flex-row md:justify-between md:items-center px-2 gap-4">
       <Nav />
-      <HexLookup onSearch={handleSearch} value={reference} />
-      <TimeControl />
+      <div className="flex flex-wrap gap-4">
+        <HexLookup onSearch={handleSearch} value={reference} />
+        <TimeControl />
+      </div>
     </header>
   )
 }
