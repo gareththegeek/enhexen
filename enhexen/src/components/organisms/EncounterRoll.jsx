@@ -13,10 +13,10 @@ const EncounterRoll = () => {
   useSubscribe('CLOCK_CHANGE', handleClockChange)
   
   return (
-    <section>
+    <div className="flex flex-row gap-4">
       <H2>Encounter Roll</H2>
       <Dice roll={encounterRoll} highlight={[1]} />
-    </section>
+    </div>
   )
 }
 

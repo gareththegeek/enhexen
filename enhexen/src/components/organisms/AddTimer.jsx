@@ -72,12 +72,17 @@ const AddTimer = ({ onSave, onCancel }) => {
   }
 
   return (
-    <form>
+    <form className="flex flex-col gap-4 max-w-sm">
       <Field label="Name" name="name">
         <Input name="name" onChange={handleNameChange} value={timer.name} />
       </Field>
       <Field label="Type" name="type">
-        <Select name="type" onChange={handleTypeChange} value={timer.type}>
+        <Select
+          className="w-24"
+          name="type"
+          onChange={handleTypeChange}
+          value={timer.type}
+        >
           <option value="custom">Custom</option>
           <option value="disease">Disease</option>
           <option value="faction">Faction</option>
@@ -92,6 +97,7 @@ const AddTimer = ({ onSave, onCancel }) => {
       </Field>
       <Field label="Period" name="period">
         <Select
+          className="w-24"
           name="period"
           onChange={handlePeriodChange}
           value={timer.period}
@@ -112,8 +118,14 @@ const AddTimer = ({ onSave, onCancel }) => {
           value={timer.amount}
         />
       </Field>
-      <Button onClick={handleSave}>Save</Button>
-      <Button onClick={handleCancel}>Cancel</Button>
+      <div className="flex justify-stretch gap-4">
+        <Button className="grow" onClick={handleSave}>
+          Save
+        </Button>
+        <Button className="grow" onClick={handleCancel}>
+          Cancel
+        </Button>
+      </div>
     </form>
   )
 }

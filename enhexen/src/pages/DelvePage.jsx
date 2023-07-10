@@ -5,10 +5,18 @@ import Timers from '../components/organisms/Timers'
 
 const DelvePage = () => (
   <>
-    <H1>Delve</H1>
-    <EncounterRoll />
-    <Timers />
-    <Loot />
+    <section>
+      <H1>Delve</H1>
+      <EncounterRoll />
+    </section>
+    <div className="flex flex-col gap-8 md:flex-row">
+      <section className="flex-1">
+        <Timers />
+      </section>
+      <section className="flex-1">
+        <Loot />
+      </section>
+    </div>
   </>
 )
 

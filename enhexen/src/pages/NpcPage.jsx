@@ -14,8 +14,14 @@ const NpcPage = () => {
 
   return (
     <>
-      <NpcDetails npc={npc} />
-      {npc?.faction && <FactionDetail faction={npc?.faction} />}
+      <section>
+        <NpcDetails npc={npc} />
+      </section>
+      {npc?.faction && (
+        <section>
+          <FactionDetail faction={npc?.faction} />
+        </section>
+      )}
     </>
   )
 }

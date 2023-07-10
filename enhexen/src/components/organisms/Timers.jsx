@@ -1,11 +1,17 @@
 import { useContext, useState } from 'react'
-import { deleteTimer, postTimer, putTimer, useFetchTimers } from '../../hooks/timers'
+import {
+  deleteTimer,
+  postTimer,
+  putTimer,
+  useFetchTimers,
+} from '../../hooks/timers'
 import H2 from '../atoms/H2'
 import Button from '../atoms/Button'
 import AddTimer from './AddTimer'
 import TimersList from './TimersList'
 import { ClockContext } from '../../contexts/ClockContext'
 import { toDateTime, toDuration } from '../../dates'
+import ButtonHeading from '../molecules/ButtonHeading'
 
 const Timers = () => {
   const { now } = useContext(ClockContext)
@@ -39,9 +45,12 @@ const Timers = () => {
   }
 
   return (
-    <section>
-      <H2>Timers</H2>
-      <Button onClick={handleAddClick}>Add</Button>
+    <>
+      <ButtonHeading
+        heading="Timers"
+        button="Add"
+        handleClick={handleAddClick}
+      />
       {showAdd && (
         <AddTimer onSave={handleSaveClick} onCancel={handleCancelClick} />
       )}
@@ -60,7 +69,7 @@ const Timers = () => {
           />
         </>
       )}
-    </section>
+    </>
   )
 }
 

@@ -30,7 +30,7 @@ const Loot = () => {
   }
 
   return (
-    <section>
+    <>
       <ButtonHeading heading="Loot" button="Add" handleClick={handleAddClick} />
       {showAdd && (
         <AddLoot onSave={handleSaveClick} onCancel={handleCancelClick} />
@@ -42,7 +42,7 @@ const Loot = () => {
           onClaim={handleClaimClick}
         />
       )}
-    </section>
+    </>
   )
 }
 

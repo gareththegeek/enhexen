@@ -4,12 +4,12 @@ import A from '../atoms/A'
 
 const AdventureDetails = ({ adventure }) => {
   return (
-    <section>
+    <>
       <H2>
         Adventure {adventure.name} ({adventure.level})
       </H2>
       <A to={adventure.hyperlink}>{adventure.hyperlink}</A>
-    </section>
+    </>
   )
 }
 

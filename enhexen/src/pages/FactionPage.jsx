@@ -7,6 +7,7 @@ import FactionDetail from '../components/organisms/FactionDetail'
 import DomainDetails from '../components/organisms/DomainDetails'
 import AssetList from '../components/organisms/AssetList'
 import NpcList from '../components/organisms/NpcList'
+import Placeholder from '../components/atoms/Placeholder'
 
 const FactionPage = () => {
   const navigate = useNavigate()
@@ -23,19 +24,29 @@ const FactionPage = () => {
   }, [navigate, id, idParam, setId])
   const { faction } = useFetchFaction(id)
 
+  if (!faction) {
+    return <Placeholder>Loading faction..</Placeholder>
+  }
+
+  const { name, domains, assets, npcs } = faction
+
   return (
     <>
-      <H1>Faction {faction?.name}</H1>
-      {faction && <FactionDetail faction={faction} />}
-      {faction?.domains?.map((domain) => (
-        <DomainDetails key={domain.id} domain={domain} faction={faction} />
-      ))}
-      {faction?.assets && (
-        <AssetList assets={faction.assets} faction={faction} showHex={true} />
-      )}
-      {faction?.npcs && (
-        <NpcList npcs={faction.npcs} faction={faction} showHex={true} />
-      )}
+      <section>
+        <H1>Faction {name}</H1>
+        <FactionDetail faction={faction} />
+        {domains?.map((domain) => (
+          <DomainDetails key={domain.id} domain={domain} faction={faction} />
+        ))}
+      </section>
+      <section>
+        {assets && (
+          <AssetList assets={assets} faction={faction} showHex={true} />
+        )}
+      </section>
+      <section>
+        {npcs && <NpcList npcs={npcs} faction={faction} showHex={true} />}
+      </section>
     </>
   )
 }

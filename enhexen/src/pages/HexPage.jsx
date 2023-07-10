@@ -43,7 +43,9 @@ const HexPage = () => {
           <RegionDetails stubRegion={region} id={region.id} />
         </section>
       )}
-      {adventure && <AdventureDetails adventure={adventure} />}
+      <section>
+        {adventure && <AdventureDetails adventure={adventure} />}
+      </section>
       <section>
         {domain && <DomainDetails domain={domain} faction={domain.faction} />}
         {assets && <AssetList assets={assets} />}

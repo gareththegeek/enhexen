@@ -4,7 +4,7 @@ import Table from '../atoms/Table'
 import KeyValue from '../molecules/KeyValue'
 
 const NpcDetails = ({ npc }) => (
-  <section>
+  <>
     <H1>NPC {npc.name}</H1>
     <Table>
       <tbody>
@@ -13,7 +13,7 @@ const NpcDetails = ({ npc }) => (
         <KeyValue label="Residence" value={npc.residence} />
       </tbody>
     </Table>
-  </section>
+  </>
 )
 
 NpcDetails.propTypes = {

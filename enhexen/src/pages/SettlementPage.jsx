@@ -32,7 +32,11 @@ const SettlementPage = () => {
           <SettlementDetails settlement={settlement} reference={reference} />
         )}
       </section>
-      {settlement && <Loot />}
+      {settlement && (
+        <section>
+          <Loot />
+        </section>
+      )}
       <section>
         {domain && <DomainDetails domain={domain} faction={domain.faction} />}
         {assets && <AssetList assets={assets} />}

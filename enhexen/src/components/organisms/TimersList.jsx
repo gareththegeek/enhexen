@@ -1,15 +1,21 @@
 import PropTypes from 'prop-types'
 import OL from '../atoms/OL'
-import LI from '../atoms/LI'
 import Entry from '../molecules/Entry'
 
 const TimersList = ({ timers, onRenew, onDelete, heading }) => (
-  <OL>
-    <LI>{heading}</LI>
-    {timers?.map((timer) => (
-      <Entry key={timer.id} entry={timer} onRenew={onRenew} onDelete={onDelete} />
-    ))}
-  </OL>
+  <>
+    <h3>{heading}</h3>
+    <OL>
+      {timers?.map((timer) => (
+        <Entry
+          key={timer.id}
+          entry={timer}
+          onRenew={onRenew}
+          onDelete={onDelete}
+        />
+      ))}
+    </OL>
+  </>
 )
 
 TimersList.propTypes = {

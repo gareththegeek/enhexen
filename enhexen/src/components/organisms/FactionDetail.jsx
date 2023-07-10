@@ -16,9 +16,7 @@ const FactionDetail = ({
     hitPoints,
   },
 }) => (
-  <section>
-    <H2>Details</H2>
-    <P>{name}</P>
+  <>
     <P>{description}</P>
     <Table>
       <thead>
@@ -44,7 +42,7 @@ const FactionDetail = ({
         </tr>
       </tbody>
     </Table>
-  </section>
+  </>
 )
 
 FactionDetail.propTypes = {

@@ -18,17 +18,17 @@ const LootList = ({ loot, onDelete, onClaim }) => {
   return (
     <OL className="flex flex-col gap-2">
       {loot && (
-        <LI key="total" className="flex gap-4 justify-between sm:justify-start">
+        <LI key="total" className="flex gap-4 justify-between">
           Total {totalSp}sp {totalXp}xp
-          <IconButton onClick={() => onClaim({ sp: totalSp, xp: totalXp })}>
+          <IconButton className="w-20" onClick={() => onClaim({ sp: totalSp, xp: totalXp })}>
             Claim
           </IconButton>
         </LI>
       )}
       {loot?.map((loot) => (
-        <LI key={loot.id} className="flex gap-4 justify-between sm:justify-start">
+        <LI key={loot.id} className="flex gap-4 justify-between">
           {loot.name} {loot.amount} {loot.type}
-          <IconButton onClick={() => onDelete(loot)}>Remove</IconButton>
+          <IconButton className="w-20" onClick={() => onDelete(loot)}>Remove</IconButton>
         </LI>
       ))}
     </OL>
