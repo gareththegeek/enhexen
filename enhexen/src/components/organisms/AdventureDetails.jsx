@@ -5,7 +5,7 @@ const AdventureDetails = ({ adventure }) => {
   return (
     <>
       <h2>
-        Adventure {adventure.name} ({adventure.level})
+        {adventure.name} a module for adventurers level {adventure.level} is to be found here!
       </h2>
       <A to={adventure.hyperlink}>{adventure.hyperlink}</A>
     </>

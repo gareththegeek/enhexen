@@ -5,7 +5,7 @@ import routes from '../routes'
 const Main = () => (
   <>
     <Header />
-    <main className="flex flex-col gap-8 max-w-[50rem]">
+    <main className="flex flex-col gap-4 max-w-[50rem]">
       <Routes>
         {routes.map(({ route, component }) => (
           <Route key={route} path={route} element={component} />

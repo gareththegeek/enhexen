@@ -37,19 +37,19 @@ const HexPage = () => {
         </div>
         <HexNavigation reference={reference} />
       </section>
-      {region && (
+      {(region || domain) && (
         <section>
-          <RegionDetails stubRegion={region} id={region.id} />
+          {domain && <DomainDetails domain={domain} faction={domain.faction} />}
+          {region && <RegionDetails stubRegion={region} id={region.id} />}
         </section>
       )}
-      <section>
-        {adventure && <AdventureDetails adventure={adventure} />}
-      </section>
-      <section>
-        {domain && <DomainDetails domain={domain} faction={domain.faction} />}
-        {assets && <AssetList assets={assets} />}
-        {npcs && <NpcList npcs={npcs} />}
-      </section>
+      {adventure && (
+        <section>
+          <AdventureDetails adventure={adventure} />
+        </section>
+      )}
+      {assets && <AssetList assets={assets} />}
+      {npcs && <NpcList npcs={npcs} />}
     </>
   )
 }

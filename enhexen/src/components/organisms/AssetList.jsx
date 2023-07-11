@@ -8,10 +8,10 @@ const AssetList = ({ assets, faction, showHex }) => {
     return <Placeholder>There are no assets here</Placeholder>
   }
   return (
-    <Table heading="Assets">
+    <Table>
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Asset</th>
           <th>HP</th>
           <th>Attack</th>
           <th>Counter</th>

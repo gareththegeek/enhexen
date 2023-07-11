@@ -13,7 +13,7 @@ const NpcList = ({ npcs, faction, showHex }) => {
 
   if (!isLarge) {
     return (
-      <div>
+      <section>
         <h3>NPCs</h3>
         <ul>
           {npcs.map(({ id, name }) => (
@@ -22,15 +22,15 @@ const NpcList = ({ npcs, faction, showHex }) => {
             </li>
           ))}
         </ul>
-      </div>
+      </section>
     )
   }
 
   return (
-    <Table heading="NPCs">
+    <Table>
       <thead>
         <tr>
-          <th>Name</th>
+          <th>NPC</th>
           <th>Position</th>
           <th>Source of Power</th>
           <th>Residence</th>

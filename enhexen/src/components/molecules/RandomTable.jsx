@@ -49,7 +49,7 @@ const RandomTable = ({ heading, items, onRoll }) => {
           </tbody>
         </Table>
       ) : (
-        <Placeholder>No encounters</Placeholder>
+        <Placeholder>There are no worthy encounters to be found in this place!</Placeholder>
       )}
     </>
   )

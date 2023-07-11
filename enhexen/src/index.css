@@ -5,15 +5,24 @@
 @layer base {
     html {
         @apply font-sans;
-        @apply m-4;
-        @apply sm:m-8;
         font-size: 18px;
+    }
+
+    body {
+        @apply m-4;
+        @apply md:m-8;
+        @apply mb-24;
+        @apply bg-zinc-200;
     }
 
     section {
         @apply flex;
         @apply flex-col;
-        @apply gap-2;
+        @apply gap-4;
+        @apply bg-white;
+        @apply rounded;
+        @apply drop-shadow;
+        @apply p-4;
     }
 
     p {
@@ -23,26 +32,46 @@
     h1 {
         @apply flex;
         @apply flex-wrap;
-        @apply mt-4;
+        @apply text-xl;
     }
 
     h2 {
         @apply flex;
         @apply flex-wrap;
+        @apply text-sm;
+    }
+
+    h3 {
+        @apply text-sm;
     }
 
     caption {
-        @apply text-base;
+        @apply text-sm;
         @apply text-left;
+    }
+
+    table {
+        @apply overflow-hidden;
+        @apply bg-white;
+        @apply rounded;
+        @apply drop-shadow;
+    }
+
+    tr:nth-child(even) {
+        @apply border-y-2;
+        @apply border-zinc-200;
+        @apply bg-zinc-100;
     }
 
     th {
         @apply font-normal;
+        @apply text-left;
+        @apply bg-yellow-200;
+        @apply p-4;
     }
 
-    th,td {
-        @apply border-2;
-        @apply border-black;
+    td {
+        @apply p-4;
     }
 
     button {
@@ -50,6 +79,16 @@
         @apply border-black;
         @apply px-4;
         @apply py-2;
+    }
+
+    form {
+        @apply flex;
+        @apply flex-col;
+        @apply gap-4;
+    }
+
+    label {
+        @apply text-sm;
     }
 
     input {
@@ -69,11 +108,6 @@
 
     a {
         @apply underline;
-    }
-
-    .text-outline {
-        @apply text-transparent;
-        -webkit-text-stroke: 2px #000;
     }
 
     .centred-absolute {

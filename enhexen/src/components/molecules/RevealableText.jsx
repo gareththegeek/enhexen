@@ -15,7 +15,7 @@ const RevealableText = ({ text, name, label, revealed, onRevealChange }) => (
       </Field>
     </div>
     <p className="max-h-64 sm:max-h-32 overflow-y-auto">
-      {text}
+      {text || 'None'}
     </p>
   </div>
 )
