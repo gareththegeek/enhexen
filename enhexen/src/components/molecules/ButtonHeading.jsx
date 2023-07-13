@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import IconButton from '../atoms/IconButton'
+import HeadingButton from '../atoms/HeadingButton'
 
 const ButtonHeading = ({
   heading,
@@ -11,7 +11,7 @@ const ButtonHeading = ({
   <div className="flex gap-4 justify-between">
     <h2>{heading}</h2>
     {showButton && button ? (
-      <IconButton onClick={handleClick}>{button}</IconButton>
+      <HeadingButton onClick={handleClick}>{button}</HeadingButton>
     ) : (
       children
     )}

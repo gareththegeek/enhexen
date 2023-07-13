@@ -1,5 +1,5 @@
 export const mergeClass = ({ className: a }, b) => {
-  const result = [a, b].join(' ').trim()
+  const result = [b, a].join(' ').trim()
   if (result === '') {
     return undefined
   }

@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
-import Field from '../molecules/Field'
 import Input from '../atoms/Input'
 import Select from '../atoms/Select'
-import ButtonGroup from '../molecules/ButtonGroup'
+import ButtonGroup from '../atoms/ButtonGroup'
+import Field from '../atoms/Field'
 
 const initialState = {
   name: '',
@@ -45,7 +45,8 @@ const AddLoot = ({ onSave, onCancel }) => {
   }
 
   return (
-    <form className="max-w-sm">
+    <form className="max-w-sm right-0 absolute z-50">
+      <h3 className="m-auto">Add Loot</h3>
       <Field label="Name" name="name">
         <Input name="name" onChange={handleNameChange} value={loot.name} />
       </Field>
@@ -69,7 +70,7 @@ const AddLoot = ({ onSave, onCancel }) => {
         </Select>
       </Field>
       <ButtonGroup>
-        <button className="grow" onClick={handleSave}>
+        <button className="grow bg-yellow-300" onClick={handleSave}>
           Save
         </button>
         <button className="grow" onClick={handleCancel}>

@@ -1,15 +1,18 @@
+import PropTypes from 'prop-types'
 import { useState } from 'react'
 import { deleteLoot, postLoot, useFetchLoot } from '../../hooks/loot'
-import AddLoot from './AddLoot'
+import AddLoot from '../organisms/AddLoot'
+import Section from '../atoms/Section'
 import LootList from '../molecules/LootList'
 import ButtonHeading from '../molecules/ButtonHeading'
+import { mergeClass } from '../mergeClass'
 
-const Loot = () => {
+const Loot = ({ className }) => {
   const [showAdd, setShowAdd] = useState(false)
   const { loot, mutateLoot } = useFetchLoot()
 
   const handleAddClick = () => {
-    setShowAdd(true)
+    setShowAdd(!showAdd)
   }
 
   const handleCancelClick = () => {
@@ -30,8 +33,16 @@ const Loot = () => {
   }
 
   return (
-    <>
-      <ButtonHeading heading="Loot" button="Add" handleClick={handleAddClick} />
+    <Section
+      className={mergeClass({ className }, 'relative')}
+      heading={
+        <ButtonHeading
+          heading="Loot"
+          button={showAdd ? 'Cancel' : 'Add'}
+          handleClick={handleAddClick}
+        />
+      }
+    >
       {showAdd && (
         <AddLoot onSave={handleSaveClick} onCancel={handleCancelClick} />
       )}
@@ -42,8 +53,12 @@ const Loot = () => {
           onClaim={handleClaimClick}
         />
       )}
-    </>
+    </Section>
   )
+}
+
+Loot.propTypes = {
+  className: PropTypes.string,
 }
 
 export default Loot

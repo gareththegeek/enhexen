@@ -46,7 +46,7 @@ const HexNavigation = ({ reference }) => {
   const { upleft, up, upright, downleft, down, downright } =
     getAdjacentReferences(reference)
   return (
-    <div className="w-42 shrink-0 mx-auto md:mx-initial mt-4">
+    <div className="w-42 shrink-0 mx-auto md:mx-initial">
       <div className="flex">
         <Hex className="relative top-7 left-3" onClick={() => handleNavigate(upleft)}>{upleft}</Hex>
         <Hex onClick={() => handleNavigate(up)}>{up}</Hex>

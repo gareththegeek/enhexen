@@ -5,7 +5,7 @@ const Dice = ({ roll, highlight, ...rest }) => (
   <div
     className={mergeClass(
       rest,
-      highlight.includes(roll) ? 'bg-black text-white' : ''
+      highlight.includes(roll) ? 'bg-zinc-900 text-zinc-50' : ''
     )}
     {...noClass(rest)}
   >

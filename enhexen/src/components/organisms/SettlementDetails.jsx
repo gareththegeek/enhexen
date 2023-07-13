@@ -1,39 +1,36 @@
 import PropTypes from 'prop-types'
-import { putRumour, useFetchRumours } from '../../hooks/rumours'
-import Field from '../molecules/Field'
-import RandomTable from '../molecules/RandomTable'
+import Link from '../atoms/Link'
+import Label from '../atoms/Label'
+import Section from '../atoms/Section'
+import SettlementDomainText from '../molecules/SettlementDomainText'
+import Field from '../atoms/Field'
 
-const SettlementDetails = ({
-  settlement: { marketClass },
-  reference,
-}) => {
-  const { rumours } = useFetchRumours(reference)
-
-  const handleRoll = ({ item }) => {
-    putRumour({ ...item, done: true })
-  }
-
-  return (
-    <>
-      <Field name="market-class" label="Market Class">
-        <p>{marketClass}</p>
+const SettlementDetails = ({ reference, domain, settlement }) => (
+  <Section
+    heading={
+      <h1 className="flex gap-4">
+        <Label>{settlement.name}</Label>
+        <Link to={`/${reference}`}>{reference}</Link>
+      </h1>
+    }
+  >
+    <SettlementDomainText
+      reference={reference}
+      settlement={settlement}
+      domain={domain}
+    />
+    {settlement && (
+      <Field name="market-class" width={24} label="Market Class">
+        <p>{settlement.marketClass}</p>
       </Field>
-      <RandomTable
-        heading="Rumours"
-        onRoll={handleRoll}
-        items={rumours?.map(({ id, roll, text }) => ({
-          id,
-          roll,
-          description: text,
-        }))}
-      />
-    </>
-  )
-}
+    )}
+  </Section>
+)
 
 SettlementDetails.propTypes = {
-  settlement: PropTypes.object,
   reference: PropTypes.string,
+  settlement: PropTypes.object,
+  domain: PropTypes.object,
 }
 
 export default SettlementDetails

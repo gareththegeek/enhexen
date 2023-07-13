@@ -15,16 +15,6 @@
         @apply bg-zinc-200;
     }
 
-    section {
-        @apply flex;
-        @apply flex-col;
-        @apply gap-4;
-        @apply bg-white;
-        @apply rounded;
-        @apply drop-shadow;
-        @apply p-4;
-    }
-
     p {
         @apply text-justify;
     }
@@ -32,12 +22,14 @@
     h1 {
         @apply flex;
         @apply flex-wrap;
-        @apply text-xl;
+        @apply font-light;
+        @apply text-base;
     }
 
     h2 {
         @apply flex;
         @apply flex-wrap;
+        @apply font-light;
         @apply text-sm;
     }
 
@@ -52,22 +44,33 @@
 
     table {
         @apply overflow-hidden;
-        @apply bg-white;
+        @apply bg-zinc-50;
         @apply rounded;
         @apply drop-shadow;
     }
 
     tr:nth-child(even) {
         @apply border-y-2;
-        @apply border-zinc-200;
+        @apply border-zinc-300;
         @apply bg-zinc-100;
+    }
+
+    tr:has(+ .selected-tr) {
+        @apply bg-black;
+    }
+
+    .selected-tr {
+        @apply bg-yellow-100;
     }
 
     th {
         @apply font-normal;
+        @apply text-sm;
         @apply text-left;
-        @apply bg-yellow-200;
-        @apply p-4;
+        @apply bg-zinc-800;
+        @apply text-zinc-50;
+        @apply font-light;
+        @apply px-4 py-2;
     }
 
     td {
@@ -76,15 +79,25 @@
 
     button {
         @apply border-2;
-        @apply border-black;
+        @apply border-zinc-900;
+        @apply bg-zinc-300;
         @apply px-4;
-        @apply py-2;
+        @apply py-1;
+        @apply rounded;
     }
 
     form {
         @apply flex;
         @apply flex-col;
         @apply gap-4;
+        @apply p-4;
+        @apply -mt-4;
+        @apply bg-zinc-100;
+        @apply border-2;
+        @apply border-t-0;
+        @apply rounded-b;
+        @apply border-zinc-900;
+        @apply drop-shadow-lg;
     }
 
     label {
@@ -93,8 +106,9 @@
 
     input {
         @apply border-2;
-        @apply border-black;
+        @apply border-zinc-900;
         @apply px-1;
+        @apply rounded;
     }
 
     input[type='checkbox'] {
@@ -116,10 +130,5 @@
         @apply left-[50%];
         @apply transform -translate-x-[50%] -translate-y-[50%];
         @aply transform-gpu;
-    }
-
-    .selected-tr {
-        @apply bg-black;
-        @apply text-white;
     }
 }

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import Input from '../atoms/Input'
-import Field from './Field'
+import Field from '../atoms/Field'
 
 const TravelSpeed = ({ speed, onChange }) => (
   <Field label="Speed" name="speed" className="flex flex-col">

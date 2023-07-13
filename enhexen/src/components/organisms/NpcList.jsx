@@ -1,20 +1,19 @@
 import PropTypes from 'prop-types'
 import Link from '../atoms/Link'
 import Table from '../atoms/Table'
-import Placeholder from '../atoms/Placeholder'
+import Section from '../atoms/Section'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 
 const NpcList = ({ npcs, faction, showHex }) => {
   const isLarge = useMediaQuery('(min-width: 640px)')
 
   if (!npcs.length) {
-    return <Placeholder>There are no NPCs here</Placeholder>
+    return <Section heading={<h2>NPCs</h2>}>There are no NPCs here</Section>
   }
 
   if (!isLarge) {
     return (
-      <section>
-        <h3>NPCs</h3>
+      <Section heading={<h2>NPCs</h2>}>
         <ul>
           {npcs.map(({ id, name }) => (
             <li key={id}>
@@ -22,7 +21,7 @@ const NpcList = ({ npcs, faction, showHex }) => {
             </li>
           ))}
         </ul>
-      </section>
+      </Section>
     )
   }
 

@@ -2,14 +2,17 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { randomInteger } from '../../maths'
 import Table from '../atoms/Table'
-import Placeholder from '../atoms/Placeholder'
-import ButtonHeading from './ButtonHeading'
+import Section from '../atoms/Section'
+import HeadingButton from '../atoms/HeadingButton'
 
-const RandomTable = ({ heading, items, onRoll }) => {
+const RandomTable = ({ items, onRoll, heading, placeholder }) => {
   const [selected, setSelected] = useState()
+  const [isSelected, setIsSelected] = useState(false)
+  const [expanded, setExpanded] = useState(false)
   const handleRoll = () => {
     const roll = randomInteger(0, items.length - 1)
     setSelected(roll)
+    setIsSelected(true)
     if (onRoll) {
       onRoll({
         roll,
@@ -18,45 +21,54 @@ const RandomTable = ({ heading, items, onRoll }) => {
     }
   }
 
+  const renderRow = ({ id, roll, description }, i) => (
+    <tr key={`${id}`} className={i === selected ? 'selected-tr' : ''}>
+      <td>{roll}</td>
+      <td>{description}</td>
+    </tr>
+  )
+
+  if (!items?.length) {
+    return <Section heading={<h2>{heading}</h2>}>{placeholder}</Section>
+  }
+
+  console.log(expanded)
+
   return (
-    <>
-      <ButtonHeading
-        heading={heading}
-        button="Roll"
-        handleClick={handleRoll}
-        showButton={!!items?.length}
-      />
-      {items?.length ? (
-        <Table>
-          <thead>
-            <tr>
-              <th>Roll</th>
-              <th>Result</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items
-              .sort((x) => x.roll)
-              .map(({ id, roll, description }, i) => (
-                <tr
-                  key={`${id}`}
-                  className={i === selected ? 'selected-tr' : ''}
-                >
-                  <td>{roll}</td>
-                  <td>{description}</td>
-                </tr>
-              ))}
-          </tbody>
-        </Table>
-      ) : (
-        <Placeholder>There are no worthy encounters to be found in this place!</Placeholder>
-      )}
-    </>
+    <Table>
+      <thead>
+        <tr>
+          <th colSpan={2}>
+            <div className="flex justify-between">
+              <div>
+                <span className="me-4">{heading}</span>
+                <HeadingButton onClick={handleRoll}>Roll</HeadingButton>
+              </div>
+              <HeadingButton onClick={() => setExpanded(!expanded)}>
+                {expanded ? '▲' : '▼'}
+              </HeadingButton>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {expanded ? (
+          items.sort((x) => x.roll).map(renderRow)
+        ) : isSelected ? (
+          renderRow(items[selected])
+        ) : (
+          <tr>
+            <td colSpan={2}>Roll to generate a result</td>
+          </tr>
+        )}
+      </tbody>
+    </Table>
   )
 }
 
 RandomTable.propTypes = {
   heading: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
   items: PropTypes.array,
   onRoll: PropTypes.func,
 }

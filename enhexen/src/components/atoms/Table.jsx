@@ -3,7 +3,7 @@ import { mergeClass, noClass } from '../mergeClass'
 
 const Table = ({ children, heading, ...rest }) => (
   <table
-    className={mergeClass(rest, 'text-sm md:text-base')}
+    className={mergeClass(rest, 'z-0')}
     {...noClass(rest)}
   >
     {heading && <caption>{heading}</caption>}

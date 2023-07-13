@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { mergeClass, noClass } from '../mergeClass'
 
 const Label = ({ children, ...rest }) => (
-  <span className={mergeClass(rest, "me-4")} {...noClass(rest)}>
+  <span className={mergeClass(rest)} {...noClass(rest)}>
     {children}
   </span>
 )

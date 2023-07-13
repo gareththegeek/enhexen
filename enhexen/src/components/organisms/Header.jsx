@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { HexContext } from '../../contexts/HexContext'
 import Nav from '../molecules/Nav'
-import TimeControl from './TimeControl'
-import HexLookup from './HexLookup'
+import TimeControl from '../molecules/TimeControl'
+import HexLookup from '../molecules/HexLookup'
 
 const Header = () => {
   const navigate = useNavigate()

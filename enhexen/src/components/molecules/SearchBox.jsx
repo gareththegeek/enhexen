@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
-import Field from './Field'
+import { mergeClass, noClass } from '../mergeClass'
+import Field from '../atoms/Field'
 import Input from '../atoms/Input'
 import IconButton from '../atoms/IconButton'
-import { mergeClass, noClass } from '../mergeClass'
 
 const SearchBox = ({ name, label, onChange, onClick, ...rest }) => {
   return (

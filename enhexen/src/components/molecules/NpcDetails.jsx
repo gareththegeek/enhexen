@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import Table from '../atoms/Table'
-import KeyValue from '../molecules/KeyValue'
+import KeyValue from '../atoms/KeyValue'
 
 const NpcDetails = ({ npc }) => (
   <>

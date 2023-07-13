@@ -2,11 +2,11 @@ import { useContext, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useFetchFaction } from '../hooks/factions'
 import { FactionContext } from '../contexts/FactionContext'
-import FactionDetail from '../components/organisms/FactionDetail'
+import FactionStats from '../components/organisms/FactionStats'
 import DomainDetails from '../components/organisms/DomainDetails'
 import AssetList from '../components/organisms/AssetList'
 import NpcList from '../components/organisms/NpcList'
-import Placeholder from '../components/atoms/Placeholder'
+import Section from '../components/atoms/Section'
 
 const FactionPage = () => {
   const navigate = useNavigate()
@@ -24,28 +24,22 @@ const FactionPage = () => {
   const { faction } = useFetchFaction(id)
 
   if (!faction) {
-    return <Placeholder>Loading faction..</Placeholder>
+    return <Section heading="Faction">Loading faction..</Section>
   }
 
-  const { name, domains, assets, npcs } = faction
+  const { name, description, domains, assets, npcs } = faction
 
   return (
     <>
-      <section>
-        <h1>Faction {name}</h1>
-        <FactionDetail faction={faction} />
+      <Section heading={<h1>{name}</h1>}>
+        <p>{description}</p>
         {domains?.map((domain) => (
           <DomainDetails key={domain.id} domain={domain} faction={faction} />
         ))}
-      </section>
-      <section>
-        {assets && (
-          <AssetList assets={assets} faction={faction} showHex={true} />
-        )}
-      </section>
-      <section>
-        {npcs && <NpcList npcs={npcs} faction={faction} showHex={true} />}
-      </section>
+      </Section>
+      <FactionStats faction={faction} />
+      {assets && <AssetList assets={assets} faction={faction} showHex={true} />}
+      {npcs && <NpcList npcs={npcs} faction={faction} showHex={true} />}
     </>
   )
 }

@@ -3,7 +3,7 @@ import { mergeClass, noClass } from '../mergeClass'
 
 const Hex = ({ onClick, selected, children, ...rest }) => (
   <button
-    className={mergeClass(rest, `w-14 h-14 border-0  ${selected ? 'text-yellow-400' : 'text-gray-400 hover:text-gray-300'}`)}
+    className={mergeClass(rest, `w-14 h-14 border-0  ${selected ? 'text-yellow-400' : 'text-zinc-400 hover:text-zinc-300'} bg-transparent`)}
     onClick={onClick}
     disabled={selected}
     {...noClass(rest)}
@@ -14,7 +14,7 @@ const Hex = ({ onClick, selected, children, ...rest }) => (
       >
         &#x2b22;
       </div>
-      <div className={`centred-absolute${selected ? ' text-black' : ' text-white'}`}>
+      <div className={`centred-absolute${selected ? ' text-zinc-900' : ' text-zinc-50'}`}>
         {children}
       </div>
     </div>

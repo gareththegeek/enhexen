@@ -2,10 +2,10 @@ import { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Duration } from 'luxon'
 import { ClockContext } from '../../contexts/ClockContext'
-import Field from '../molecules/Field'
 import Input from '../atoms/Input'
+import ButtonGroup from '../atoms/ButtonGroup'
 import Select from '../atoms/Select'
-import ButtonGroup from '../molecules/ButtonGroup'
+import Field from '../atoms/Field'
 
 const presets = {
   faction: { amount: 1, period: 'months', name: 'Faction' },
@@ -72,7 +72,8 @@ const AddTimer = ({ onSave, onCancel }) => {
   }
 
   return (
-    <form className="max-w-sm">
+    <form className="max-w-sm right-0 absolute z-50">
+      <h3 className="m-auto">Add Timer</h3>
       <Field label="Name" name="name">
         <Input name="name" onChange={handleNameChange} value={timer.name} />
       </Field>
@@ -119,7 +120,7 @@ const AddTimer = ({ onSave, onCancel }) => {
         />
       </Field>
       <ButtonGroup>
-        <button className="grow" onClick={handleSave}>
+        <button className="grow bg-yellow-300" onClick={handleSave}>
           Save
         </button>
         <button className="grow" onClick={handleCancel}>

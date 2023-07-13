@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom'
 import { useFetchNpc } from '../hooks/npcs'
 import Placeholder from '../components/atoms/Placeholder'
-import FactionDetail from '../components/organisms/FactionDetail'
-import NpcDetails from '../components/organisms/NpcDetails'
+import NpcDetails from '../components/molecules/NpcDetails'
+import FactionStats from '../components/organisms/FactionStats'
 
 const NpcPage = () => {
   const { id } = useParams()
@@ -19,7 +19,8 @@ const NpcPage = () => {
       </section>
       {npc?.faction && (
         <section>
-          <FactionDetail faction={npc?.faction} />
+          <p>{npc?.faction?.description}</p>
+          <FactionStats faction={npc?.faction} />
         </section>
       )}
     </>

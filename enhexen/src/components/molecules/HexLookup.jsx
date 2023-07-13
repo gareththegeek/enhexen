@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import SearchBox from '../molecules/SearchBox'
+import SearchBox from './SearchBox'
 import { useState } from 'react'
 
 const HexLookup = ({ onSearch, initialValue }) => {

@@ -1,42 +1,40 @@
 import PropTypes from 'prop-types'
-import { putHex } from '../../hooks/hexes'
-import RevealableText from '../molecules/RevealableText'
+import Section from '../atoms/Section'
+import Label from '../atoms/Label'
+import HexNavigation from '../molecules/HexNavigation'
+import LandmarkHiddenSecret from '../molecules/LandmarkHiddenSecret'
+import SettlementDomainText from '../molecules/SettlementDomainText'
 
-const HexDetails = ({ hex }) => {
-  const handleRevealChange = (name) => (nextRevealed) => {
-    hex[name] = nextRevealed
-    putHex(hex)
-  }
+const HexDetails = ({ reference, hex }) => {
+  const { region, domain, settlement } = hex
 
   return (
-    <>
-      <RevealableText
-        name="landmark"
-        label="Landmark"
-        text={hex.landmark}
-        revealed={hex.landmarkRevealed}
-        onRevealChange={handleRevealChange('landmarkRevealed')}
-      />
-      <RevealableText
-        name="hidden"
-        label="Hidden"
-        text={hex.hidden}
-        revealed={hex.hiddenRevealed}
-        onRevealChange={handleRevealChange('hiddenRevealed')}
-      />
-      <RevealableText
-        name="secret"
-        label="Secret"
-        text={hex.secret}
-        revealed={hex.secretRevealed}
-        onRevealChange={handleRevealChange('secretRevealed')}
-      />
-    </>
+    <Section
+      heading={
+        <h1 className="flex gap-4">
+          <Label>{reference}</Label>
+          {region && <span>{region.name}</span>}
+        </h1>
+      }
+    >
+      <div className="flex flex-col-reverse sm:flex-row gap-8">
+        <div className="flex flex-col gap-4">
+          <SettlementDomainText
+            reference={reference}
+            settlement={settlement}
+            domain={domain}
+          />
+          {hex && <LandmarkHiddenSecret hex={hex} />}
+        </div>
+        <HexNavigation reference={reference} />
+      </div>
+    </Section>
   )
 }
 
 HexDetails.propTypes = {
-  hex: PropTypes.object.isRequired,
+  hex: PropTypes.object,
+  reference: PropTypes.string,
 }
 
 export default HexDetails

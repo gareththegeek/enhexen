@@ -1,12 +1,17 @@
 import PropTypes from 'prop-types'
 import Link from '../atoms/Link'
 import Table from '../atoms/Table'
-import Placeholder from '../atoms/Placeholder'
+import Section from '../atoms/Section'
 
 const AssetList = ({ assets, faction, showHex }) => {
   if (!assets?.length) {
-    return <Placeholder>There are no assets here</Placeholder>
+    return (
+      <Section heading={<h2>Assets</h2>}>
+        There are no assets currently stationed here
+      </Section>
+    )
   }
+  console.log(`/${assets[0].hex?.reference}`)
   return (
     <Table>
       <thead>
