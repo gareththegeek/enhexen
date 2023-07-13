@@ -3,7 +3,7 @@ import { mergeClass, noClass } from '../mergeClass'
 
 const Hex = ({ onClick, selected, children, ...rest }) => (
   <button
-    className={mergeClass(rest, `w-14 h-14 border-0  ${selected ? 'text-yellow-400' : 'text-zinc-400 hover:text-zinc-300'} bg-transparent`)}
+    className={mergeClass(rest, `w-14 h-14 border-0  ${selected ? 'text-yellow-400' : 'text-zinc-400 hover:text-zinc-300'} bg-transparent hover:bg-transparent`)}
     onClick={onClick}
     disabled={selected}
     {...noClass(rest)}

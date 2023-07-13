@@ -7,7 +7,7 @@ const HeadingButton = ({ onClick, children, primary, ...rest }) => (
     className={mergeClass(
       rest,
       `${
-        primary ? 'bg-yellow-400' : 'bg-zinc-300'
+        primary ? 'bg-yellow-400 hover:bg-yellow-200' : 'bg-zinc-300'
       } text-zinc-900 font-normal px-4 py-1 -my-1 rounded text-sm`
     )}
     {...noClass(rest)}

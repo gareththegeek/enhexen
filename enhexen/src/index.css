@@ -86,6 +86,10 @@
         @apply rounded;
     }
 
+    button:hover {
+        @apply bg-zinc-100;
+    }
+
     form {
         @apply flex;
         @apply flex-col;
@@ -122,6 +126,15 @@
 
     a {
         @apply underline;
+        @apply text-zinc-900;
+    }
+
+    a:hover {
+        @apply text-zinc-500;
+    }
+
+    .selected-nav-link {
+        @apply font-bold;
     }
 
     .centred-absolute {

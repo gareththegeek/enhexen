@@ -1,15 +1,12 @@
 import PropTypes from 'prop-types'
 import Link from '../atoms/Link'
 
-const SettlementDomainText = ({
-  reference,
-  settlement,
-  domain,
-  domain: { faction },
-}) => {
+const SettlementDomainText = ({ reference, settlement, domain }) => {
   if (!settlement && !domain) {
     return <></>
   }
+
+  const { faction } = domain
 
   return (
     <p>

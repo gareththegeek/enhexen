@@ -5,13 +5,18 @@ import EncounterTable from '../components/organisms/EncounterTable'
 import AdventureDetails from '../components/organisms/AdventureDetails'
 import AssetList from '../components/organisms/AssetList'
 import NpcList from '../components/organisms/NpcList'
+import HexLookup from '../components/molecules/HexLookup'
 
 const HexPage = () => {
   const reference = useReference()
   const { hex } = useFetchHex(reference)
 
   if (!reference) {
-    return <Section>Loading Hex</Section>
+    return (
+      <Section heading="Search for a hex">
+        <HexLookup width="w-96" />
+      </Section>
+    )
   }
   if (!hex) {
     return (

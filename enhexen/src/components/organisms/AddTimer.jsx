@@ -120,7 +120,7 @@ const AddTimer = ({ onSave, onCancel }) => {
         />
       </Field>
       <ButtonGroup>
-        <button className="grow bg-yellow-300" onClick={handleSave}>
+        <button className="grow bg-yellow-400 hover:bg-yellow-200" onClick={handleSave}>
           Save
         </button>
         <button className="grow" onClick={handleCancel}>

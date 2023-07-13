@@ -7,11 +7,14 @@ const ButtonHeading = ({
   handleClick,
   showButton = true,
   children,
+  primary = false,
 }) => (
   <div className="flex gap-4 justify-between">
     <h2>{heading}</h2>
     {showButton && button ? (
-      <HeadingButton onClick={handleClick}>{button}</HeadingButton>
+      <HeadingButton primary={primary} onClick={handleClick}>
+        {button}
+      </HeadingButton>
     ) : (
       children
     )}
@@ -24,6 +27,7 @@ ButtonHeading.propTypes = {
   handleClick: PropTypes.func,
   showButton: PropTypes.bool,
   children: PropTypes.node,
+  primary: PropTypes.bool,
 }
 
 export default ButtonHeading

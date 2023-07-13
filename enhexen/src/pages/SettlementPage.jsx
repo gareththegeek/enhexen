@@ -1,5 +1,5 @@
 import { useFetchHex, useReference } from '../hooks/hexes'
-import Placeholder from '../components/atoms/Placeholder'
+import Section from '../components/atoms/Section'
 import SettlementDetails from '../components/organisms/SettlementDetails'
 import AssetList from '../components/organisms/AssetList'
 import NpcList from '../components/organisms/NpcList'
@@ -12,7 +12,7 @@ const SettlementPage = () => {
   const { hex } = useFetchHex(reference)
 
   if (!hex?.settlement) {
-    return <Placeholder>No Settlement</Placeholder>
+    return <Section>No Settlement</Section>
   }
 
   const { settlement, domain, assets, npcs } = hex

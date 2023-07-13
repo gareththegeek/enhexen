@@ -13,7 +13,7 @@ const Field = ({ name, label, children, width, ...rest }) => (
 
 Field.propTypes = {
   name: PropTypes.string.isRequired,
-  width: PropTypes.number,
+  width: PropTypes.string,
   label: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 }
