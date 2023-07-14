@@ -14,16 +14,18 @@ const SettlementDetails = ({ reference, domain, settlement }) => (
       </h1>
     }
   >
-    <SettlementDomainText
-      reference={reference}
-      settlement={settlement}
-      domain={domain}
-    />
-    {settlement && (
-      <Field name="market-class" width={24} label="Market Class">
-        <p>{settlement.marketClass}</p>
-      </Field>
-    )}
+    <div className="flex flex-col gap-4">
+      <SettlementDomainText
+        reference={reference}
+        settlement={settlement}
+        domain={domain}
+      />
+      {settlement && (
+        <Field name="market-class" width="24" label="Market Class">
+          <p>{settlement.marketClass}</p>
+        </Field>
+      )}
+    </div>
   </Section>
 )
 

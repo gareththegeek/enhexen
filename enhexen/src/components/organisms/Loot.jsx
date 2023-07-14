@@ -37,7 +37,8 @@ const Loot = ({ className }) => {
       className={mergeClass({ className }, 'relative')}
       heading={
         <ButtonHeading
-          heading="Loot"
+          heading={<h2>Loot</h2>}
+          secondary
           button={showAdd ? 'Cancel' : 'Add'}
           handleClick={handleAddClick}
         />

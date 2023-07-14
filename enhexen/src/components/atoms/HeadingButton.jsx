@@ -1,23 +1,22 @@
 import PropTypes from 'prop-types'
+import Button from './Button'
 import { mergeClass, noClass } from '../mergeClass'
 
-const HeadingButton = ({ onClick, children, primary, ...rest }) => (
-  <button
+const HeadingButton = ({ onClick, children, primary, secondary, ...rest }) => (
+  <Button
+    className={mergeClass(rest, 'px-4 py-1 -my-1 text-sm')}
+    primary={primary}
+    secondary={secondary}
     onClick={onClick}
-    className={mergeClass(
-      rest,
-      `${
-        primary ? 'bg-yellow-400 hover:bg-yellow-200' : 'bg-zinc-300'
-      } text-zinc-900 font-normal px-4 py-1 -my-1 rounded text-sm`
-    )}
     {...noClass(rest)}
   >
     {children}
-  </button>
+  </Button>
 )
 
 HeadingButton.propTypes = {
   primary: PropTypes.bool,
+  secondary: PropTypes.bool,
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
 }

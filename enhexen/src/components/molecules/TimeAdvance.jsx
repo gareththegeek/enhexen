@@ -52,7 +52,7 @@ const TimeAdvance = ({ options, applyTravelSpeed, speed }) => {
     <ol className="flex gap-2">
       {options.map(({ icon, amount, title }) => (
         <li key={icon}>
-          <IconButton title={title} onClick={() => handleClick(amount)}>
+          <IconButton title={title} secondary onClick={() => handleClick(amount)}>
             {formatAmount(amount)}
           </IconButton>
         </li>

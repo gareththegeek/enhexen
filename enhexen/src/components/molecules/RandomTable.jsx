@@ -32,21 +32,21 @@ const RandomTable = ({ items, onRoll, heading, placeholder }) => {
     return <Section heading={<h2>{heading}</h2>}>{placeholder}</Section>
   }
 
-  console.log(expanded)
-
   return (
     <Table>
       <thead>
         <tr>
           <th colSpan={2}>
             <div className="flex justify-between">
+              <span className="me-4">{heading}</span>
               <div>
-                <span className="me-4">{heading}</span>
-                <HeadingButton onClick={handleRoll}>Roll</HeadingButton>
+                <HeadingButton onClick={() => setExpanded(!expanded)}>
+                  {expanded ? 'Collapse' : 'Expand'}
+                </HeadingButton>
+                <HeadingButton onClick={handleRoll} secondary>
+                  Roll
+                </HeadingButton>
               </div>
-              <HeadingButton onClick={() => setExpanded(!expanded)}>
-                {expanded ? '▲' : '▼'}
-              </HeadingButton>
             </div>
           </th>
         </tr>

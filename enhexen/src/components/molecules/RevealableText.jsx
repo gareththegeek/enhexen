@@ -6,7 +6,7 @@ const RevealableText = ({ text, name, label, revealed, onRevealChange }) => (
   <div>
     <div className="flex place-content-between sm:place-content-start gap-1">
       <h3>{label}</h3>
-      <Field name={`${name}-revealed`} label="Revealed">
+      <Field name={`${name}-revealed`} width="w-20" label="Revealed">
         <Tickbox
           name="hidden-revealed"
           value={revealed}

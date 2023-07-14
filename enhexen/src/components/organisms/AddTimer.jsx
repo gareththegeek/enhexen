@@ -6,6 +6,7 @@ import Input from '../atoms/Input'
 import ButtonGroup from '../atoms/ButtonGroup'
 import Select from '../atoms/Select'
 import Field from '../atoms/Field'
+import Button from '../atoms/Button'
 
 const presets = {
   faction: { amount: 1, period: 'months', name: 'Faction' },
@@ -120,12 +121,12 @@ const AddTimer = ({ onSave, onCancel }) => {
         />
       </Field>
       <ButtonGroup>
-        <button className="grow bg-yellow-400 hover:bg-yellow-200" onClick={handleSave}>
+        <Button className="grow" primary onClick={handleSave}>
           Save
-        </button>
-        <button className="grow" onClick={handleCancel}>
+        </Button>
+        <Button className="grow" secondary onClick={handleCancel}>
           Cancel
-        </button>
+        </Button>
       </ButtonGroup>
     </form>
   )

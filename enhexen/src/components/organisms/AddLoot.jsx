@@ -4,6 +4,7 @@ import Input from '../atoms/Input'
 import Select from '../atoms/Select'
 import ButtonGroup from '../atoms/ButtonGroup'
 import Field from '../atoms/Field'
+import Button from '../atoms/Button'
 
 const initialState = {
   name: '',
@@ -70,12 +71,12 @@ const AddLoot = ({ onSave, onCancel }) => {
         </Select>
       </Field>
       <ButtonGroup>
-        <button className="grow bg-yellow-400 hover:bg-yellow-200" onClick={handleSave}>
+        <Button className="grow" primary onClick={handleSave}>
           Save
-        </button>
-        <button className="grow" onClick={handleCancel}>
+        </Button>
+        <Button className="grow" secondary onClick={handleCancel}>
           Cancel
-        </button>
+        </Button>
       </ButtonGroup>
     </form>
   )

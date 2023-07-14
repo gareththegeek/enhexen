@@ -5,11 +5,13 @@ const Dice = ({ roll, highlight, ...rest }) => (
   <div
     className={mergeClass(
       rest,
-      highlight.includes(roll) ? 'bg-zinc-900 text-zinc-50' : ''
+      `${
+        highlight.includes(roll) ? 'bg-stone-900 text-stone-50' : ''
+      } w-10 h-10 border-2 border-stone-500 rounded flex items-center justify-center`
     )}
     {...noClass(rest)}
   >
-    {roll}
+    <span className="text-xl">{roll}</span>
   </div>
 )
 

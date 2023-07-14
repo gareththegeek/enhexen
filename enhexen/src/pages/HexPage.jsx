@@ -13,7 +13,7 @@ const HexPage = () => {
 
   if (!reference) {
     return (
-      <Section heading="Search for a hex">
+      <Section heading={<h1>Search for a hex</h1>}>
         <HexLookup width="w-96" />
       </Section>
     )

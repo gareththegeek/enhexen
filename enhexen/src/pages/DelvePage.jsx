@@ -25,7 +25,7 @@ const DelvePage = () => {
       <Section
         heading={
           <ButtonHeading
-            heading="Delve"
+            heading={<h1>Delve</h1>}
             button="Turn"
             primary
             handleClick={handleTurnClick}

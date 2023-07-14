@@ -50,7 +50,8 @@ const Timers = ({ className }) => {
       className={mergeClass({ className })}
       heading={
         <ButtonHeading
-          heading="Timers"
+          heading={<h2>Timers</h2>}
+          secondary
           button={showAdd ? 'Cancel' : 'Add'}
           handleClick={handleAddClick}
         />

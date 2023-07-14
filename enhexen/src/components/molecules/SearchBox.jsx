@@ -23,7 +23,7 @@ const SearchBox = ({ name, label, onChange, onClick, width, ...rest }) => {
       >
         <Input className="w-[100%]" onChange={onChange} onKeyUp={handleKeyUp} />
       </Field>
-      <IconButton onClick={onClick} className="grayscale" title="Search">
+      <IconButton onClick={onClick} secondary className="grayscale" title="Search">
         🔍
       </IconButton>
     </fieldset>

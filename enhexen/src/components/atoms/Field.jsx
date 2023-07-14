@@ -6,7 +6,7 @@ const Field = ({ name, label, children, width, ...rest }) => (
     className={mergeClass(rest, 'flex flex-wrap')}
     {...noClass(rest)}
   >
-    <label className={width ?? 'w-16'} htmlFor={name}>{label}</label>
+    <label className={`${width ?? 'w-20'} text-stone-600 font-normal uppercase`} htmlFor={name}>{label}</label>
     {children}
   </div>
 )

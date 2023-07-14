@@ -18,7 +18,7 @@ const HexDetails = ({ reference, hex }) => {
       }
     >
       <div className="flex flex-col-reverse sm:flex-row gap-8">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-8">
           <SettlementDomainText
             reference={reference}
             settlement={settlement}

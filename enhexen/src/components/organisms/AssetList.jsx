@@ -11,7 +11,7 @@ const AssetList = ({ assets, faction, showHex }) => {
       </Section>
     )
   }
-  console.log(`/${assets[0].hex?.reference}`)
+  
   return (
     <Table>
       <thead>
