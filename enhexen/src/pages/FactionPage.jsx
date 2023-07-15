@@ -5,7 +5,7 @@ import { FactionContext } from '../contexts/FactionContext'
 import FactionStats from '../components/organisms/FactionStats'
 import DomainDetails from '../components/organisms/DomainDetails'
 import AssetList from '../components/organisms/AssetList'
-import NpcList from '../components/organisms/NpcList'
+import NpcTable from '../components/organisms/NpcTable'
 import Section from '../components/atoms/Section'
 
 const FactionPage = () => {
@@ -36,10 +36,10 @@ const FactionPage = () => {
         {domains?.map((domain) => (
           <DomainDetails key={domain.id} domain={domain} faction={faction} />
         ))}
+        <FactionStats faction={faction} />
       </Section>
-      <FactionStats faction={faction} />
       {assets && <AssetList assets={assets} faction={faction} showHex={true} />}
-      {npcs && <NpcList npcs={npcs} faction={faction} showHex={true} />}
+      {npcs && <NpcTable npcs={npcs} faction={faction} showHex={true} />}
     </>
   )
 }

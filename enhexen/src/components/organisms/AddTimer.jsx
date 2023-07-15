@@ -9,14 +9,14 @@ import Field from '../atoms/Field'
 import Button from '../atoms/Button'
 
 const presets = {
-  faction: { amount: 1, period: 'months', name: 'Faction' },
-  rations: { amount: 1, period: 'days', name: 'Rations' },
-  rent: { amount: 1, period: 'months', name: 'Rent' },
-  rest: { amount: 16, period: 'hours', name: 'Rest' },
-  restock: { amount: 1, period: 'months', name: 'Restock' },
-  spell: { amount: 1, period: 'hours', name: 'Spell' },
-  status: { amount: 1, period: 'days', name: 'Status' },
-  torch: { amount: 1, period: 'hours', name: 'Torch' },
+  faction: { amount: 1, period: 'months', name: '🚩Faction' },
+  rations: { amount: 1, period: 'days', name: '🍛Rations' },
+  rent: { amount: 1, period: 'months', name: '💵Rent' },
+  rest: { amount: 16, period: 'hours', name: '💤Rest' },
+  restock: { amount: 1, period: 'months', name: '👹Restock' },
+  spell: { amount: 1, period: 'hours', name: '🪄Spell' },
+  status: { amount: 1, period: 'days', name: '🍄Status' },
+  torch: { amount: 1, period: 'hours', name: '🔥Torch' },
   custom: { amount: '', period: '', name: '' },
 }
 
@@ -80,26 +80,26 @@ const AddTimer = ({ onSave, onCancel }) => {
       </Field>
       <Field label="Type" name="type">
         <Select
-          className="w-24"
+          className="w-32"
           name="type"
           onChange={handleTypeChange}
           value={timer.type}
         >
-          <option value="custom">Custom</option>
-          <option value="disease">Disease</option>
-          <option value="faction">Faction</option>
-          <option value="rations">Rations</option>
-          <option value="rent">Rent</option>
-          <option value="rest">Rest</option>
-          <option value="restock">Restock</option>
-          <option value="spell">Spell</option>
-          <option value="status">Status</option>
-          <option value="torch">Torch</option>
+          <option value="custom">✏️Custom</option>
+          <option value="disease">🦠Disease</option>
+          <option value="faction">🚩Faction</option>
+          <option value="rations">🍛Rations</option>
+          <option value="rent">💵Rent</option>
+          <option value="rest">💤Rest</option>
+          <option value="restock">👹Restock</option>
+          <option value="spell">🪄Spell</option>
+          <option value="status">🍄Status</option>
+          <option value="torch">🔥Torch</option>
         </Select>
       </Field>
       <Field label="Period" name="period">
         <Select
-          className="w-24"
+          className="w-32"
           name="period"
           onChange={handlePeriodChange}
           value={timer.period}

@@ -7,7 +7,7 @@ import LootList from '../molecules/LootList'
 import ButtonHeading from '../molecules/ButtonHeading'
 import { mergeClass } from '../mergeClass'
 
-const Loot = ({ className }) => {
+const Loot = ({ className, claim = false }) => {
   const [showAdd, setShowAdd] = useState(false)
   const { loot, mutateLoot } = useFetchLoot()
 
@@ -38,7 +38,7 @@ const Loot = ({ className }) => {
       heading={
         <ButtonHeading
           heading={<h2>Loot</h2>}
-          secondary
+          secondary={!claim}
           button={showAdd ? 'Cancel' : 'Add'}
           handleClick={handleAddClick}
         />
@@ -49,6 +49,7 @@ const Loot = ({ className }) => {
       )}
       {loot && (
         <LootList
+          claim={claim}
           loot={loot}
           onDelete={handleDeleteClick}
           onClaim={handleClaimClick}
@@ -60,6 +61,7 @@ const Loot = ({ className }) => {
 
 Loot.propTypes = {
   className: PropTypes.string,
+  claim: PropTypes.bool
 }
 
 export default Loot

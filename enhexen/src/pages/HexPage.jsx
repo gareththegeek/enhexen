@@ -4,7 +4,7 @@ import HexDetails from '../components/organisms/HexDetails'
 import EncounterTable from '../components/organisms/EncounterTable'
 import AdventureDetails from '../components/organisms/AdventureDetails'
 import AssetList from '../components/organisms/AssetList'
-import NpcList from '../components/organisms/NpcList'
+import NpcTable from '../components/organisms/NpcTable'
 import HexLookup from '../components/molecules/HexLookup'
 
 const HexPage = () => {
@@ -34,7 +34,7 @@ const HexPage = () => {
       {adventure && <AdventureDetails adventure={adventure} />}
       {region && <EncounterTable id={region.id} />}
       {assets && <AssetList assets={assets} />}
-      {npcs && <NpcList npcs={npcs} />}
+      {npcs && <NpcTable npcs={npcs} />}
     </>
   )
 }

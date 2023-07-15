@@ -47,7 +47,7 @@
     }
 
     h3 {
-        @apply text-sm;
+        @apply text-xs;
     }
 
     .heading {
@@ -112,10 +112,6 @@
         @apply rounded-b;
         @apply border-stone-900;
         @apply drop-shadow-lg;
-    }
-
-    label {
-        @apply text-sm;
     }
 
     input {

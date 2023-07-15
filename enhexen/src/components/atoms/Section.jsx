@@ -12,7 +12,7 @@ const Section = ({ heading, children, ...rest }) => (
     <div className="heading px-4 py-2">
       {heading}
     </div>
-    <div className="p-4">{children}</div>
+    <div className="flex flex-col gap-4 p-4">{children}</div>
   </section>
 )
 

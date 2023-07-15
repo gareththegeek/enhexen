@@ -4,6 +4,7 @@ import { randomInteger } from '../../maths'
 import Table from '../atoms/Table'
 import Section from '../atoms/Section'
 import HeadingButton from '../atoms/HeadingButton'
+import Placeholder from '../atoms/Placeholder'
 
 const RandomTable = ({ items, onRoll, heading, placeholder }) => {
   const [selected, setSelected] = useState()
@@ -29,7 +30,11 @@ const RandomTable = ({ items, onRoll, heading, placeholder }) => {
   )
 
   if (!items?.length) {
-    return <Section heading={<h2>{heading}</h2>}>{placeholder}</Section>
+    return (
+      <Section heading={<h2>{heading}</h2>}>
+        <Placeholder>{placeholder}</Placeholder>
+      </Section>
+    )
   }
 
   return (
@@ -43,7 +48,7 @@ const RandomTable = ({ items, onRoll, heading, placeholder }) => {
                 <HeadingButton onClick={() => setExpanded(!expanded)}>
                   {expanded ? 'Collapse' : 'Expand'}
                 </HeadingButton>
-                <HeadingButton onClick={handleRoll} secondary>
+                <HeadingButton onClick={handleRoll} primary>
                   Roll
                 </HeadingButton>
               </div>
