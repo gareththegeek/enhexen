@@ -3,8 +3,15 @@ import { HexProvider } from './HexContext'
 import { FactionProvider } from './FactionContext'
 import { ClockProvider } from './ClockContext'
 import { PubSubProvider } from './PubSubContext'
+import { UserProvider } from './UserContext'
 
-const providers = [HexProvider, FactionProvider, ClockProvider, PubSubProvider]
+const providers = [
+  HexProvider,
+  FactionProvider,
+  ClockProvider,
+  PubSubProvider,
+  UserProvider,
+]
 
 const Providers = ({ children }) => (
   <>

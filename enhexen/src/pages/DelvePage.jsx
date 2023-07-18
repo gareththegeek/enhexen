@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { Duration } from 'luxon'
 import { usePublish } from '../hooks/pubsub'
-import { putClock } from '../hooks/clock'
+import useClock from '../hooks/clock'
 import { ClockContext } from '../contexts/ClockContext'
 import EncounterRoll from '../components/molecules/EncounterRoll'
 import Loot from '../components/organisms/Loot'
@@ -11,6 +11,7 @@ import ButtonHeading from '../components/molecules/ButtonHeading'
 
 const DelvePage = () => {
   const { now, setNow } = useContext(ClockContext)
+  const { putClock } = useClock()
   const publish = usePublish('CLOCK_CHANGE')
 
   const handleTurnClick = () => {

@@ -1,4 +1,4 @@
-import putRumour from './putRumour'
+import usePutRumour from './usePutRumour'
 import useFetchRumours from './useFetchRumours'
 
-export { putRumour, useFetchRumours }
+export { usePutRumour, useFetchRumours }

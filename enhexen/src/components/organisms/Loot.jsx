@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
-import { deleteLoot, postLoot, useFetchLoot } from '../../hooks/loot'
+import { useDeleteLoot, usePostLoot, useFetchLoot } from '../../hooks/loot'
 import AddLoot from '../organisms/AddLoot'
 import Section from '../atoms/Section'
 import LootList from '../molecules/LootList'
@@ -10,6 +10,8 @@ import { mergeClass } from '../mergeClass'
 const Loot = ({ className, claim = false }) => {
   const [showAdd, setShowAdd] = useState(false)
   const { loot, mutateLoot } = useFetchLoot()
+  const deleteLoot = useDeleteLoot()
+  const postLoot = usePostLoot()
 
   const handleAddClick = () => {
     setShowAdd(!showAdd)

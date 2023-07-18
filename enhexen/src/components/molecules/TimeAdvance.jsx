@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { Duration } from 'luxon'
-import { putClock } from '../../hooks/clock'
+import useClock from '../../hooks/clock'
 import { usePublish } from '../../hooks/pubsub'
 import { ClockContext } from '../../contexts/ClockContext'
 import IconButton from '../atoms/IconButton'
@@ -11,6 +11,7 @@ const standardHexesPerDay = 12
 
 const TimeAdvance = ({ options, applyTravelSpeed, speed }) => {
   const { now, setNow } = useContext(ClockContext)
+  const { putClock } = useClock()
   const publish = usePublish('CLOCK_CHANGE')
 
   const getDuration = (amount) => {
@@ -52,7 +53,11 @@ const TimeAdvance = ({ options, applyTravelSpeed, speed }) => {
     <ol className="flex gap-2">
       {options.map(({ icon, amount, title }) => (
         <li key={icon}>
-          <IconButton title={title} secondary onClick={() => handleClick(amount)}>
+          <IconButton
+            title={title}
+            secondary
+            onClick={() => handleClick(amount)}
+          >
             {formatAmount(amount)}
           </IconButton>
         </li>

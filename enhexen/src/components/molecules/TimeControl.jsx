@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { ClockContext } from '../../contexts/ClockContext'
-import { useFetchClock } from '../../hooks/clock'
+import useClock from '../../hooks/clock'
 import Clock from '../atoms/Clock'
 import TimeAdvance from '../molecules/TimeAdvance'
 import useCurrentPath from '../../hooks/useCurrentPath'
@@ -42,7 +42,7 @@ const timeAdvanceOptions = {
 
 const TimeControl = () => {
   const { now, setNow } = useContext(ClockContext)
-  const { now: nextNow } = useFetchClock(!now)
+  const { now: nextNow } = useClock(!now)
   const [speed, setSpeed] = useState(60)
 
   useEffect(() => {
@@ -53,10 +53,10 @@ const TimeControl = () => {
 
   const route = useCurrentPath()
   const options = timeAdvanceOptions[route]
-  
+
   return (
     <div className="flex gap-4">
-      <TravelSpeed speed={speed} onChange={setSpeed} />
+      <TravelSpeed speed={speed} onChange={({ value }) => setSpeed(value)} />
       <div>
         <Clock value={now} />
         <TimeAdvance

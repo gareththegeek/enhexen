@@ -1,5 +1,5 @@
-import putHex from './putHex'
+import usePutHex from './usePutHex'
 import useFetchHex from './useFetchHex'
 import useReference from './useReference'
 
-export { putHex, useFetchHex, useReference }
+export { usePutHex, useFetchHex, useReference }

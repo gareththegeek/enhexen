@@ -1,12 +1,8 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { Duration } from 'luxon'
 import { ClockContext } from '../../contexts/ClockContext'
-import Input from '../atoms/Input'
-import ButtonGroup from '../atoms/ButtonGroup'
-import Select from '../atoms/Select'
-import Field from '../atoms/Field'
-import Button from '../atoms/Button'
+import Form from '../molecules/Form'
 
 const presets = {
   faction: { amount: 1, period: 'months', name: '🚩Faction' },
@@ -20,115 +16,67 @@ const presets = {
   custom: { amount: '', period: '', name: '' },
 }
 
-const initialState = {
-  due: '',
-  name: '',
-  type: '',
-  period: '',
-  amount: '',
-  duration: '',
-}
-
 const AddTimer = ({ onSave, onCancel }) => {
   const { now } = useContext(ClockContext)
-  const [timer, setTimer] = useState(initialState)
 
-  const clear = () => {
-    setTimer(initialState)
-  }
+  const handleSave = (nextTimer) => {
+    if (!onSave) {
+      return
+    }
 
-  const updateTimer = (nextTimer) => {
     const { period, amount } = nextTimer
     const duration = Duration.fromObject({ [period]: amount })
-    setTimer({ ...nextTimer, due: now.plus(duration), duration })
+    onSave({ ...nextTimer, due: now.plus(duration), duration })
   }
 
-  const handleNameChange = (name) => {
-    updateTimer({ ...timer, name })
-  }
-
-  const handleTypeChange = (type) => {
-    updateTimer({ ...presets[type], type })
-  }
-
-  const handlePeriodChange = (period) => {
-    updateTimer({ ...timer, period })
-  }
-
-  const handleAmountChange = (amount) => {
-    updateTimer({ ...timer, amount })
-  }
-
-  const handleSave = () => {
-    if (onSave) {
-      onSave(timer)
-    }
-    clear()
-  }
-  const handleCancel = () => {
-    if (onCancel) {
-      onCancel()
-    }
-    clear()
+  const applyPreset = ({ value, setState }) => {
+    setState({ ...presets[value] })
   }
 
   return (
-    <form className="max-w-sm right-0 absolute z-50">
-      <h3 className="m-auto">Add Timer</h3>
-      <Field label="Name" name="name">
-        <Input name="name" onChange={handleNameChange} value={timer.name} />
-      </Field>
-      <Field label="Type" name="type">
-        <Select
-          className="w-32"
-          name="type"
-          onChange={handleTypeChange}
-          value={timer.type}
-        >
-          <option value="custom">✏️Custom</option>
-          <option value="disease">🦠Disease</option>
-          <option value="faction">🚩Faction</option>
-          <option value="rations">🍛Rations</option>
-          <option value="rent">💵Rent</option>
-          <option value="rest">💤Rest</option>
-          <option value="restock">👹Restock</option>
-          <option value="spell">🪄Spell</option>
-          <option value="status">🍄Status</option>
-          <option value="torch">🔥Torch</option>
-        </Select>
-      </Field>
-      <Field label="Period" name="period">
-        <Select
-          className="w-32"
-          name="period"
-          onChange={handlePeriodChange}
-          value={timer.period}
-        >
-          <option value="minutes">Minutes</option>
-          <option value="hours">Hours</option>
-          <option value="days">Days</option>
-          <option value="weeks">Weeks</option>
-          <option value="months">Months</option>
-          <option value="years">Years</option>
-        </Select>
-      </Field>
-      <Field label="Amount" name="amount">
-        <Input
-          name="amount"
-          type="number"
-          onChange={handleAmountChange}
-          value={timer.amount}
-        />
-      </Field>
-      <ButtonGroup>
-        <Button className="grow" primary onClick={handleSave}>
-          Save
-        </Button>
-        <Button className="grow" secondary onClick={handleCancel}>
-          Cancel
-        </Button>
-      </ButtonGroup>
-    </form>
+    <Form
+      className="max-w-sm right-0 absolute z-50"
+      onSubmit={handleSave}
+      onCancel={onCancel}
+      definition={{
+        heading: 'Add Timer',
+        fields: [
+          { name: 'name', label: 'Name', type: 'text' },
+          {
+            name: 'type',
+            label: 'Type',
+            type: 'select',
+            changeHandler: applyPreset,
+            options: [
+              { value: 'custom', label: '✏️Custom' },
+              { value: 'disease', label: '🦠Disease' },
+              { value: 'faction', label: '🚩Faction' },
+              { value: 'rations', label: '🍛Rations' },
+              { value: 'rent', label: '💵Rent' },
+              { value: 'rest', label: '💤Rest' },
+              { value: 'restock', label: '👹Restock' },
+              { value: 'spell', label: '🪄Spell' },
+              { value: 'status', label: '🍄Status' },
+              { value: 'torch', label: '🔥Torch' },
+            ],
+          },
+          {
+            name: 'period',
+            label: 'Period',
+            type: 'select',
+            options: [
+              { value: 'minutes', label: 'Minutes' },
+              { value: 'hours', label: 'Hours' },
+              { value: 'days', label: 'Days' },
+              { value: 'weeks', label: 'Weeks' },
+              { value: 'months', label: 'Months' },
+              { value: 'years', label: 'Years' },
+            ],
+          },
+          { name: 'amount', label: 'Amount', type: 'number' },
+        ],
+      }}
+    />
   )
 }
 

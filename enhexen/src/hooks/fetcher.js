@@ -26,8 +26,12 @@ const mapStrapiEntity = (entity) => {
   return result
 }
 
-const fetcher = async (...args) => {
-  const response = await fetch(...args)
+const fetcher = (jwt) => async (url) => {
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${jwt}`,
+    },
+  })
   const result = await response.json()
   return Array.isArray(result.data)
     ? result.data.map(mapStrapiEntity)

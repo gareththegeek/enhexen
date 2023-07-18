@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import { useContext, useState } from 'react'
 import {
-  deleteTimer,
-  postTimer,
-  putTimer,
+  useDeleteTimer,
+  usePostTimer,
+  usePutTimer,
   useFetchTimers,
 } from '../../hooks/timers'
 import AddTimer from '../organisms/AddTimer'
@@ -18,6 +18,9 @@ const Timers = ({ className }) => {
   const { now } = useContext(ClockContext)
   const [showAdd, setShowAdd] = useState(false)
   const { timers, mutateTimers } = useFetchTimers()
+  const deleteTimer = useDeleteTimer()
+  const postTimer = usePostTimer()
+  const putTimer = usePutTimer()
   const elapsedTimers = timers?.filter(({ due }) => now >= toDateTime(due))
   const upcomingTimers = timers?.filter(({ due }) => now < toDateTime(due))
 

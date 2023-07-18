@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types'
-import { putHex } from '../../hooks/hexes'
+import { usePutHex } from '../../hooks/hexes'
 import RevealableText from './RevealableText'
 
 const LandmarkHiddenSecret = ({ hex }) => {
-  const handleRevealChange = (name) => (nextRevealed) => {
-    hex[name] = nextRevealed
-    putHex(hex)
-  }
+  const putHex = usePutHex()
+  const handleRevealChange =
+    (name) =>
+    ({ value }) => {
+      hex[name] = value
+      putHex(hex)
+    }
 
   return (
     <>

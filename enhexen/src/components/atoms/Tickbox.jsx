@@ -11,7 +11,7 @@ const Tickbox = ({ name, value, onChange, ...rest }) => {
       name={name}
       ref={ref}
       defaultChecked={value}
-      onChange={() => onChange(ref.current.checked)}
+      onChange={() => onChange({ name, value: ref.current.checked })}
       className={mergeClass(rest)}
       {...noClass(rest)}
     />

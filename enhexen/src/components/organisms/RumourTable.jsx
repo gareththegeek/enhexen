@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types'
-import { putRumour, useFetchRumours } from '../../hooks/rumours'
+import { usePutRumour, useFetchRumours } from '../../hooks/rumours'
 import RandomTable from '../molecules/RandomTable'
 
 const RumourTable = ({ reference }) => {
   const { rumours } = useFetchRumours(reference)
+  const putRumour = usePutRumour()
 
   const handleRoll = ({ item }) => {
     putRumour({ ...item, done: true })

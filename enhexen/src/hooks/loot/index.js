@@ -1,5 +1,5 @@
-import deleteLoot from './deleteLoot'
-import postLoot from './postLoot'
+import useDeleteLoot from './useDeleteLoot'
+import usePostLoot from './usePostLoot'
 import useFetchLoot from './useFetchLoot'
 
-export { deleteLoot, postLoot, useFetchLoot }
+export { useDeleteLoot, usePostLoot, useFetchLoot }

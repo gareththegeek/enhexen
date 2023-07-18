@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-07-15T13:36:54.545Z"
+    "x-generation-date": "2023-07-18T18:17:30.607Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -10017,7 +10017,7 @@
               "type": {
                 "type": "string",
                 "enum": [
-                  "sp",
+                  "gp",
                   "xp"
                 ]
               }
@@ -10084,7 +10084,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "sp",
+              "gp",
               "xp"
             ]
           },

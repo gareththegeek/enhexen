@@ -15,7 +15,7 @@ const HexLookup = ({ initialValue, width, ...rest }) => {
     navigate(`/${value}`)
   }
 
-  const handleOnChange = (value) => {
+  const handleOnChange = ({ value }) => {
     setValue(value)
   }
 
