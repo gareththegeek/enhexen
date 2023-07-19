@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
-import { randomInteger } from '../../maths'
+import { randomInteger } from '../../helpers/maths'
 import Table from '../atoms/Table'
 import Section from '../atoms/Section'
 import HeadingButton from '../atoms/HeadingButton'

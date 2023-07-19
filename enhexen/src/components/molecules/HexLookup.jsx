@@ -23,7 +23,7 @@ const HexLookup = ({ initialValue, width, ...rest }) => {
     <SearchBox
       className={mergeClass(rest)}
       name="reference"
-      label="Reference"
+      label="Hex Reference"
       placeholder="e.g. 21.23"
       onChange={handleOnChange}
       onClick={handleClick}

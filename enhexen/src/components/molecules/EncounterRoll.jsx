@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSubscribe } from '../../hooks/pubsub'
-import { randomInteger } from '../../maths'
+import { randomInteger } from '../../helpers/maths'
 import Dice from '../atoms/Dice'
 
 const EncounterRoll = () => {

@@ -4,7 +4,7 @@ import useClock from '../../hooks/clock'
 import Clock from '../atoms/Clock'
 import TimeAdvance from '../molecules/TimeAdvance'
 import useCurrentPath from '../../hooks/useCurrentPath'
-import { toDateTime } from '../../dates'
+import { toDateTime } from '../../helpers/dates'
 import TravelSpeed from '../molecules/TravelSpeed'
 
 const timeAdvanceOptions = {
@@ -55,9 +55,9 @@ const TimeControl = () => {
   const options = timeAdvanceOptions[route]
 
   return (
-    <div className="flex gap-4">
+    <div className="flex items-end gap-4">
       <TravelSpeed speed={speed} onChange={({ value }) => setSpeed(value)} />
-      <div>
+      <div className="flex flex-col items-end">
         <Clock value={now} />
         <TimeAdvance
           options={options}

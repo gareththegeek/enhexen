@@ -9,7 +9,7 @@ import {
 import AddTimer from '../organisms/AddTimer'
 import TimersList from '../molecules/TimersList'
 import { ClockContext } from '../../contexts/ClockContext'
-import { toDateTime, toDuration } from '../../dates'
+import { toDateTime, toDuration } from '../../helpers/dates'
 import ButtonHeading from '../molecules/ButtonHeading'
 import { mergeClass } from '../mergeClass'
 import Section from '../atoms/Section'

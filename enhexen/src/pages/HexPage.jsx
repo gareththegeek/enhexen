@@ -6,6 +6,7 @@ import AdventureDetails from '../components/organisms/AdventureDetails'
 import AssetList from '../components/organisms/AssetList'
 import NpcTable from '../components/organisms/NpcTable'
 import HexLookup from '../components/molecules/HexLookup'
+import HexNavigation from '../components/molecules/HexNavigation'
 
 const HexPage = () => {
   const reference = useReference()
@@ -21,7 +22,10 @@ const HexPage = () => {
   if (!hex) {
     return (
       <Section heading={<h1>{reference}</h1>}>
-        No hex found with reference {reference}
+        <div className="flex flex-col-reverse sm:flex-row justify-between gap-8">
+          <p>No hex found with reference {reference}</p>
+          <HexNavigation reference={reference} />
+        </div>
       </Section>
     )
   }

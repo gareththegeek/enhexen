@@ -1,13 +1,14 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../contexts/UserContext'
 import Form from '../components/molecules/Form'
+import Section from '../components/atoms/Section'
 
 // TODO
 const authUrls = {
   login: 'http://localhost:1337/api/auth/local',
   register: 'http://localhost:1337/api/auth/local/register',
-  'forgot-password': 'http://localhost:1337/api/',
+  'forgot-password': 'http://localhost:1337/api/auth/forgot-password',
   'reset-password': 'http://localhost:1337/api/',
 }
 
@@ -19,6 +20,10 @@ const definitions = {
       { name: 'password', label: 'Password', type: 'password' },
       { name: 'rememberMe', label: 'Remember me', type: 'tickbox' },
     ],
+    links: [
+      { label: 'Forgot your password?', to: '/auth/forgot-password' },
+      { label: 'Register for an account', to: '/auth/register' },
+    ],
   },
   register: {
     heading: 'Register',
@@ -29,10 +34,12 @@ const definitions = {
       // { name: 'confirm', label: 'Confirm Password', type: 'password' },
       { name: 'rememberMe', label: 'Remember me', type: 'tickbox' },
     ],
+    links: [{ label: 'Already have an account', to: '/auth/login' }],
   },
   'forgot-password': {
-    heading: 'Forgotten Password',
-    fields: [{ name: 'identifier', label: 'Username', type: 'text' }],
+    heading: 'Forgot Password',
+    fields: [{ name: 'email', label: 'Email', type: 'text' }],
+    links: [{ label: 'Return to login', to: '/auth/login' }],
   },
   'reset-password': {
     heading: 'Password Reset',
@@ -48,14 +55,14 @@ const definitions = {
 const AuthPage = () => {
   const { authType } = useParams()
   const navigate = useNavigate()
-  const { setUser } = useContext(UserContext)
+  const { login } = useContext(UserContext)
+  const [errors, setError] = useState()
+
+  useEffect(() => {
+    setError(undefined)
+  }, [authType])
 
   const handleSubmit = async (body) => {
-    if (authType === 'forgot-password') {
-      // TODO
-      body.url = 'http://localhost:5173/auth/reset-password'
-    }
-
     const url = authUrls[authType]
     try {
       const response = await fetch(url, {
@@ -65,15 +72,24 @@ const AuthPage = () => {
         },
         body: JSON.stringify(body),
       })
-      const { jwt, user } = await response.json()
 
-      setUser({
-        jwt,
-        user,
-      })
+      if (response.status !== 200) {
+        const { error } = await response.json()
+        const nextErrors = error.details.errors || [error]
+        setError(nextErrors.map(({ message }) => message))
+        return
+      }
+
+      if (authType === 'forgot-password') {
+        navigate('/auth/forgot-password/sent')
+        return
+      }
+
+      const user = await response.json()
+      login(user, Boolean(body.rememberMe))
       navigate('/')
     } catch (e) {
-      console.error(e)
+      setError([e.message])
     }
   }
 
@@ -83,7 +99,11 @@ const AuthPage = () => {
     return
   }
 
-  return <Form onSubmit={handleSubmit} definition={definition} />
+  return (
+    <Section heading={<h1>{definition.heading}</h1>}>
+      <Form onSubmit={handleSubmit} definition={definition} errors={errors} />
+    </Section>
+  )
 }
 
 AuthPage.propTypes = {}

@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
+import { mergeClass } from '../mergeClass'
 
-const ButtonGroup = ({ children }) => (
-  <div className="flex justify-stretch gap-4">{children}</div>
+const ButtonGroup = ({ children, ...rest }) => (
+  <div className={mergeClass(rest, "flex gap-4")}>{children}</div>
 )
 
 ButtonGroup.propTypes = {

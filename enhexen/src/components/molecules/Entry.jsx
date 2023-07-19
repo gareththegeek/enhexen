@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import RelativeTime from '../atoms/RelativeTime'
-import { toDateTime } from '../../dates'
+import { toDateTime } from '../../helpers/dates'
 import IconButton from '../atoms/IconButton'
 import { useContext } from 'react'
 import { ClockContext } from '../../contexts/ClockContext'

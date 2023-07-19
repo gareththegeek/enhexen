@@ -105,13 +105,6 @@
         @apply flex-col;
         @apply gap-4;
         @apply p-4;
-        @apply -mt-4;
-        @apply bg-stone-100;
-        @apply border-2;
-        @apply border-t-0;
-        @apply rounded-b;
-        @apply border-stone-900;
-        @apply drop-shadow-lg;
     }
 
     input {
@@ -140,7 +133,8 @@
     }
 
     .selected-nav-link {
-        @apply font-bold;
+        @apply border-b-2;
+        @apply border-orange-600
     }
 
     .centred-absolute {
@@ -149,5 +143,10 @@
         @apply left-[50%];
         @apply transform -translate-x-[50%] -translate-y-[50%];
         @aply transform-gpu;
+    }
+
+    .mx-initial {
+        margin-left: initial;
+        margin-right: initial;
     }
 }

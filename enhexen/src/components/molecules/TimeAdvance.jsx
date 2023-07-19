@@ -5,6 +5,7 @@ import useClock from '../../hooks/clock'
 import { usePublish } from '../../hooks/pubsub'
 import { ClockContext } from '../../contexts/ClockContext'
 import IconButton from '../atoms/IconButton'
+import { round1 } from '../../helpers/maths'
 
 const explorationToWildernessSpeedQuotient = 5
 const standardHexesPerDay = 12
@@ -32,19 +33,19 @@ const TimeAdvance = ({ options, applyTravelSpeed, speed }) => {
   const formatAmount = (amount) => {
     const duration = getDuration(amount)
     if (duration.minutes) {
-      return `${duration.minutes}m`
+      return `${round1(duration.minutes)}m`
     }
     if (duration.hours) {
-      return `${duration.hours}h`
+      return `${round1(duration.hours)}h`
     }
     if (duration.days) {
-      return `${duration.days}d`
+      return `${round1(duration.days)}d`
     }
     if (duration.weeks) {
-      return `${duration.weeks}w`
+      return `${round1(duration.weeks)}w`
     }
     if (duration.months) {
-      return `${duration.months}mth`
+      return `${round1(duration.months)}mth`
     }
     throw new Error(`Unknown period type: ${Object.keys(amount)[0]}`)
   }

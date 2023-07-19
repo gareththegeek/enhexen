@@ -7,8 +7,9 @@ import { useState } from 'react'
 import Select from '../atoms/Select'
 import Tickbox from '../atoms/Tickbox'
 import Field from '../atoms/Field'
+import Link from '../atoms/Link'
 
-const Form = ({ definition, onSubmit, onCancel, ...rest }) => {
+const Form = ({ definition, errors, onSubmit, onCancel, ...rest }) => {
   const getInitialState = ({ fields }) =>
     fields.reduce((a, { name, type, initialValue }) => {
       a[name] = initialValue ?? type === 'tickbox' ? false : ''
@@ -85,16 +86,27 @@ const Form = ({ definition, onSubmit, onCancel, ...rest }) => {
 
   return (
     <form className={mergeClass(rest)} {...noClass(rest)}>
-      <h3 className="m-auto">{definition.heading}</h3>
       {definition.fields.map(renderField)}
-      <ButtonGroup>
+      {errors?.length && (
+        <ul className="flex flex-col gap-4 text-stone-50 rounded text-sm font-bold m-auto">
+          {errors.map((error) => (
+            <li className="capitalize bg-orange-800 p-4 px-8" key={error}>{error}</li>
+          ))}
+        </ul>
+      )}
+      {definition.links?.map(({ label, to }) => (
+        <Link className="m-auto" key={label} to={to}>
+          {label}
+        </Link>
+      ))}
+      <ButtonGroup className="flex justify-center">
         {onSubmit && (
-          <Button className="grow" primary onClick={handleSubmit}>
-            Save
+          <Button className="grow max-w-sm" primary onClick={handleSubmit}>
+            Submit
           </Button>
         )}
         {onCancel && (
-          <Button className="grow" onClick={handleCancel}>
+          <Button className="grow max-w-sm" onClick={handleCancel}>
             Cancel
           </Button>
         )}
@@ -105,6 +117,7 @@ const Form = ({ definition, onSubmit, onCancel, ...rest }) => {
 
 Form.propTypes = {
   definition: PropTypes.object.isRequired,
+  errors: PropTypes.array,
   onSubmit: PropTypes.func,
   onCancel: PropTypes.func,
 }
