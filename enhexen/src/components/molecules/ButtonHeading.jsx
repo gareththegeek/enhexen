@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import HeadingButton from '../atoms/HeadingButton'
+import Button from '../atoms/Button'
 
 const ButtonHeading = ({
   heading,
@@ -13,13 +13,13 @@ const ButtonHeading = ({
   <div className="flex gap-4 items-baseline justify-between">
     {heading}
     {showButton && button ? (
-      <HeadingButton
+      <Button
         primary={primary}
         secondary={secondary}
         onClick={handleClick}
       >
         {button}
-      </HeadingButton>
+      </Button>
     ) : (
       children
     )}

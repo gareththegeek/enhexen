@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { randomInteger } from '../../helpers/maths'
 import Table from '../atoms/Table'
 import Section from '../atoms/Section'
-import HeadingButton from '../atoms/HeadingButton'
+import Button from '../atoms/Button'
 import Placeholder from '../atoms/Placeholder'
 
 const RandomTable = ({ items, onRoll, heading, placeholder }) => {
@@ -45,12 +45,12 @@ const RandomTable = ({ items, onRoll, heading, placeholder }) => {
             <div className="flex justify-between">
               <span className="me-4">{heading}</span>
               <div>
-                <HeadingButton onClick={() => setExpanded(!expanded)}>
+                <Button onClick={() => setExpanded(!expanded)}>
                   {expanded ? 'Collapse' : 'Expand'}
-                </HeadingButton>
-                <HeadingButton onClick={handleRoll} primary>
+                </Button>
+                <Button onClick={handleRoll} primary>
                   Roll
-                </HeadingButton>
+                </Button>
               </div>
             </div>
           </th>

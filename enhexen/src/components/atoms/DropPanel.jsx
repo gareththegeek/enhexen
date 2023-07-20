@@ -4,7 +4,6 @@ const DropPanel = ({ heading, children }) => (
   <div
     className={`
     max-w-sm right-0 absolute z-50
-    -mt-4
     border-2 rounded-b-lg border-stone-900 drop-shadow-lg
     bg-stone-100`}
   >

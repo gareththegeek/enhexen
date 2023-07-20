@@ -4,8 +4,8 @@ import { usePublish } from '../hooks/pubsub'
 import useClock from '../hooks/clock'
 import { ClockContext } from '../contexts/ClockContext'
 import EncounterRoll from '../components/molecules/EncounterRoll'
-import Loot from '../components/organisms/Loot'
-import Timers from '../components/organisms/Timers'
+import LootTable from '../components/organisms/LootTable'
+import TimersTable from '../components/organisms/TimersTable'
 import Section from '../components/atoms/Section'
 import ButtonHeading from '../components/molecules/ButtonHeading'
 
@@ -36,8 +36,8 @@ const DelvePage = () => {
         <EncounterRoll />
       </Section>
       <div className="flex flex-col gap-8 md:flex-row">
-        <Timers className="flex-1" />
-        <Loot className="flex-1" />
+        <TimersTable className="flex-1" />
+        <LootTable className="flex-1" />
       </div>
     </>
   )

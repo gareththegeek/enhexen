@@ -3,7 +3,7 @@ import Section from '../components/atoms/Section'
 import SettlementDetails from '../components/organisms/SettlementDetails'
 import AssetList from '../components/organisms/AssetList'
 import NpcTable from '../components/organisms/NpcTable'
-import Loot from '../components/organisms/Loot'
+import LootTable from '../components/organisms/LootTable'
 import RumourTable from '../components/organisms/RumourTable'
 
 const SettlementPage = () => {
@@ -25,7 +25,7 @@ const SettlementPage = () => {
         domain={domain}
       />
       {settlement && <RumourTable reference={reference} />}
-      {settlement && <Loot claim />}
+      {settlement && <LootTable claim />}
       {assets && <AssetList assets={assets} />}
       {npcs && <NpcTable npcs={npcs} />}
     </>

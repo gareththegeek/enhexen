@@ -81,7 +81,7 @@
         @apply bg-black;
     }
 
-    .selected-tr {
+    .selected-tr, .selected-tr:nth-child(even) {
         @apply bg-orange-200;
     }
 
@@ -96,8 +96,16 @@
         @apply font-semibold;
     }
 
+    td:first-child {
+        @apply pl-4;
+    }
+
+    td:last-child {
+        @apply pr-4;
+    }
+
     td {
-        @apply p-4;
+        @apply py-2;
     }
     
     form {
