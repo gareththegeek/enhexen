@@ -14,7 +14,7 @@ const TravelSpeed = ({ speed, onChange }) => (
 )
 
 TravelSpeed.propTypes = {
-  speed: PropTypes.number,
+  speed: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onChange: PropTypes.func,
 }
 

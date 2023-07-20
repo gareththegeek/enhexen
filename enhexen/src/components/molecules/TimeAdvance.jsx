@@ -70,7 +70,7 @@ const TimeAdvance = ({ options, applyTravelSpeed, speed }) => {
 TimeAdvance.propTypes = {
   options: PropTypes.array,
   applyTravelSpeed: PropTypes.bool,
-  speed: PropTypes.number,
+  speed: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 }
 
 export default TimeAdvance
