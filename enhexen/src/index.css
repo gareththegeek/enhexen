@@ -5,14 +5,13 @@
 @layer base {
     html {
         @apply font-sans;
-        font-size: 18px;
+        font-size: 16px;
     }
 
     body {
-        @apply m-4;
-        @apply md:m-8;
         @apply mb-24;
-        @apply bg-stone-300;
+        @apply bg-stone-50;
+        @apply md:bg-stone-300;
     }
 
     p {
@@ -52,16 +51,12 @@
 
     .heading {
         @apply bg-stone-100;
-        @apply rounded-t;
+        @apply border-t-2 md:border-t-0;
+        @apply md:rounded-t;
         @apply border-b-2;
-        @apply border-stone-300;
+        @apply border-t-white md:border-stone-300;
         @apply uppercase;
         @apply text-stone-600;
-    }
-
-    caption {
-        @apply text-sm;
-        @apply text-left;
     }
 
     table {
@@ -69,6 +64,10 @@
         @apply bg-stone-50;
         @apply rounded;
         @apply drop-shadow;
+    }
+
+    tr,td {
+        @apply max-h-fit;
     }
 
     tr:nth-child(even) {
@@ -89,23 +88,24 @@
         @apply font-normal;
         @apply text-xs;
         @apply text-left;
-        @apply bg-stone-800;
         @apply font-light;
-        @apply px-4 py-2;
+        @apply px-2 py-4;
         @apply heading;
         @apply font-semibold;
-    }
-
-    td:first-child {
-        @apply pl-4;
-    }
-
-    td:last-child {
-        @apply pr-4;
+        /* @apply bg-stone-800; */
+        background-color: (245 245 244 / var(--tw-bg-opacity)) padding-box;
     }
 
     td {
-        @apply py-2;
+        @apply px-2 py-4;
+    }
+
+    td:first-child,th:first-child {
+        @apply ps-4;
+    }
+
+    td:last-child,th:last-child {
+        @apply pe-4;
     }
     
     form {

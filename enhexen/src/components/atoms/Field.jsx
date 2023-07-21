@@ -2,12 +2,20 @@ import { cloneElement } from 'react'
 import PropTypes from 'prop-types'
 import { mergeClass, noClass } from '../mergeClass'
 
-const Field = ({ name, label, children, width, ...rest }) => (
-  <div className={mergeClass(rest, 'flex flex-wrap')} {...noClass(rest)}>
+const Field = ({
+  name,
+  label,
+  children,
+  labelWidth,
+  horizonal = false,
+  ...rest
+}) => (
+  <div
+    className={mergeClass(rest, `flex ${horizonal ? 'flex-row' : 'flex-col'}`)}
+    {...noClass(rest)}
+  >
     <label
-      className={`${
-        width ?? 'w-20'
-      } text-stone-600 font-normal text-xs uppercase`}
+      className={`${labelWidth} text-stone-600 font-normal text-xs uppercase`}
       htmlFor={name}
     >
       {label}
@@ -18,8 +26,9 @@ const Field = ({ name, label, children, width, ...rest }) => (
 
 Field.propTypes = {
   name: PropTypes.string.isRequired,
-  width: PropTypes.string,
+  labelWidth: PropTypes.string,
   label: PropTypes.string.isRequired,
+  horizonal: PropTypes.bool,
   children: PropTypes.node.isRequired,
 }
 

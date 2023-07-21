@@ -12,8 +12,8 @@ const renderLoot = (loot, onDelete) =>
   loot.map((l) => (
     <tr key={l.id}>
       <td>{l.name}</td>
-      <td>{l.type === 'gp' && l.amount}</td>
-      <td>{l.amount}</td>
+      <td className="text-right">{l.type === 'gp' && l.amount}</td>
+      <td className="text-right">{l.amount}</td>
       <td>
         <Button onClick={onDelete}>Delete</Button>
       </td>
@@ -21,7 +21,9 @@ const renderLoot = (loot, onDelete) =>
   ))
 
 const total = (loot, type) =>
-  loot?.filter((x) => !type || x.type === type).reduce((a, c) => a + c.amount, 0)
+  loot
+    ?.filter((x) => !type || x.type === type)
+    .reduce((a, c) => a + c.amount, 0)
 
 const LootTable = ({ className, claim = false }) => {
   const [showAdd, setShowAdd] = useState(false)
@@ -65,8 +67,8 @@ const LootTable = ({ className, claim = false }) => {
       <thead>
         <tr>
           <th>Loot</th>
-          <th className="w-12">GP</th>
-          <th className="w-12">XP</th>
+          <th className="w-12 text-right">GP</th>
+          <th className="w-12 text-right">XP</th>
           <TableHeadingButton
             className="w-4"
             secondary
@@ -79,10 +81,16 @@ const LootTable = ({ className, claim = false }) => {
       <tbody>
         <tr className="font-semibold">
           <td>Total</td>
-          <td>{totalGp}</td>
-          <td>{totalXp}</td>
+          <td className="text-right">{totalGp}</td>
+          <td className="text-right">{totalXp}</td>
           <td>
-            <Button primary={claim} secondary={!claim}>Claim</Button>
+            <Button
+              primary={claim}
+              secondary={!claim}
+              onClick={handleClaimClick}
+            >
+              Claim
+            </Button>
           </td>
         </tr>
         {loot && renderLoot(loot, handleDeleteClick)}

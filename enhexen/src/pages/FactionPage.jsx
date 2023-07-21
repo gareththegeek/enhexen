@@ -38,8 +38,12 @@ const FactionPage = () => {
         ))}
         <FactionStats faction={faction} />
       </Section>
-      {assets && <AssetList assets={assets} faction={faction} showHex={true} />}
-      {npcs && <NpcTable npcs={npcs} faction={faction} showHex={true} />}
+      <div className="md:flex gap-8">
+        {assets && (
+          <AssetList className="md:flex-1" assets={assets} faction={faction} showHex />
+        )}
+        {npcs && <NpcTable className="flex-1" npcs={npcs} faction={faction} showHex />}
+      </div>
     </>
   )
 }

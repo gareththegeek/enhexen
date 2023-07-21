@@ -101,12 +101,12 @@ const Form = ({ definition, errors, onSubmit, onCancel, ...rest }) => {
       ))}
       <ButtonGroup className="flex justify-center">
         {onSubmit && (
-          <Button className="grow max-w-sm" primary onClick={handleSubmit}>
+          <Button className="grow" primary onClick={handleSubmit}>
             Submit
           </Button>
         )}
         {onCancel && (
-          <Button className="grow max-w-sm" onClick={handleCancel}>
+          <Button className="grow" onClick={handleCancel}>
             Cancel
           </Button>
         )}

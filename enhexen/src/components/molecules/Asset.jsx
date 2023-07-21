@@ -10,7 +10,7 @@ const Asset = ({
 }) => {
   const effectiveFaction = faction ?? asset.faction
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-2">
       <div className="flex justify-between">
         <span>{name}</span>
         {showHex && hex && (
@@ -26,7 +26,7 @@ const Asset = ({
           </span>
         )}
       </div>
-      <div className="flex gap-4 text-sm  text-stone-600 flex-wrap">
+      <div className="flex gap-4 text-sm text-stone-600 flex-wrap">
         <Stat label="❤️" title="Hitpoints">{`${hp}/${maxHp}`}</Stat>
         {attack !== '-' && <Stat label="🗡️" title="Attack">{attack}</Stat>}
         {counter !== '-' && <Stat label="🛡️" title="Counter">{counter}</Stat>}

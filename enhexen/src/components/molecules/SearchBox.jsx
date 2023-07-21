@@ -4,7 +4,7 @@ import Field from '../atoms/Field'
 import Input from '../atoms/Input'
 import IconButton from '../atoms/IconButton'
 
-const SearchBox = ({ name, label, onChange, onClick, width, ...rest }) => {
+const SearchBox = ({ name, label, onChange, onClick, labelWidth, ...rest }) => {
   const handleKeyUp = (e) => {
     if (e.key !== 'Enter') {
       return
@@ -17,8 +17,8 @@ const SearchBox = ({ name, label, onChange, onClick, width, ...rest }) => {
       <Field
         name={name}
         label={label}
-        className={mergeClass(rest, `flex flex-col ${width}`)}
-        width={width}
+        className={mergeClass(rest)}
+        labelWidth={labelWidth}
         {...noClass(rest)}
       >
         <Input className="w-[100%]" onChange={onChange} onKeyUp={handleKeyUp} />
@@ -35,7 +35,7 @@ SearchBox.propTypes = {
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  width: PropTypes.string
+  labelWidth: PropTypes.string
 }
 
 export default SearchBox

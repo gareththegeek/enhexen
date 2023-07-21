@@ -6,7 +6,12 @@ const RevealableText = ({ text, name, label, revealed, onRevealChange }) => (
   <div>
     <div className="flex place-content-between sm:place-content-start gap-1">
       <h3>{label}</h3>
-      <Field name={`${name}-revealed`} width="w-16" label="Revealed">
+      <Field
+        name={`${name}-revealed`}
+        labelWidth="w-16"
+        label="Revealed"
+        horizonal
+      >
         <Tickbox
           name="hidden-revealed"
           value={revealed}
@@ -14,9 +19,7 @@ const RevealableText = ({ text, name, label, revealed, onRevealChange }) => (
         />
       </Field>
     </div>
-    <p className="max-h-64 sm:max-h-32 overflow-y-auto">
-      {text || 'None'}
-    </p>
+    <p className="max-h-64 sm:max-h-32 overflow-y-auto">{text || 'None'}</p>
   </div>
 )
 

@@ -22,7 +22,7 @@ const Authenticated = () => (
   <>
     <Header />
     <main className="flex max-w-[50rem] m-auto">
-      <div className="flex flex-col gap-8 w-full mt-48 md:mt-20">
+      <div className="flex flex-col gap-8 w-full mt-52 md:mt-24">
         <Routes>
           {routes.map(({ route, component }) => (
             <Route

@@ -15,7 +15,7 @@ const HexPage = () => {
   if (!reference) {
     return (
       <Section heading={<h1>Search for a hex</h1>}>
-        <HexLookup width="w-96" />
+        <HexLookup labelWidth="w-96" />
       </Section>
     )
   }
@@ -37,8 +37,10 @@ const HexPage = () => {
       <HexDetails reference={reference} hex={hex} />
       {adventure && <AdventureDetails adventure={adventure} />}
       {region && <EncounterTable id={region.id} />}
-      {assets && <AssetList assets={assets} />}
-      {npcs && <NpcTable npcs={npcs} />}
+      <div className="flex gap-8">
+        {assets && <AssetList className="flex-1" assets={assets} />}
+        {npcs && <NpcTable className="flex-1" npcs={npcs} />}
+      </div>
     </>
   )
 }

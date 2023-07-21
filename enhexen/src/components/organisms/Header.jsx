@@ -12,7 +12,7 @@ const Header = () => {
       fixed 
       flex flex-col md:flex-row
       md:justify-between items-center
-      gap-4 -m-4 md:-m-8 p-2 md:px-12
+      gap-4 p-2 md:px-12
       w-screen min-h-[4.2rem]
       bg-stone-100 drop-shadow-lg z-50`}
     >
@@ -20,7 +20,7 @@ const Header = () => {
         <>
           <Nav />
           <div className="flex flex-wrap justify-center gap-4">
-            <HexLookup width="w-28" />
+            <HexLookup labelWidth="w-28" />
             <TimeControl />
           </div>
         </>

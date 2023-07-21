@@ -13,18 +13,16 @@ const TimersRow = ({ timer, onDelete, onRenew }) => {
       <td className={`${onRenew && !isNow && 'text-stone-700'}`}>
         {timer.name}
       </td>
-      <td className={`text-sm ${!isNow && 'text-stone-700'}`}>
+      <td className={`text-sm text-center ${!isNow && 'text-stone-700'}`}>
         <RelativeTime value={toDateTime(timer.due)} />
       </td>
-      <td>
+      <td className="flex">
         {onRenew && (
-          <IconButton title="Renew" onClick={() => onRenew(timer)}>
+          <IconButton className="w-8" title="Renew" onClick={() => onRenew(timer)}>
             ↺
           </IconButton>
         )}
-      </td>
-      <td>
-        <IconButton title="Remove" onClick={() => onDelete(timer)}>
+        <IconButton className="w-8" title="Remove" onClick={() => onDelete(timer)}>
           X
         </IconButton>
       </td>

@@ -66,8 +66,7 @@ const TimerTable = ({ className }) => {
       <thead>
         <tr>
           <th>Timers</th>
-          <th className="w-24"></th>
-          <th className="w-1"></th>
+          <th className="w-26"></th>
           <TableHeadingButton
             className="w-1"
             secondary
@@ -84,7 +83,6 @@ const TimerTable = ({ className }) => {
           </td>
           <td></td>
           <td></td>
-          <td></td>
         </tr>
         {elapsedTimers &&
           renderTimers(elapsedTimers, handleDeleteClick, handleRenewClick)}
@@ -92,7 +90,6 @@ const TimerTable = ({ className }) => {
           <td>
             <h3>Upcoming</h3>
           </td>
-          <td></td>
           <td></td>
           <td></td>
         </tr>

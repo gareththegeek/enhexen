@@ -14,7 +14,7 @@ const routes = [
 
 const Unauthenticated = () => (
   <>
-    <main className="flex max-w-[50rem] m-auto">
+    <main className="flex max-w-[30rem] m-auto">
       <div className="flex flex-col gap-8 w-full mt-48 md:mt-20">
         <Routes>
           {routes.map(({ route, component }) => (

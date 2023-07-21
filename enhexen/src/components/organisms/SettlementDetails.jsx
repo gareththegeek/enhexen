@@ -20,7 +20,7 @@ const SettlementDetails = ({ reference, domain, settlement }) => (
       domain={domain}
     />
     {settlement && (
-      <Field name="market-class" width="24" label="Market Class">
+      <Field name="market-class" labelWidth="24" label="Market Class">
         <p>{settlement.marketClass}</p>
       </Field>
     )}

@@ -26,8 +26,10 @@ const SettlementPage = () => {
       />
       {settlement && <RumourTable reference={reference} />}
       {settlement && <LootTable claim />}
-      {assets && <AssetList assets={assets} />}
-      {npcs && <NpcTable npcs={npcs} />}
+      <div className="md:flex gap-8">
+        {assets && <AssetList className="flex-1" assets={assets} />}
+        {npcs && <NpcTable className="flex-1" npcs={npcs} />}
+      </div>
     </>
   )
 }

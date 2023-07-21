@@ -11,7 +11,14 @@ const Nav = ({ ...rest }) => {
 
   return (
     <nav aria-label="Main" className={mergeClass(rest)}>
-      <ul className="flex gap-2 md:gap-4">
+      <ul className="flex gap-2 md:gap-4 items-baseline">
+        {user && (
+          <li>
+            <Button className="" onClick={logout}>
+              Logout
+            </Button>
+          </li>
+        )}
         <li>
           <Link
             className={`no-underline py-2 ${
@@ -52,11 +59,6 @@ const Nav = ({ ...rest }) => {
             Factions
           </Link>
         </li>
-        {user && (
-          <li>
-            <Button className="ml-4" onClick={logout}>Logout</Button>
-          </li>
-        )}
       </ul>
     </nav>
   )

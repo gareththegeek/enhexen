@@ -5,11 +5,11 @@ const Section = ({ heading, children, ...rest }) => (
   <section
     className={mergeClass(
       rest,
-      'flex flex-col bg-stone-50 rounded drop-shadow'
+      'flex flex-col bg-stone-50 md:rounded md:drop-shadow'
     )}
     {...noClass(rest)}
   >
-    <div className="heading px-4 py-2">
+    <div className="heading p-4">
       {heading}
     </div>
     <div className="flex flex-col gap-4 p-4">{children}</div>
