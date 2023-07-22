@@ -14,7 +14,7 @@ const Header = () => {
       md:justify-between items-center
       gap-4 p-2 md:px-12
       w-screen min-h-[4.2rem]
-      bg-stone-100 drop-shadow-lg z-50`}
+      bg-grey-100 drop-shadow-lg z-50`}
     >
       {user && (
         <>

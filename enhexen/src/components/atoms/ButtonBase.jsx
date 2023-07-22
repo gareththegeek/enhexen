@@ -8,10 +8,10 @@ const ButtonBase = ({ onClick, children, primary, secondary, ...rest }) => (
       rest,
       `${
         primary
-          ? 'border-2 border-orange-600 bg-orange-600 text-orange-50 hover:bg-orange-500 font-semibold'
-          : secondary
-          ? 'border-2 border-stone-500 bg-stone-50 text-orange-700 hover:bg-orange-50 font-semibold'
-          : 'underline font-normal text-stone-900 hover:text-stone-600'
+          ? 'border-2 border-primary-600 bg-primary-600 text-primary-50 hover:bg-primary-500 font-semibold'
+          : `font-semibold text-primary-500 hover:text-primary-800 ${
+              secondary && 'border-2 border-grey-500 bg-grey-50 hover:bg-primary-100'
+            }`
       } rounded`
     )}
     {...noClass(rest)}

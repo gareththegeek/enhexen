@@ -9,7 +9,9 @@ const AdventureDetails = ({ adventure }) => {
         {adventure.name} a module for adventurers level {adventure.level} is to
         be found here!
       </p>
-      <A to={adventure.hyperlink}>{adventure.hyperlink}</A>
+      {adventure.hyperlink && (
+        <A to={adventure.hyperlink}>{adventure.hyperlink}</A>
+      )}
     </Section>
   )
 }

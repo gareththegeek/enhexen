@@ -37,7 +37,7 @@ const HexPage = () => {
       <HexDetails reference={reference} hex={hex} />
       {adventure && <AdventureDetails adventure={adventure} />}
       {region && <EncounterTable id={region.id} />}
-      <div className="flex gap-8">
+      <div className="flex flex-col md:flex-row gap-8">
         {assets && <AssetList className="flex-1" assets={assets} />}
         {npcs && <NpcTable className="flex-1" npcs={npcs} />}
       </div>

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import Link from '../atoms/Link'
+import ButtonLink from '../atoms/ButtonLink'
 import Stat from '../atoms/Stat'
 
 const Asset = ({
@@ -15,18 +15,18 @@ const Asset = ({
         <span>{name}</span>
         {showHex && hex && (
           <span>
-            <Link to={`/${hex.reference}`}>{hex.reference}</Link>
+            <ButtonLink to={`/${hex.reference}`}>{hex.reference}</ButtonLink>
           </span>
         )}
         {!showHex && effectiveFaction && (
           <span>
-            <Link to={`/factions/${effectiveFaction.id}`}>
+            <ButtonLink to={`/factions/${effectiveFaction.id}`}>
               {effectiveFaction.name}
-            </Link>
+            </ButtonLink>
           </span>
         )}
       </div>
-      <div className="flex gap-4 text-sm text-stone-600 flex-wrap">
+      <div className="flex gap-4 text-sm text-grey-600 flex-wrap">
         <Stat label="❤️" title="Hitpoints">{`${hp}/${maxHp}`}</Stat>
         {attack !== '-' && <Stat label="🗡️" title="Attack">{attack}</Stat>}
         {counter !== '-' && <Stat label="🛡️" title="Counter">{counter}</Stat>}

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
-import Link from '../atoms/Link'
+import ButtonLink from '../atoms/ButtonLink'
 import Table from '../atoms/Table'
 import Section from '../atoms/Section'
 import Placeholder from '../atoms/Placeholder'
@@ -37,13 +37,13 @@ const NpcTable = ({ npcs, faction, showHex, className }) => {
             </td>
             {showHex ? (
               <td className="text-center">
-                <Link to={`/${npc.hex?.reference}`}>{npc.hex?.reference}</Link>
+                <ButtonLink to={`/${npc.hex?.reference}`}>{npc.hex?.reference}</ButtonLink>
               </td>
             ) : (
               <td className="text-center">
-                <Link to={`/factions/${npc.faction?.id ?? faction.id}`}>
+                <ButtonLink to={`/factions/${npc.faction?.id ?? faction.id}`}>
                   {npc.faction?.name ?? faction.name}
-                </Link>
+                </ButtonLink>
               </td>
             )}
           </tr>

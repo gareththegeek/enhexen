@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { mergeClass, noClass } from '../mergeClass'
 
 const Placeholder = ({ children, ...rest }) => (
-  <div className={mergeClass(rest, "text-stone-600")} {...noClass(rest)}>
+  <div className={mergeClass(rest, "text-grey-600")} {...noClass(rest)}>
     {children}
   </div>
 )

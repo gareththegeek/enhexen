@@ -88,9 +88,9 @@ const Form = ({ definition, errors, onSubmit, onCancel, ...rest }) => {
     <form className={mergeClass(rest)} {...noClass(rest)}>
       {definition.fields.map(renderField)}
       {errors?.length && (
-        <ul className="flex flex-col gap-4 text-stone-50 rounded text-sm font-bold m-auto">
+        <ul className="flex flex-col gap-4 text-grey-50 rounded text-sm font-bold m-auto">
           {errors.map((error) => (
-            <li className="capitalize bg-orange-800 p-4 px-8" key={error}>{error}</li>
+            <li className="capitalize bg-primary-800 p-4 px-8" key={error}>{error}</li>
           ))}
         </ul>
       )}

@@ -10,10 +10,10 @@ const TimersRow = ({ timer, onDelete, onRenew }) => {
   const isNow = now.equals(toDateTime(timer.due))
   return (
     <tr key={timer.id} className={isNow && 'selected-tr'}>
-      <td className={`${onRenew && !isNow && 'text-stone-700'}`}>
+      <td className={`${onRenew && !isNow && 'text-grey-700'}`}>
         {timer.name}
       </td>
-      <td className={`text-sm text-center ${!isNow && 'text-stone-700'}`}>
+      <td className={`text-sm text-center ${!isNow && 'text-grey-700'}`}>
         <RelativeTime value={toDateTime(timer.due)} />
       </td>
       <td className="flex">

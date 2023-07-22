@@ -15,7 +15,7 @@ const Field = ({
     {...noClass(rest)}
   >
     <label
-      className={`${labelWidth} text-stone-600 font-normal text-xs uppercase`}
+      className={`${labelWidth} text-grey-600 font-normal text-xs uppercase`}
       htmlFor={name}
     >
       {label}

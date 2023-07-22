@@ -22,7 +22,7 @@ const Nav = ({ ...rest }) => {
         <li>
           <Link
             className={`no-underline py-2 ${
-              route === 'hexes' && 'selected-nav-link'
+              route === 'hexes' ? 'selected-nav-link' : 'text-grey-500'
             }`}
             to=""
           >
@@ -32,7 +32,7 @@ const Nav = ({ ...rest }) => {
         <li>
           <Link
             className={`no-underline py-2 ${
-              route === 'settlement' && 'selected-nav-link'
+              route === 'settlement' ? 'selected-nav-link' : 'text-grey-500'
             }`}
             to="/settlements"
           >
@@ -42,7 +42,7 @@ const Nav = ({ ...rest }) => {
         <li>
           <Link
             className={`no-underline py-2 ${
-              route === 'delve' && 'selected-nav-link'
+              route === 'delve'? 'selected-nav-link' : 'text-grey-500'
             }`}
             to="/delve"
           >
@@ -52,7 +52,7 @@ const Nav = ({ ...rest }) => {
         <li>
           <Link
             className={`no-underline py-2 ${
-              route === 'factions' && 'selected-nav-link'
+              route === 'factions'? 'selected-nav-link' : 'text-grey-500'
             }`}
             to="/factions"
           >
