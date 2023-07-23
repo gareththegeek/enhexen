@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { UserContext } from '../contexts/UserContext'
 
 const post = (endpoint, entity, jwt) =>
-  fetch(`http://localhost:1337/api/${endpoint}`, {
+  fetch(`${import.meta.env.VITE_API_BASE}/${endpoint}`, {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',

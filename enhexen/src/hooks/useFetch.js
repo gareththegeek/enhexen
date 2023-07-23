@@ -5,9 +5,8 @@ import { UserContext } from '../contexts/UserContext'
 
 const useFetch = (endpoint, shouldFetch = true) => {
   const { user } = useContext(UserContext)
-  // TODO config URL
   const { data, mutate } = useSWR(
-    shouldFetch ? `http://localhost:1337/api/${endpoint}` : null,
+    shouldFetch ? `${import.meta.env.VITE_API_BASE}/${endpoint}` : null,
     fetcher(user?.jwt)
   )
   // Apparently useSWR initially returns a successful cors

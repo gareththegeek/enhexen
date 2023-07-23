@@ -4,12 +4,13 @@ import { UserContext } from '../contexts/UserContext'
 import Form from '../components/molecules/Form'
 import Section from '../components/atoms/Section'
 
-// TODO
+const API_BASE = import.meta.env.VITE_API_BASE
+
 const authUrls = {
-  login: 'http://localhost:1337/api/auth/local',
-  register: 'http://localhost:1337/api/auth/local/register',
-  'forgot-password': 'http://localhost:1337/api/auth/forgot-password',
-  'reset-password': 'http://localhost:1337/api/',
+  login: `${API_BASE}/auth/local`,
+  register: `${API_BASE}/auth/local/register`,
+  'forgot-password': `${API_BASE}/auth/forgot-password`,
+  'reset-password': `${API_BASE}/`,
 }
 
 const definitions = {
