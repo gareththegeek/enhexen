@@ -1,11 +1,11 @@
 import Nav from '../molecules/Nav'
-import TimeControl from '../molecules/TimeControl'
-import HexLookup from '../molecules/HexLookup'
-import { useContext } from 'react'
-import { UserContext } from '../../contexts/UserContext'
+import User from '../molecules/User'
+import useClock from '../../hooks/clock'
+import Clock from '../atoms/Clock'
+import { toDateTime } from '../../helpers/dates'
 
 const Header = () => {
-  const { user } = useContext(UserContext)
+  const { now } = useClock(true)
   return (
     <header
       className={`
@@ -16,15 +16,9 @@ const Header = () => {
       w-screen min-h-[4.2rem]
       bg-grey-100 drop-shadow-lg z-50`}
     >
-      {user && (
-        <>
-          <Nav />
-          <div className="flex flex-wrap justify-center gap-4">
-            <HexLookup labelWidth="w-28" />
-            <TimeControl />
-          </div>
-        </>
-      )}
+      <User />
+      <Nav />
+      <Clock value={toDateTime(now)} />
     </header>
   )
 }

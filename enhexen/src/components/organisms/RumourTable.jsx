@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { usePutRumour, useFetchRumours } from '../../hooks/rumours'
 import RandomTable from '../molecules/RandomTable'
 
-const RumourTable = ({ reference }) => {
+const RumourTable = ({ reference, className }) => {
   const { rumours } = useFetchRumours(reference)
   const putRumour = usePutRumour()
 
@@ -12,6 +12,7 @@ const RumourTable = ({ reference }) => {
 
   return (
     <RandomTable
+      className={className}
       onRoll={handleRoll}
       heading="Rumour"
       placeholder="There are no credible rumours in this place only idle gossip"
@@ -25,6 +26,7 @@ const RumourTable = ({ reference }) => {
 }
 
 RumourTable.propTypes = {
+  className: PropTypes.string,
   reference: PropTypes.string.isRequired,
 }
 

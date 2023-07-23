@@ -4,11 +4,10 @@ import Label from '../atoms/Label'
 import Section from '../atoms/Section'
 import SettlementDomainText from '../molecules/SettlementDomainText'
 import Field from '../atoms/Field'
-import HexNavigation from '../molecules/HexNavigation'
 
-const SettlementDetails = ({ reference, domain, settlement }) => (
+const SettlementDetails = ({ reference, domain, settlement, className }) => (
   <Section
-    horizontal
+    className={className}
     heading={
       <h1 className="flex gap-4">
         <Label>{settlement.name}</Label>
@@ -16,23 +15,21 @@ const SettlementDetails = ({ reference, domain, settlement }) => (
       </h1>
     }
   >
-    <div className="flex flex-col gap-4">
-      <SettlementDomainText
-        reference={reference}
-        settlement={settlement}
-        domain={domain}
-      />
-      {settlement && (
-        <Field name="market-class" labelWidth="24" label="Market Class">
-          <p>{settlement.marketClass}</p>
-        </Field>
-      )}
-    </div>
-    <HexNavigation reference={reference} />
+    <SettlementDomainText
+      reference={reference}
+      settlement={settlement}
+      domain={domain}
+    />
+    {settlement && (
+      <Field name="market-class" labelWidth="24" label="Market Class">
+        <p>{settlement.marketClass}</p>
+      </Field>
+    )}
   </Section>
 )
 
 SettlementDetails.propTypes = {
+  className: PropTypes.string,
   reference: PropTypes.string,
   settlement: PropTypes.object,
   domain: PropTypes.object,

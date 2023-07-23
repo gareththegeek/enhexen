@@ -9,7 +9,7 @@ const TimersRow = ({ timer, onDelete, onRenew }) => {
   const { now } = useContext(ClockContext)
   const isNow = now.equals(toDateTime(timer.due))
   return (
-    <tr key={timer.id} className={isNow && 'selected-tr'}>
+    <tr key={timer.id} className={isNow ? 'selected-tr' : undefined}>
       <td className={`${onRenew && !isNow && 'text-grey-700'}`}>
         {timer.name}
       </td>

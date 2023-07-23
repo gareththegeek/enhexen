@@ -7,6 +7,7 @@ import DomainDetails from '../components/organisms/DomainDetails'
 import AssetList from '../components/organisms/AssetList'
 import NpcTable from '../components/organisms/NpcTable'
 import Section from '../components/atoms/Section'
+import SidebySide from '../components/atoms/SideBySide'
 
 const FactionPage = () => {
   const navigate = useNavigate()
@@ -38,12 +39,19 @@ const FactionPage = () => {
         ))}
         <FactionStats faction={faction} />
       </Section>
-      <div className="md:flex gap-8">
+      <SidebySide>
         {assets && (
-          <AssetList className="md:flex-1" assets={assets} faction={faction} showHex />
+          <AssetList
+            className="md:flex-1"
+            assets={assets}
+            faction={faction}
+            showHex
+          />
         )}
-        {npcs && <NpcTable className="flex-1" npcs={npcs} faction={faction} showHex />}
-      </div>
+        {npcs && (
+          <NpcTable className="flex-1" npcs={npcs} faction={faction} showHex />
+        )}
+      </SidebySide>
     </>
   )
 }

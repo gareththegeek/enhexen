@@ -5,28 +5,25 @@ import EncounterTable from '../components/organisms/EncounterTable'
 import AdventureDetails from '../components/organisms/AdventureDetails'
 import AssetList from '../components/organisms/AssetList'
 import NpcTable from '../components/organisms/NpcTable'
-import HexLookup from '../components/molecules/HexLookup'
-import HexNavigation from '../components/molecules/HexNavigation'
+import Navigation from '../components/organisms/Navigation'
+import Placeholder from '../components/atoms/Placeholder'
+import SidebySide from '../components/atoms/SideBySide'
 
 const HexPage = () => {
   const reference = useReference()
   const { hex } = useFetchHex(reference)
 
-  if (!reference) {
+  if (!reference || !hex) {
     return (
-      <Section heading={<h1>Search for a hex</h1>}>
-        <HexLookup labelWidth="w-96" />
-      </Section>
-    )
-  }
-  if (!hex) {
-    return (
-      <Section heading={<h1>{reference}</h1>}>
-        <div className="flex flex-col-reverse sm:flex-row justify-between gap-8">
-          <p>No hex found with reference {reference}</p>
-          <HexNavigation reference={reference} />
-        </div>
-      </Section>
+      <SidebySide>
+        <Section
+          containerClassName="items-center"
+          heading={<h1>{reference ?? 'Hex'} not found</h1>}
+        >
+          <Placeholder>No hex found with reference {reference}</Placeholder>
+        </Section>
+        <Navigation reference={reference} type="hexes" />
+      </SidebySide>
     )
   }
 
@@ -34,13 +31,21 @@ const HexPage = () => {
 
   return (
     <>
-      <HexDetails reference={reference} hex={hex} />
+      <SidebySide>
+        <HexDetails className="flex-2" reference={reference} hex={hex} />
+        <Navigation
+          className="flex-1"
+          reference={reference}
+          hex={hex}
+          type="hexes"
+        />
+      </SidebySide>
       {adventure && <AdventureDetails adventure={adventure} />}
       {region && <EncounterTable id={region.id} />}
-      <div className="flex flex-col md:flex-row gap-8">
+      <SidebySide>
         {assets && <AssetList className="flex-1" assets={assets} />}
         {npcs && <NpcTable className="flex-1" npcs={npcs} />}
-      </div>
+      </SidebySide>
     </>
   )
 }

@@ -9,7 +9,7 @@ const routes = [
   { name: 'auth', route: '/auth/:authType', component: <AuthPage /> },
   { name: 'password-reset-sent', route: '/auth/forgot-password/sent', component: <AuthResetPasswordSent /> },
   { name: 'connect', route: '/connect/:provider', component: <ConnectPage /> },
-  { name: 'default', route: '/', component: <Navigate to='/auth/login' /> }
+  { name: 'wildcard', route: '*', component: <Navigate to='/auth/login' />}
 ]
 
 const Unauthenticated = () => (

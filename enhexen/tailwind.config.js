@@ -23,6 +23,11 @@ export default {
       'primary-700': '#2b0099',
       'primary-800': '#220080',
     },
+    extend: {
+      flex: {
+        2: '2 2 0%',
+      },
+    },
   },
   plugins: [],
 }

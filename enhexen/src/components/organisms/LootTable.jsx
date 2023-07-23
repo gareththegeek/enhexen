@@ -97,32 +97,6 @@ const LootTable = ({ className, claim = false }) => {
       </tbody>
     </Table>
   )
-
-  // return (
-  //   <Section
-  //     className={mergeClass({ className }, 'relative')}
-  //     heading={
-  //       <ButtonHeading
-  //         heading={<h2>Loot</h2>}
-  //         secondary={!claim}
-  //         button={showAdd ? 'Cancel' : 'Add'}
-  //         handleClick={handleAddClick}
-  //       />
-  //     }
-  //   >
-  //     {showAdd && (
-  //       <AddLoot onSave={handleSaveClick} onCancel={handleCancelClick} />
-  //     )}
-  //     {loot && (
-  //       <LootList
-  //         claim={claim}
-  //         loot={loot}
-  //         onDelete={handleDeleteClick}
-  //         onClaim={handleClaimClick}
-  //       />
-  //     )}
-  //   </Section>
-  // )
 }
 
 LootTable.propTypes = {

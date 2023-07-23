@@ -7,7 +7,9 @@ import EncounterRoll from '../components/molecules/EncounterRoll'
 import LootTable from '../components/organisms/LootTable'
 import TimersTable from '../components/organisms/TimersTable'
 import Section from '../components/atoms/Section'
+import SidebySide from '../components/atoms/SideBySide'
 import ButtonHeading from '../components/molecules/ButtonHeading'
+import TimeControl from '../components/molecules/TimeControl'
 
 const DelvePage = () => {
   const { now, setNow } = useContext(ClockContext)
@@ -24,6 +26,7 @@ const DelvePage = () => {
   return (
     <>
       <Section
+        containerClassName="flex flex-col md:flex-row justify-between"
         heading={
           <ButtonHeading
             heading={<h1>Delve</h1>}
@@ -34,11 +37,12 @@ const DelvePage = () => {
         }
       >
         <EncounterRoll />
+        <TimeControl type="delve" />
       </Section>
-      <div className="flex flex-col gap-8 md:flex-row">
+      <SidebySide>
         <TimersTable className="flex-1" />
         <LootTable className="flex-1" />
-      </div>
+      </SidebySide>
     </>
   )
 }

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { mergeClass, noClass } from '../mergeClass'
 
-const Section = ({ heading, horizontal, children, ...rest }) => (
+const Section = ({ heading, children, containerClassName, ...rest }) => (
   <section
     className={mergeClass(
       rest,
@@ -9,9 +9,12 @@ const Section = ({ heading, horizontal, children, ...rest }) => (
     )}
     {...noClass(rest)}
   >
-    <div className="heading p-4">{heading}</div>
+    <div className="heading p-4 md:px-8">{heading}</div>
     <div
-      className={`flex ${horizontal ? 'flex-col md:flex-row' : 'flex-col'} gap-4 p-4`}
+      className={mergeClass(
+        { className: containerClassName },
+        `flex flex-col gap-8 p-4 md:px-8`
+      )}
     >
       {children}
     </div>
@@ -20,8 +23,8 @@ const Section = ({ heading, horizontal, children, ...rest }) => (
 
 Section.propTypes = {
   heading: PropTypes.node,
-  horizontal: PropTypes.bool,
   children: PropTypes.node,
+  containerClassName: PropTypes.string,
 }
 
 export default Section

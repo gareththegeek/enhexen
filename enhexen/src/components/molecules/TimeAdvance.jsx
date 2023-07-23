@@ -6,6 +6,7 @@ import { usePublish } from '../../hooks/pubsub'
 import { ClockContext } from '../../contexts/ClockContext'
 import IconButton from '../atoms/IconButton'
 import { round1 } from '../../helpers/maths'
+import Label from '../atoms/Label'
 
 const explorationToWildernessSpeedQuotient = 5
 const standardHexesPerDay = 12
@@ -51,15 +52,12 @@ const TimeAdvance = ({ options, applyTravelSpeed, speed }) => {
   }
 
   return (
-    <ol className="flex gap-2">
-      {options.map(({ icon, amount, title }) => (
-        <li key={icon}>
-          <IconButton
-            title={title}
-            secondary
-            onClick={() => handleClick(amount)}
-          >
-            {formatAmount(amount)}
+    <ol className="flex flex-col gap-2">
+      {options.map(({ icon, amount, title, verb }) => (
+        <li key={icon} className="flex gap-2">
+          <Label className="w-32 text-right">{title}</Label>
+          <IconButton onClick={() => handleClick(amount)} className="w-full">
+            {`${verb} (${formatAmount(amount)})`}
           </IconButton>
         </li>
       ))}

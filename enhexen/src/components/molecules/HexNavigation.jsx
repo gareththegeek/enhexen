@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import Placeholder from '../atoms/Placeholder'
 import Hex from '../atoms/Hex'
 
@@ -43,22 +43,50 @@ const HexNavigation = ({ reference }) => {
   if (!reference) {
     return <Placeholder>No Reference</Placeholder>
   }
+  if (!/[0-9]+\.[0-9]/.exec(reference)) {
+    return <Navigate to={'/not-found'} />
+  }
+
   const { upleft, up, upright, downleft, down, downright } =
     getAdjacentReferences(reference)
   return (
-    <div className="w-42 shrink-0 mx-auto md:mx-initial">
+    <div className="w-42 shrink-0 mx-auto">
       <div className="flex">
-        <Hex className="relative top-7 left-3" onClick={() => handleNavigate(upleft)}>{upleft}</Hex>
+        <Hex
+          className="relative top-7 left-3"
+          onClick={() => handleNavigate(upleft)}
+        >
+          {upleft}
+        </Hex>
         <Hex onClick={() => handleNavigate(up)}>{up}</Hex>
-        <Hex className="relative top-6 right-3" onClick={() => handleNavigate(upright)}>{upright}</Hex>
+        <Hex
+          className="relative top-6 right-3"
+          onClick={() => handleNavigate(upright)}
+        >
+          {upright}
+        </Hex>
       </div>
       <div className="flex">
-        <Hex className="relative bottom-1 left-14" selected={true}>{reference}</Hex>
+        <Hex className="relative bottom-1 left-14" selected={true}>
+          {reference}
+        </Hex>
       </div>
       <div className="flex">
-        <Hex className="relative bottom-8 left-3" onClick={() => handleNavigate(downleft)}>{downleft}</Hex>
-        <Hex className="relative bottom-2" onClick={() => handleNavigate(down)}>{down}</Hex>
-        <Hex className="relative bottom-9 right-3" onClick={() => handleNavigate(downright)}>{downright}</Hex>
+        <Hex
+          className="relative bottom-8 left-3"
+          onClick={() => handleNavigate(downleft)}
+        >
+          {downleft}
+        </Hex>
+        <Hex className="relative bottom-2" onClick={() => handleNavigate(down)}>
+          {down}
+        </Hex>
+        <Hex
+          className="relative bottom-9 right-3"
+          onClick={() => handleNavigate(downright)}
+        >
+          {downright}
+        </Hex>
       </div>
     </div>
   )

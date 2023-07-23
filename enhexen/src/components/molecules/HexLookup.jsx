@@ -5,7 +5,7 @@ import { mergeClass, noClass } from '../mergeClass'
 import { HexContext } from '../../contexts/HexContext'
 import SearchBox from './SearchBox'
 
-const HexLookup = ({ initialValue, labelWidth, ...rest }) => {
+const HexLookup = ({ initialValue, labelWidth, horizontal, ...rest }) => {
   const [value, setValue] = useState(initialValue)
   const navigate = useNavigate()
   const { setReference } = useContext(HexContext)
@@ -23,11 +23,12 @@ const HexLookup = ({ initialValue, labelWidth, ...rest }) => {
     <SearchBox
       className={mergeClass(rest)}
       name="reference"
-      label="Hex Reference"
+      label="Reference"
       placeholder="e.g. 21.23"
       onChange={handleOnChange}
       onClick={handleClick}
       labelWidth={labelWidth}
+      horizontal={horizontal}
       {...noClass(rest)}
     />
   )
@@ -36,6 +37,7 @@ const HexLookup = ({ initialValue, labelWidth, ...rest }) => {
 HexLookup.propTypes = {
   initialValue: PropTypes.string,
   labelWidth: PropTypes.string,
+  horizontal: PropTypes.bool,
 }
 
 export default HexLookup

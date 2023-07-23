@@ -6,7 +6,7 @@ import Section from '../atoms/Section'
 import Button from '../atoms/Button'
 import Placeholder from '../atoms/Placeholder'
 
-const RandomTable = ({ items, onRoll, heading, placeholder }) => {
+const RandomTable = ({ items, onRoll, heading, placeholder, className }) => {
   const [selected, setSelected] = useState()
   const [isSelected, setIsSelected] = useState(false)
   const [expanded, setExpanded] = useState(false)
@@ -31,14 +31,14 @@ const RandomTable = ({ items, onRoll, heading, placeholder }) => {
 
   if (!items?.length) {
     return (
-      <Section heading={<h2>{heading}</h2>}>
+      <Section className={className} heading={<h2>{heading}</h2>}>
         <Placeholder>{placeholder}</Placeholder>
       </Section>
     )
   }
 
   return (
-    <Table>
+    <Table className={className}>
       <thead>
         <tr>
           <th colSpan={2}>
@@ -72,6 +72,7 @@ const RandomTable = ({ items, onRoll, heading, placeholder }) => {
 }
 
 RandomTable.propTypes = {
+  className: PropTypes.string,
   heading: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   items: PropTypes.array,

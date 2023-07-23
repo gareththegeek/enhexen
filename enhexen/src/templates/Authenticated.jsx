@@ -7,6 +7,7 @@ import FactionSelectPage from '../pages/FactionSelectPage'
 import HexPage from '../pages/HexPage'
 import NpcPage from '../pages/NpcPage'
 import SettlementPage from '../pages/SettlementPage'
+import NotFoundPage from '../pages/NotFoundPage'
 
 // prettier-ignore
 export const routes = [
@@ -16,12 +17,14 @@ export const routes = [
   { name: 'factions', route: '/factions', component: <FactionSelectPage /> },
   { name: 'factions', route: '/factions/:id', component: <FactionPage /> },
   { name: 'npc', route: '/npcs/:id', component: <NpcPage /> },
+  { name: 'not-found', route: '/not-found', component: <NotFoundPage />},
+  { name: 'wildcard', route: '*', component: <NotFoundPage />}
 ]
 
 const Authenticated = () => (
   <>
     <Header />
-    <main className="flex max-w-[50rem] m-auto">
+    <main className="flex max-w-5xl m-auto">
       <div className="flex flex-col gap-8 w-full mt-52 md:mt-24">
         <Routes>
           {routes.map(({ route, component }) => (

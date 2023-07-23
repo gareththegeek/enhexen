@@ -3,12 +3,12 @@ import Input from '../atoms/Input'
 import Field from '../atoms/Field'
 
 const TravelSpeed = ({ speed, onChange }) => (
-  <Field label="Speed" name="speed" labelWidth="w-16" className="flex flex-col h-11">
+  <Field label="Travel Speed" name="speed" labelWidth="w-22" className="h-11">
     <Input
       type="number"
       onChange={onChange}
       value={speed}
-      className="w-14 h-0"
+      className="w-full"
     />
   </Field>
 )

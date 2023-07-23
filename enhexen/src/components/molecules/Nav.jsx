@@ -1,24 +1,13 @@
-import { useContext } from 'react'
 import useCurrentPath from '../../hooks/useCurrentPath'
-import Button from '../atoms/Button'
 import Link from '../atoms/Link'
 import { mergeClass } from '../mergeClass'
-import { UserContext } from '../../contexts/UserContext'
 
 const Nav = ({ ...rest }) => {
   const route = useCurrentPath()
-  const { user, logout } = useContext(UserContext)
 
   return (
     <nav aria-label="Main" className={mergeClass(rest)}>
       <ul className="flex gap-2 md:gap-4 items-baseline">
-        {user && (
-          <li>
-            <Button className="" onClick={logout}>
-              Logout
-            </Button>
-          </li>
-        )}
         <li>
           <Link
             className={`no-underline py-2 ${
@@ -42,7 +31,7 @@ const Nav = ({ ...rest }) => {
         <li>
           <Link
             className={`no-underline py-2 ${
-              route === 'delve'? 'selected-nav-link' : 'text-grey-500'
+              route === 'delve' ? 'selected-nav-link' : 'text-grey-500'
             }`}
             to="/delve"
           >
@@ -52,7 +41,7 @@ const Nav = ({ ...rest }) => {
         <li>
           <Link
             className={`no-underline py-2 ${
-              route === 'factions'? 'selected-nav-link' : 'text-grey-500'
+              route === 'factions' ? 'selected-nav-link' : 'text-grey-500'
             }`}
             to="/factions"
           >
