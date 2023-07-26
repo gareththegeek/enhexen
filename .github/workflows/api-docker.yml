@@ -15,11 +15,12 @@ jobs:
       - name: Get tag
         id: gettag
         uses: dawidd6/action-get-tag@v1
+      - name: Log into registry
+        uses: docker/login-action@v1
         with:
           registry: ${{ secrets.ACR_ENDPOINT }}
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
-          steps:
       - name: Build & Push
         uses: docker/build-push-action@v2
         with:
