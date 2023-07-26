@@ -1,7 +1,7 @@
 name: api-docker
 on:
   push:
-    tags: ['v*.*.*']
+    tags: ['*']
 env:
   IMAGE_NAME: enhexen-api
 jobs:
