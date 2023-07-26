@@ -1,11 +1,7 @@
 name: api-docker
 on:
   push:
-    branches:
-      - main
-    paths:
-      - enhexen-api/*
-      - .github/workflows/api-docker.yml
+    tags: ['v*.*.*']
 env:
   IMAGE_NAME: enhexen-api
 jobs:
