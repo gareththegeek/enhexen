@@ -13,7 +13,7 @@ jobs:
         with:
           submodules: true
       - name: Get tag
-        id: gettag
+        id: tag
         uses: dawidd6/action-get-tag@v1
       - name: Log into registry
         uses: docker/login-action@v1
