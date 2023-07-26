@@ -147,7 +147,7 @@
         @apply top-[50%];
         @apply left-[50%];
         @apply transform -translate-x-[50%] -translate-y-[50%];
-        @aply transform-gpu;
+        @apply transform-gpu;
     }
 
     .mx-initial {

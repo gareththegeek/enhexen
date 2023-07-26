@@ -1,0 +1,47 @@
+version: "3.3"
+
+volumes:
+  postgres-db:
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: postgres@postgres.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+  
+  enhexen-api:
+    image: enhexen-api:4
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 1337
+      APP_KEYS: strapi,strapi,strapi,strapi
+      API_TOKEN_SALT: strapi
+      ADMIN_JWT_SECRET: strapi
+      TRANSFER_TOKEN_SALT: strapi
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: enhexen-api
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_SSL: false
+      JWT_SECRET: strapi
+    ports:
+      - "1337:1337"
+    depends_on:
+      - postgres

@@ -23,7 +23,7 @@ const definitions = {
     ],
     links: [
       { label: 'Forgot your password?', to: '/auth/forgot-password' },
-      { label: 'Register for an account', to: '/auth/register' },
+      // { label: 'Register for an account', to: '/auth/register' },
     ],
   },
   register: {
