@@ -24,6 +24,7 @@ jobs:
       - name: Build & Push
         uses: docker/build-push-action@v2
         with:
+          file: "/enhexen-api/Dockerfile"
           push: true
           build-args: |
             version=${{ steps.tag.outputs.tag }}
