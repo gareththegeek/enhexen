@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import Form from '../molecules/Form'
-import DropPanel from '../atoms/DropPanel'
+import Section from '../atoms/Section'
 
-const AddLoot = ({ onSave, onCancel }) => (
-  <DropPanel heading={<h3>Add Loot</h3>}>
+const AddLoot = ({ onSave, onCancel, className }) => (
+  <Section heading={<h2>Add Loot</h2>} className={className}>
     <Form
       onSubmit={onSave}
       onCancel={onCancel}
@@ -25,12 +25,13 @@ const AddLoot = ({ onSave, onCancel }) => (
         ],
       }}
     />
-  </DropPanel>
+  </Section>
 )
 
 AddLoot.propTypes = {
   onSave: PropTypes.func,
   onCancel: PropTypes.func,
+  className: PropTypes.string,
 }
 
 export default AddLoot

@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { useDeleteLoot, usePostLoot, useFetchLoot } from '../../hooks/loot'
 import Table from '../atoms/Table'
 import AddLoot from '../organisms/AddLoot'
-import { mergeClass } from '../mergeClass'
 import TableHeadingButton from '../atoms/TableHeadingButton'
 import Placeholder from '../atoms/Placeholder'
 import Button from '../atoms/Button'
@@ -59,11 +58,18 @@ const LootTable = ({ className, claim = false }) => {
     Promise.all(loot.map((x) => deleteLoot(x))).then(mutateLoot)
   }
 
+  if (showAdd) {
+    return (
+      <AddLoot
+        onSave={handleSaveClick}
+        onCancel={handleCancelClick}
+        className={className}
+      />
+    )
+  }
+
   return (
-    <Table className={mergeClass({ className }, 'relative')}>
-      {showAdd && (
-        <AddLoot onSave={handleSaveClick} onCancel={handleCancelClick} />
-      )}
+    <Table className={className}>
       <thead>
         <tr>
           <th>Loot</th>

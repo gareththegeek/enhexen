@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Duration } from 'luxon'
 import { ClockContext } from '../../contexts/ClockContext'
 import Form from '../molecules/Form'
-import DropPanel from '../atoms/DropPanel'
+import Section from '../atoms/Section'
 
 const presets = {
   faction: { amount: 1, period: 'months', name: '🚩Faction' },
@@ -17,7 +17,7 @@ const presets = {
   custom: { amount: '', period: '', name: '' },
 }
 
-const AddTimer = ({ onSave, onCancel }) => {
+const AddTimer = ({ onSave, onCancel, className }) => {
   const { now } = useContext(ClockContext)
 
   const handleSave = (nextTimer) => {
@@ -35,7 +35,7 @@ const AddTimer = ({ onSave, onCancel }) => {
   }
 
   return (
-    <DropPanel heading={<h3>Add Timer</h3>}>
+    <Section heading={<h3>Add Timer</h3>} className={className}>
       <Form
         onSubmit={handleSave}
         onCancel={onCancel}
@@ -78,13 +78,14 @@ const AddTimer = ({ onSave, onCancel }) => {
           ],
         }}
       />
-    </DropPanel>
+    </Section>
   )
 }
 
 AddTimer.propTypes = {
   onSave: PropTypes.func,
   onCancel: PropTypes.func,
+  className: PropTypes.string
 }
 
 export default AddTimer

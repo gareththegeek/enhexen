@@ -58,11 +58,18 @@ const TimerTable = ({ className }) => {
     deleteTimer(timer).then(mutateTimers)
   }
 
+  if (showAdd) {
+    return (
+      <AddTimer
+        onSave={handleSaveClick}
+        onCancel={handleCancelClick}
+        className={className}
+      />
+    )
+  }
+
   return (
-    <Table className={mergeClass({ className }, 'relative')}>
-      {showAdd && (
-        <AddTimer onSave={handleSaveClick} onCancel={handleCancelClick} />
-      )}
+    <Table className={className}>
       <thead>
         <tr>
           <th>Timers</th>
