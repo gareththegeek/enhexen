@@ -8,6 +8,7 @@ import AssetList from '../components/organisms/AssetList'
 import NpcTable from '../components/organisms/NpcTable'
 import Section from '../components/atoms/Section'
 import SidebySide from '../components/atoms/SideBySide'
+import FactionSelect from '../components/organisms/FactionSelect'
 
 const FactionPage = () => {
   const navigate = useNavigate()
@@ -25,20 +26,23 @@ const FactionPage = () => {
   const { faction } = useFetchFaction(id)
 
   if (!faction) {
-    return <Section heading="Faction">Loading faction..</Section>
+    return <FactionSelect />
   }
 
   const { name, description, domains, assets, npcs } = faction
 
   return (
     <>
-      <Section heading={<h1>{name}</h1>}>
-        <p>{description}</p>
-        {domains?.map((domain) => (
-          <DomainDetails key={domain.id} domain={domain} faction={faction} />
-        ))}
-        <FactionStats faction={faction} />
-      </Section>
+      <SidebySide>
+        <Section heading={<h1>{name}</h1>} className="md:flex-2">
+          <p>{description}</p>
+          {domains?.map((domain) => (
+            <DomainDetails key={domain.id} domain={domain} faction={faction} />
+          ))}
+          <FactionStats faction={faction} />
+        </Section>
+        <FactionSelect className="md:flex-1" />
+      </SidebySide>
       <SidebySide>
         {assets && (
           <AssetList
