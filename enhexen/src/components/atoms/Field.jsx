@@ -20,7 +20,7 @@ const Field = ({
     >
       {label}
     </label>
-    {cloneElement(children, { name })}
+    {cloneElement(children, { name, className: "h-auto" })}
   </div>
 )
 
