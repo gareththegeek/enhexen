@@ -9,7 +9,7 @@ const Navigation = ({ reference, hex, type, className }) => {
   if (!reference) {
     return (
       <Section heading={<h1>Search for a hex</h1>}>
-        <HexLookup labelWidth="w-96" />
+        <HexLookup className="w-full" />
       </Section>
     )
   }
