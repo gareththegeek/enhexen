@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import Header from '../components/organisms/Header'
+import Footer from '../components/organisms/Footer'
 import ProtectedRoute from '../ProtectedRoute'
 import DelvePage from '../pages/DelvePage'
 import FactionPage from '../pages/FactionPage'
@@ -23,7 +24,7 @@ const Authenticated = () => (
   <>
     <Header />
     <main className="flex max-w-5xl m-auto">
-      <div className="flex flex-col gap-8 w-full mt-52 md:mt-24">
+      <div className="flex flex-col gap-8 w-full mt-16 md:mt-24">
         <Routes>
           {routes.map(({ route, component }) => (
             <Route
@@ -35,6 +36,7 @@ const Authenticated = () => (
         </Routes>
       </div>
     </main>
+    <Footer />
   </>
 )
 

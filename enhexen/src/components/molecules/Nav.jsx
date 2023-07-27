@@ -7,7 +7,7 @@ const Nav = ({ ...rest }) => {
 
   return (
     <nav aria-label="Main" className={mergeClass(rest)}>
-      <ul className="flex gap-2 md:gap-4 items-baseline">
+      <ul className="flex gap-4 items-baseline">
         <li>
           <Link
             className={`no-underline py-2 ${

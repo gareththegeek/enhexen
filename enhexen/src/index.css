@@ -127,6 +127,15 @@
         @apply py-1;
     }
 
+    footer a.text-grey-500 {
+        @apply text-grey-50;
+    }
+
+    footer a.selected-nav-link {
+        @apply text-primary-400;
+        @apply border-b-primary-400;
+    }
+
     a {
         @apply underline;
         @apply text-primary-500;
