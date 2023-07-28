@@ -48,6 +48,16 @@ const Nav = ({ ...rest }) => {
             Factions
           </Link>
         </li>
+        <li>
+          <Link
+            className={`no-underline py-2 ${
+              route === 'log' ? 'selected-nav-link' : 'text-grey-500'
+            }`}
+            to="/log"
+          >
+            Log
+          </Link>
+        </li>
       </ul>
     </nav>
   )

@@ -1,23 +1,29 @@
 import PropTypes from 'prop-types'
 import { mergeClass, noClass } from '../mergeClass'
 import Field from '../atoms/Field'
-import Input from '../atoms/Input'
 import IconButton from '../atoms/IconButton'
+import { useState } from 'react'
+import InputWithSuggestions from './InputWithSuggestions'
 
 const SearchBox = ({
   name,
   label,
-  onChange,
-  onClick,
+  onSearch,
   labelWidth,
   horizontal,
   ...rest
 }) => {
+  const [value, setValue] = useState('')
+
+  const handleChange = ({ value }) => {
+    setValue(value)
+  }
+
   const handleKeyUp = (e) => {
     if (e.key !== 'Enter') {
       return
     }
-    onClick()
+    onSearch(value)
   }
 
   return (
@@ -30,10 +36,14 @@ const SearchBox = ({
         horizontal={horizontal}
         {...noClass(rest)}
       >
-        <Input className="w-[100%]" onChange={onChange} onKeyUp={handleKeyUp} />
+        <InputWithSuggestions
+          className="w-[100%]"
+          onChange={handleChange}
+          onKeyUp={handleKeyUp}
+        />
       </Field>
       <IconButton
-        onClick={onClick}
+        onClick={() => onSearch(value)}
         secondary
         className="grayscale"
         title="Search"
@@ -45,8 +55,7 @@ const SearchBox = ({
 }
 
 SearchBox.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   labelWidth: PropTypes.string,

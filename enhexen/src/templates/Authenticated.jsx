@@ -6,6 +6,7 @@ import DelvePage from '../pages/DelvePage'
 import FactionPage from '../pages/FactionPage'
 import HexPage from '../pages/HexPage'
 import NpcPage from '../pages/NpcPage'
+import LogPage from '../pages/LogPage'
 import SettlementPage from '../pages/SettlementPage'
 import NotFoundPage from '../pages/NotFoundPage'
 
@@ -16,6 +17,7 @@ export const routes = [
   { name: 'delve', route: '/delve', component: <DelvePage /> },
   { name: 'factions', route: '/factions/:id?', component: <FactionPage /> },
   { name: 'npc', route: '/npcs/:id', component: <NpcPage /> },
+  { name: 'log', route: '/log/:id?', component: <LogPage /> },
   { name: 'not-found', route: '/not-found', component: <NotFoundPage />},
   { name: 'wildcard', route: '*', component: <NotFoundPage />}
 ]

@@ -4,6 +4,7 @@ import { FactionProvider } from './FactionContext'
 import { ClockProvider } from './ClockContext'
 import { PubSubProvider } from './PubSubContext'
 import { UserProvider } from './UserContext'
+import { LogProvider } from './LogContext'
 
 const providers = [
   HexProvider,
@@ -11,6 +12,7 @@ const providers = [
   ClockProvider,
   PubSubProvider,
   UserProvider,
+  LogProvider,
 ]
 
 const Providers = ({ children }) => (

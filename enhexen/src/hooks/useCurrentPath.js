@@ -3,8 +3,12 @@ import { routes } from '../templates/Authenticated'
 
 const useCurrentPath = () => {
   const { pathname } = useLocation()
+
   return routes
-    .map(({ name, route }) => ({ name, start: route.split(':')[0] }))
+    .map(({ name, route }) => ({
+      name,
+      start: route.split(':')[0].replace(/\/+$/, ''),
+    }))
     .reverse()
     .find(({ start }) => pathname.startsWith(start))?.name
 }

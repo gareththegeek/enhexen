@@ -6,17 +6,12 @@ import { HexContext } from '../../contexts/HexContext'
 import SearchBox from './SearchBox'
 
 const HexLookup = ({ initialValue, labelWidth, horizontal, ...rest }) => {
-  const [value, setValue] = useState(initialValue)
   const navigate = useNavigate()
   const { setReference } = useContext(HexContext)
 
-  const handleClick = () => {
+  const handleSearch = (value) => {
     setReference(value)
     navigate(`/${value}`)
-  }
-
-  const handleOnChange = ({ value }) => {
-    setValue(value)
   }
 
   return (
@@ -25,8 +20,7 @@ const HexLookup = ({ initialValue, labelWidth, horizontal, ...rest }) => {
       name="reference"
       label="Reference"
       placeholder="e.g. 21.23"
-      onChange={handleOnChange}
-      onClick={handleClick}
+      onSearch={handleSearch}
       labelWidth={labelWidth}
       horizontal={horizontal}
       {...noClass(rest)}
