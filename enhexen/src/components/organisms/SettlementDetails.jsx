@@ -4,6 +4,7 @@ import Label from '../atoms/Label'
 import Section from '../atoms/Section'
 import SettlementDomainText from '../molecules/SettlementDomainText'
 import Field from '../atoms/Field'
+import SettlementSelect from './SettlementSelect'
 
 const SettlementDetails = ({ reference, domain, settlement, className }) => (
   <Section
@@ -15,6 +16,7 @@ const SettlementDetails = ({ reference, domain, settlement, className }) => (
       </h1>
     }
   >
+    <SettlementSelect />
     <SettlementDomainText
       reference={reference}
       settlement={settlement}

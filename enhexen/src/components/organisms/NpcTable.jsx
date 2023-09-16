@@ -37,7 +37,7 @@ const NpcTable = ({ npcs, faction, showHex, className }) => {
             </td>
             {showHex ? (
               <td className="text-center">
-                <ButtonLink to={`/${npc.hex?.reference}`}>{npc.hex?.reference}</ButtonLink>
+                {npc.hex && <ButtonLink to={`/${npc.hex.reference}`}>{npc.hex.reference}</ButtonLink>}
               </td>
             ) : (
               <td className="text-center">

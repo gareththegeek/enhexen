@@ -78,7 +78,7 @@ const insertAdventures = async (records: HexRecord[]) =>
     ({ Adventure, Level, Link }) => ({
       name: Adventure,
       level: Level,
-      link: Link,
+      hyperlink: Link,
       done: false,
     }),
     'name'

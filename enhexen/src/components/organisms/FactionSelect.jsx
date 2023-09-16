@@ -20,6 +20,8 @@ const FactionSelect = ({ className }) => {
     navigate(`/factions/${value}`)
   }
 
+  factions?.sort((a, b) => a.name > b.name)
+
   return (
     <Section heading={<h2>Select Faction</h2>} className={className}>
       <Field label="Faction" name="faction">

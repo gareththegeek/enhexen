@@ -6,7 +6,7 @@ const SettlementDomainText = ({ reference, settlement, domain }) => {
     return <></>
   }
 
-  const { faction } = domain
+  const faction = domain?.faction
 
   return (
     <p>

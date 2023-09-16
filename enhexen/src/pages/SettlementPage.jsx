@@ -7,6 +7,7 @@ import RumourTable from '../components/organisms/RumourTable'
 import Navigation from '../components/organisms/Navigation'
 import SidebySide from '../components/atoms/SideBySide'
 import SettlementSelect from '../components/organisms/SettlementSelect'
+import Section from '../components/atoms/Section'
 
 const SettlementPage = () => {
   const reference = useReference('/settlements')
@@ -14,7 +15,11 @@ const SettlementPage = () => {
   const { hex } = useFetchHex(reference)
 
   if (!hex?.settlement) {
-    return <SettlementSelect />
+    return (
+      <Section heading={<h2>Select Settlement</h2>}>
+        <SettlementSelect />
+      </Section>
+    )
   }
 
   const { settlement, domain, assets, npcs } = hex
