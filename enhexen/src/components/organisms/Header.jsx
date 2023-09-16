@@ -5,10 +5,13 @@ import Clock from '../atoms/Clock'
 import { toDateTime } from '../../helpers/dates'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { ClockContext } from '../../contexts/ClockContext'
+import useClock from '../../hooks/clock'
 
 const Header = () => {
-  const { now } = useContext(ClockContext)
+  const { now: local } = useContext(ClockContext)
+  const { now: remote } = useClock(!local)
   const isMdScreen = useMediaQuery('(min-width: 768px)')
+  const now = local || remote
 
   if (!isMdScreen) {
     return (
