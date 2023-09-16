@@ -3,20 +3,28 @@ import { mergeClass, noClass } from '../mergeClass'
 import Button from '../atoms/Button'
 import ButtonGroup from '../atoms/ButtonGroup'
 import Input from '../atoms/Input'
+import Textarea from '../atoms/Textarea'
 import { useState } from 'react'
 import Select from '../atoms/Select'
 import Tickbox from '../atoms/Tickbox'
 import Field from '../atoms/Field'
 import Link from '../atoms/Link'
 
-const Form = ({ definition, errors, onSubmit, onCancel, ...rest }) => {
+const Form = ({
+  definition,
+  errors,
+  onSubmit,
+  onCancel,
+  initialData,
+  ...rest
+}) => {
   const getInitialState = ({ fields }) =>
     fields.reduce((a, { name, type, initialValue }) => {
-      a[name] = initialValue ?? type === 'tickbox' ? false : ''
+      a[name] = initialValue ?? (type === 'tickbox' ? false : '')
       return a
     }, {})
 
-  const [state, setState] = useState(getInitialState(definition))
+  const [state, setState] = useState(initialData || getInitialState(definition))
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -72,6 +80,15 @@ const Form = ({ definition, errors, onSubmit, onCancel, ...rest }) => {
           return (
             <Tickbox name={name} onChange={handleChange} value={state[name]} />
           )
+        case 'textarea':
+          return (
+            <Textarea
+              rows={5}
+              name={name}
+              onChange={handleChange}
+              value={state[name]}
+            />
+          )
         default:
           throw new Error(`Unknown field type: {type}`)
       }
@@ -90,7 +107,9 @@ const Form = ({ definition, errors, onSubmit, onCancel, ...rest }) => {
       {errors?.length && (
         <ul className="flex flex-col gap-4 text-grey-50 rounded text-sm font-bold m-auto">
           {errors.map((error) => (
-            <li className="capitalize bg-primary-800 p-4 px-8" key={error}>{error}</li>
+            <li className="capitalize bg-primary-800 p-4 px-8" key={error}>
+              {error}
+            </li>
           ))}
         </ul>
       )}
@@ -117,6 +136,7 @@ const Form = ({ definition, errors, onSubmit, onCancel, ...rest }) => {
 
 Form.propTypes = {
   definition: PropTypes.object.isRequired,
+  initialData: PropTypes.object,
   errors: PropTypes.array,
   onSubmit: PropTypes.func,
   onCancel: PropTypes.func,

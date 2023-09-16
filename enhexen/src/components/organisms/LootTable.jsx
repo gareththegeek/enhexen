@@ -1,9 +1,6 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
-import { useDeleteLoot, usePostLoot, useFetchLoot } from '../../hooks/loot'
+import { useDeleteLoot, useFetchLoot } from '../../hooks/loot'
 import Table from '../atoms/Table'
-import AddLoot from '../organisms/AddLoot'
-import TableHeadingButton from '../atoms/TableHeadingButton'
 import Placeholder from '../atoms/Placeholder'
 import Button from '../atoms/Button'
 import Section from '../atoms/Section'
@@ -15,7 +12,7 @@ const renderLoot = (loot, onDelete) =>
       <td className="text-right">{l.type === 'gp' && l.amount}</td>
       <td className="text-right">{l.amount}</td>
       <td>
-        <Button onClick={onDelete}>Delete</Button>
+        <Button onClick={() => onDelete(l)}>Delete</Button>
       </td>
     </tr>
   ))
@@ -25,34 +22,19 @@ const total = (loot, type) =>
     ?.filter((x) => !type || x.type === type)
     .reduce((a, c) => a + c.amount, 0)
 
-const LootTable = ({ className, claim = false }) => {
-  const [showAdd, setShowAdd] = useState(false)
+const LootTable = ({ addButton, className, claim = false }) => {
   const { loot, mutateLoot } = useFetchLoot()
   const deleteLoot = useDeleteLoot()
-  const postLoot = usePostLoot()
 
   const totalGp = total(loot, 'gp')
   const totalXp = total(loot)
 
-  if (totalGp + totalXp === 0) {
+  if (claim && totalGp + totalXp === 0) {
     return (
       <Section heading={<h2>Loot</h2>} className={className}>
         <Placeholder>No loot yet..</Placeholder>
       </Section>
     )
-  }
-
-  const handleAddClick = () => {
-    setShowAdd(!showAdd)
-  }
-
-  const handleCancelClick = () => {
-    setShowAdd(false)
-  }
-
-  const handleSaveClick = (loot) => {
-    setShowAdd(false)
-    postLoot(loot).then(mutateLoot)
   }
 
   const handleDeleteClick = (loot) => {
@@ -63,16 +45,6 @@ const LootTable = ({ className, claim = false }) => {
     Promise.all(loot.map((x) => deleteLoot(x))).then(mutateLoot)
   }
 
-  if (showAdd) {
-    return (
-      <AddLoot
-        onSave={handleSaveClick}
-        onCancel={handleCancelClick}
-        className={className}
-      />
-    )
-  }
-
   return (
     <Table className={className}>
       <thead>
@@ -80,13 +52,7 @@ const LootTable = ({ className, claim = false }) => {
           <th>Loot</th>
           <th className="w-12 text-right">GP</th>
           <th className="w-12 text-right">XP</th>
-          <TableHeadingButton
-            className="w-4"
-            secondary
-            onClick={handleAddClick}
-          >
-            {showAdd ? 'Cancel' : 'Add'}
-          </TableHeadingButton>
+          {claim ? <th className="w-4"></th> : addButton}
         </tr>
       </thead>
       <tbody>
@@ -111,6 +77,7 @@ const LootTable = ({ className, claim = false }) => {
 }
 
 LootTable.propTypes = {
+  addButton: PropTypes.node,
   className: PropTypes.string,
   claim: PropTypes.bool,
 }

@@ -1,17 +1,9 @@
 import PropTypes from 'prop-types'
-import { useContext, useState } from 'react'
-import {
-  useDeleteTimer,
-  usePostTimer,
-  usePutTimer,
-  useFetchTimers,
-} from '../../hooks/timers'
+import { useContext } from 'react'
+import { useDeleteTimer, usePutTimer, useFetchTimers } from '../../hooks/timers'
 import { ClockContext } from '../../contexts/ClockContext'
 import { toDateTime, toDuration } from '../../helpers/dates'
 import Table from '../atoms/Table'
-import TableHeadingButton from '../atoms/TableHeadingButton'
-import AddTimer from './AddTimer'
-import { mergeClass } from '../mergeClass'
 import TimersRow from '../molecules/TimersRow'
 
 const renderTimers = (timers, onDelete, onRenew) =>
@@ -24,28 +16,13 @@ const renderTimers = (timers, onDelete, onRenew) =>
     />
   ))
 
-const TimerTable = ({ className }) => {
+const TimerTable = ({ addButton, className }) => {
   const { now } = useContext(ClockContext)
-  const [showAdd, setShowAdd] = useState(false)
   const { timers, mutateTimers } = useFetchTimers()
   const deleteTimer = useDeleteTimer()
-  const postTimer = usePostTimer()
   const putTimer = usePutTimer()
   const elapsedTimers = timers?.filter(({ due }) => now >= toDateTime(due))
   const upcomingTimers = timers?.filter(({ due }) => now < toDateTime(due))
-
-  const handleAddClick = () => {
-    setShowAdd(!showAdd)
-  }
-
-  const handleCancelClick = () => {
-    setShowAdd(false)
-  }
-
-  const handleSaveClick = (timer) => {
-    setShowAdd(false)
-    postTimer(timer).then(mutateTimers)
-  }
 
   const handleRenewClick = (timer) => {
     putTimer({
@@ -58,29 +35,13 @@ const TimerTable = ({ className }) => {
     deleteTimer(timer).then(mutateTimers)
   }
 
-  if (showAdd) {
-    return (
-      <AddTimer
-        onSave={handleSaveClick}
-        onCancel={handleCancelClick}
-        className={className}
-      />
-    )
-  }
-
   return (
     <Table className={className}>
       <thead>
         <tr>
           <th>Timers</th>
           <th className="w-26"></th>
-          <TableHeadingButton
-            className="w-1"
-            secondary
-            onClick={handleAddClick}
-          >
-            {showAdd ? 'Cancel' : 'Add'}
-          </TableHeadingButton>
+          {addButton}
         </tr>
       </thead>
       <tbody>
@@ -107,6 +68,7 @@ const TimerTable = ({ className }) => {
 }
 
 TimerTable.propTypes = {
+  addButton: PropTypes.node,
   className: PropTypes.string,
 }
 

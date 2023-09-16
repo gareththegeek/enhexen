@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import Nav from '../molecules/Nav'
 import User from '../molecules/User'
 import Clock from '../atoms/Clock'
@@ -8,9 +8,14 @@ import { ClockContext } from '../../contexts/ClockContext'
 import useClock from '../../hooks/clock'
 
 const Header = () => {
-  const { now: local } = useContext(ClockContext)
+  const { now: local, setNow } = useContext(ClockContext)
   const { now: remote } = useClock(!local)
   const isMdScreen = useMediaQuery('(min-width: 768px)')
+  useEffect(() => {
+    if (!local) {
+      setNow(remote)
+    }
+  }, [local, remote, setNow])
   const now = local || remote
 
   if (!isMdScreen) {

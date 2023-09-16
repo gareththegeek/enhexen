@@ -4,6 +4,7 @@ import { Duration } from 'luxon'
 import { ClockContext } from '../../contexts/ClockContext'
 import Form from '../molecules/Form'
 import Section from '../atoms/Section'
+import { useFetchTimers, usePostTimer } from '../../hooks/timers'
 
 const presets = {
   faction: { amount: 1, period: 'months', name: '🚩Faction' },
@@ -17,17 +18,18 @@ const presets = {
   custom: { amount: '', period: '', name: '' },
 }
 
-const AddTimer = ({ onSave, onCancel, className }) => {
+const AddTimer = ({ onDismiss, className }) => {
   const { now } = useContext(ClockContext)
+  const { mutateTimers } = useFetchTimers()
+  const postTimer = usePostTimer()
 
-  const handleSave = (nextTimer) => {
-    if (!onSave) {
-      return
-    }
-
-    const { period, amount } = nextTimer
+  const handleSave = (timer) => {
+    const { period, amount } = timer
     const duration = Duration.fromObject({ [period]: amount })
-    onSave({ ...nextTimer, due: now.plus(duration), duration })
+    postTimer({ ...timer, due: now.plus(duration), duration }).then(
+      mutateTimers
+    )
+    onDismiss()
   }
 
   const applyPreset = ({ value, setState }) => {
@@ -38,7 +40,7 @@ const AddTimer = ({ onSave, onCancel, className }) => {
     <Section heading={<h3>Add Timer</h3>} className={className}>
       <Form
         onSubmit={handleSave}
-        onCancel={onCancel}
+        onCancel={onDismiss}
         definition={{
           heading: 'Add Timer',
           fields: [
@@ -83,9 +85,8 @@ const AddTimer = ({ onSave, onCancel, className }) => {
 }
 
 AddTimer.propTypes = {
-  onSave: PropTypes.func,
-  onCancel: PropTypes.func,
-  className: PropTypes.string
+  onDismiss: PropTypes.func,
+  className: PropTypes.string,
 }
 
 export default AddTimer

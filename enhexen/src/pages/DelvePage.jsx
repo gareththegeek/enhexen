@@ -4,12 +4,12 @@ import { usePublish } from '../hooks/pubsub'
 import useClock from '../hooks/clock'
 import { ClockContext } from '../contexts/ClockContext'
 import EncounterRoll from '../components/molecules/EncounterRoll'
-import LootTable from '../components/organisms/LootTable'
-import TimersTable from '../components/organisms/TimersTable'
 import Section from '../components/atoms/Section'
 import SidebySide from '../components/atoms/SideBySide'
 import ButtonHeading from '../components/molecules/ButtonHeading'
 import TimeControl from '../components/molecules/TimeControl'
+import Loot from '../components/organisms/Loot'
+import Timers from '../components/organisms/Timers'
 
 const DelvePage = () => {
   const { now, setNow } = useContext(ClockContext)
@@ -40,8 +40,8 @@ const DelvePage = () => {
         <TimeControl type="delve" />
       </Section>
       <SidebySide>
-        <TimersTable className="flex-1" />
-        <LootTable className="flex-1" />
+        <Timers className="flex-1" />
+        <Loot className="flex-1" />
       </SidebySide>
     </>
   )

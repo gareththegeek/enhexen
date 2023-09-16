@@ -1,5 +1,5 @@
-import Log from "../components/organisms/Log"
-import LogSearch from "../components/organisms/LogSearch"
+import LogSearch from '../components/organisms/LogSearch'
+import Log from '../components/organisms/Log'
 
 const LogPage = () => (
   <>
