@@ -280,6 +280,10 @@ const processRumourSheet = async (
   records: RumourRecord[],
   adventure: StrapiEntity
 ) => {
+  if(adventure === undefined) {
+    console.error(records)
+    throw new Error("Failed to find adventure id")
+  }
   const rumours = await insertRumours(records, adventure.id)
   return mergeDeepRight(adventure, {
     attributes: {

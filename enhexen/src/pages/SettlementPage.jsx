@@ -1,4 +1,3 @@
-import { Navigate } from 'react-router-dom'
 import { useFetchHex, useReference } from '../hooks/hexes'
 import SettlementDetails from '../components/organisms/SettlementDetails'
 import AssetList from '../components/organisms/AssetList'
@@ -7,6 +6,7 @@ import LootTable from '../components/organisms/LootTable'
 import RumourTable from '../components/organisms/RumourTable'
 import Navigation from '../components/organisms/Navigation'
 import SidebySide from '../components/atoms/SideBySide'
+import SettlementSelect from '../components/organisms/SettlementSelect'
 
 const SettlementPage = () => {
   const reference = useReference('/settlements')
@@ -14,8 +14,7 @@ const SettlementPage = () => {
   const { hex } = useFetchHex(reference)
 
   if (!hex?.settlement) {
-    console.log('Navigate', `/${reference ?? ''}`)
-    return <Navigate to={`/${reference ?? ''}`} />
+    return <SettlementSelect />
   }
 
   const { settlement, domain, assets, npcs } = hex

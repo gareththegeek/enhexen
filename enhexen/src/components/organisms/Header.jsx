@@ -1,12 +1,13 @@
+import { useContext } from 'react'
 import Nav from '../molecules/Nav'
 import User from '../molecules/User'
-import useClock from '../../hooks/clock'
 import Clock from '../atoms/Clock'
 import { toDateTime } from '../../helpers/dates'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
+import { ClockContext } from '../../contexts/ClockContext'
 
 const Header = () => {
-  const { now } = useClock(true)
+  const { now } = useContext(ClockContext)
   const isMdScreen = useMediaQuery('(min-width: 768px)')
 
   if (!isMdScreen) {

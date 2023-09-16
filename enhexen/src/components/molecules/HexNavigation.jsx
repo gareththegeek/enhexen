@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import { Navigate, useNavigate } from 'react-router-dom'
-import Placeholder from '../atoms/Placeholder'
 import Hex from '../atoms/Hex'
 
 const parseReference = (reference) => {
@@ -41,7 +40,7 @@ const HexNavigation = ({ reference }) => {
   }
 
   if (!reference) {
-    return <Placeholder>No Reference</Placeholder>
+    return <></>
   }
   if (!/[0-9]+\.[0-9]/.exec(reference)) {
     return <Navigate to={'/not-found'} />

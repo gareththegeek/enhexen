@@ -17,7 +17,7 @@ const SettlementDomainText = ({ reference, settlement, domain }) => {
       {settlement && domain ? ' l' : domain && 'L'}
       {domain &&
         `ocated within the domain of ${domain.name} which is controlled by `}
-      {domain && <Link to={`/factions/${faction.id}`}>{faction.name}</Link>}
+      {faction && <Link to={`/factions/${faction.id}`}>{faction.name}</Link>}
     </p>
   )
 }

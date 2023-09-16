@@ -17,12 +17,13 @@ const HexPage = () => {
     return (
       <SidebySide>
         <Section
+          className="flex-2"
           containerClassName="items-center"
           heading={<h1>{reference ?? 'Hex'} not found</h1>}
         >
           <Placeholder>No hex found with reference {reference}</Placeholder>
         </Section>
-        <Navigation reference={reference} type="hexes" />
+        <Navigation className="flex-1" reference={reference} type="hexes" />
       </SidebySide>
     )
   }

@@ -6,6 +6,7 @@ import AddLoot from '../organisms/AddLoot'
 import TableHeadingButton from '../atoms/TableHeadingButton'
 import Placeholder from '../atoms/Placeholder'
 import Button from '../atoms/Button'
+import Section from '../atoms/Section'
 
 const renderLoot = (loot, onDelete) =>
   loot.map((l) => (
@@ -34,7 +35,11 @@ const LootTable = ({ className, claim = false }) => {
   const totalXp = total(loot)
 
   if (totalGp + totalXp === 0) {
-    return <Placeholder>No loot yet..</Placeholder>
+    return (
+      <Section heading={<h2>Loot</h2>} className={className}>
+        <Placeholder>No loot yet..</Placeholder>
+      </Section>
+    )
   }
 
   const handleAddClick = () => {
