@@ -14,7 +14,6 @@ const AddLog = ({ data, onDismiss, className }) => {
 
   const handleSaveClick = (log) => {
     if (isNew) {
-      console.log(log, now)
       postLog({
         text: log.text,
         created: now,
