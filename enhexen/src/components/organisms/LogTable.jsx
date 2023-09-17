@@ -3,10 +3,11 @@ import PropTypes from 'prop-types'
 import dompurify from 'dompurify'
 import { formatDate, toDateTime } from '../../helpers/dates'
 import { LogContext } from '../../contexts/LogContext'
-import { useFetchLog, useDeleteLog } from '../../hooks/logs'
+import { useFetchLog, useDeleteLog, usePutLog } from '../../hooks/logs'
 import { useFetchSettlements } from '../../hooks/settlements'
 import Button from '../atoms/Button'
 import Table from '../atoms/Table'
+import IconButton from '../atoms/IconButton'
 import { useFetchFactions } from '../../hooks/factions'
 import { useFetchNpcs } from '../../hooks/npcs'
 
@@ -62,6 +63,7 @@ const renderLogEntry = ({ factions, npcs, settlements }) => {
 
 const LogTable = ({ addButton, onEdit, className }) => {
   const { searchText } = useContext(LogContext)
+  const putLog = usePutLog()
   const deleteLog = useDeleteLog()
   const { entries, mutateEntries } = useFetchLog(searchText)
   const { settlements } = useFetchSettlements()
@@ -69,7 +71,16 @@ const LogTable = ({ addButton, onEdit, className }) => {
   const { npcs } = useFetchNpcs()
   const [confirm, setConfirm] = useState(false)
 
-  entries?.sort((a, b) => toDateTime(a.created) < toDateTime(b.created))
+  entries?.sort((a, b) => {
+    if (a.pinned !== b.pinned) {
+      return b.pinned - a.pinned
+    }
+    const diff = toDateTime(a.created) < toDateTime(b.created)
+    if (diff !== 0) {
+      return diff
+    }
+    return a.text - b.text
+  })
 
   const handleDeleteClick = ({ id }) => {
     if (confirm !== id) {
@@ -77,6 +88,15 @@ const LogTable = ({ addButton, onEdit, className }) => {
       return
     }
     deleteLog(id).then(mutateEntries)
+  }
+
+  const handlePinClick = ({ id, created, text, pinned }) => {
+    putLog({
+      id,
+      created,
+      text,
+      pinned: !pinned,
+    }).then(mutateEntries)
   }
 
   const render = renderLogEntry({ factions, npcs, settlements })
@@ -87,12 +107,22 @@ const LogTable = ({ addButton, onEdit, className }) => {
         <tr>
           <th>Log</th>
           <th></th>
+          <th></th>
           {addButton}
         </tr>
       </thead>
       <tbody>
         {entries?.map((logEntry) => (
           <tr key={logEntry.id}>
+            <td>
+              <IconButton
+                title="Pin"
+                className={!logEntry.pinned && 'grayscale'}
+                onClick={() => handlePinClick(logEntry)}
+              >
+                📌
+              </IconButton>
+            </td>
             <td>{formatDate(toDateTime(logEntry.created))}</td>
             <td>{render(logEntry.text)}</td>
             <td>

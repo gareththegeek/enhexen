@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { UserContext } from '../contexts/UserContext'
+import parseResponse from './parser'
 
 const post = (endpoint, entity, jwt) =>
   fetch(`${import.meta.env.VITE_API_BASE}/${endpoint}`, {
@@ -20,7 +21,10 @@ const usePost = () => {
     return
   }
 
-  return (endpoint, entity) => post(endpoint, entity, user?.jwt)
+  return async (endpoint, entity) => {
+    const response = await post(endpoint, entity, user?.jwt)
+    return parseResponse(response)
+  }
 }
 
 export default usePost

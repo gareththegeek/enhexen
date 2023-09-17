@@ -5,7 +5,7 @@ const useFetchRumours = (reference) => {
     `rumours?reference=${reference}`,
     !!reference
   )
-  return { rumours: data, mutateRumours: mutate }
+  return { rumours: data, mutateRumours: () => mutate() }
 }
 
 export default useFetchRumours

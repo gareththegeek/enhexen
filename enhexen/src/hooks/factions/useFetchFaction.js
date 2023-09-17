@@ -5,7 +5,7 @@ const useFetchFaction = (id) => {
     `factions/${id}?populate[assets][populate]=hex&populate[npcs][populate]=hex&populate[domains]=1`,
     !!id
   )
-  return { faction: data, mutateFaction: mutate }
+  return { faction: data, mutateFaction: () => mutate() }
 }
 
 export default useFetchFaction
