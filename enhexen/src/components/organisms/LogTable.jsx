@@ -1,9 +1,9 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import dompurify from 'dompurify'
 import { formatDate, toDateTime } from '../../helpers/dates'
 import { LogContext } from '../../contexts/LogContext'
-import { useFetchLog } from '../../hooks/logs'
+import { useFetchLog, useDeleteLog } from '../../hooks/logs'
 import { useFetchSettlements } from '../../hooks/settlements'
 import Button from '../atoms/Button'
 import Table from '../atoms/Table'
@@ -37,7 +37,7 @@ const renderLogEntry = ({ factions, npcs, settlements }) => {
     value: (x) => x.hex.reference,
     data: settlements,
   })
-  
+
   const factionRegex = buildRegex(factions)
   const npcRegex = buildRegex(npcs)
   const settlementRegex = buildRegex(settlements)
@@ -62,10 +62,22 @@ const renderLogEntry = ({ factions, npcs, settlements }) => {
 
 const LogTable = ({ addButton, onEdit, className }) => {
   const { searchText } = useContext(LogContext)
-  const { entries } = useFetchLog(searchText)
+  const deleteLog = useDeleteLog()
+  const { entries, mutateEntries } = useFetchLog(searchText)
   const { settlements } = useFetchSettlements()
   const { factions } = useFetchFactions()
   const { npcs } = useFetchNpcs()
+  const [confirm, setConfirm] = useState(false)
+
+  entries?.sort((a, b) => toDateTime(a.created) < toDateTime(b.created))
+
+  const handleDeleteClick = ({ id }) => {
+    if (confirm !== id) {
+      setConfirm(id)
+      return
+    }
+    deleteLog(id).then(mutateEntries)
+  }
 
   const render = renderLogEntry({ factions, npcs, settlements })
 
@@ -84,6 +96,12 @@ const LogTable = ({ addButton, onEdit, className }) => {
             <td>{formatDate(toDateTime(logEntry.created))}</td>
             <td>{render(logEntry.text)}</td>
             <td>
+              <Button
+                warning={logEntry.id === confirm}
+                onClick={() => handleDeleteClick(logEntry)}
+              >
+                {logEntry.id === confirm ? 'Confirm?' : 'Delete'}
+              </Button>
               <Button onClick={() => onEdit(logEntry)}>Edit</Button>
             </td>
           </tr>

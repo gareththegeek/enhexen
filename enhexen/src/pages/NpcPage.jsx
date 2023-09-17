@@ -19,7 +19,8 @@ const NpcPage = () => {
       <SideBySide>
         <NpcDetails className="flex-1" npc={npc} />
         {npc?.faction && (
-          <Section heading={<h2>Stats</h2>} className="flex-1">
+          <Section heading={<h2>Faction</h2>} className="flex-1">
+            <p>{`${npc?.faction?.name} ${npc?.faction?.description}`}</p>
             <FactionStats faction={npc?.faction} />
           </Section>
         )}

@@ -22,6 +22,8 @@ export default {
       'primary-600': '#3d00cc',
       'primary-700': '#2b0099',
       'primary-800': '#220080',
+      'warning-600': '#ffa100',
+      'warning-500': '#ffb200'
     },
     extend: {
       flex: {
