@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import dompurify from 'dompurify'
 import { formatDate, toDateTime } from '../../helpers/dates'
@@ -10,6 +10,7 @@ import Table from '../atoms/Table'
 import IconButton from '../atoms/IconButton'
 import { useFetchFactions } from '../../hooks/factions'
 import { useFetchNpcs } from '../../hooks/npcs'
+import Paginator from '../molecules/Paginator'
 
 const referenceRegex = /([0-9]{1,2}\.[0-9]{1,2})/g
 
@@ -35,7 +36,7 @@ const renderLogEntry = ({ factions, npcs, settlements }) => {
   })
   const settlementLookup = indexBy({
     key: (x) => x.name,
-    value: (x) => x.hex.reference,
+    value: (x) => x.hex?.reference,
     data: settlements,
   })
 
@@ -62,25 +63,18 @@ const renderLogEntry = ({ factions, npcs, settlements }) => {
 }
 
 const LogTable = ({ addButton, onEdit, className }) => {
+  const [confirm, setConfirm] = useState(false)
+  const [page, setPage] = useState(0)
   const { searchText } = useContext(LogContext)
+  useEffect(() => {
+    setPage(0)
+  }, [searchText])
   const putLog = usePutLog()
   const deleteLog = useDeleteLog()
-  const { entries, mutateEntries } = useFetchLog(searchText)
+  const { entries, meta, mutateEntries } = useFetchLog({ searchText, page })
   const { settlements } = useFetchSettlements()
   const { factions } = useFetchFactions()
   const { npcs } = useFetchNpcs()
-  const [confirm, setConfirm] = useState(false)
-
-  entries?.sort((a, b) => {
-    if (a.pinned !== b.pinned) {
-      return b.pinned - a.pinned
-    }
-    const diff = toDateTime(a.created) < toDateTime(b.created)
-    if (diff !== 0) {
-      return diff
-    }
-    return a.text - b.text
-  })
 
   const handleDeleteClick = ({ id }) => {
     if (confirm !== id) {
@@ -112,6 +106,16 @@ const LogTable = ({ addButton, onEdit, className }) => {
         </tr>
       </thead>
       <tbody>
+        {meta?.pagination && (
+          <tr>
+            <td colSpan={4}>
+              <Paginator
+                pagination={meta.pagination}
+                onPage={(page) => setPage(page)}
+              />
+            </td>
+          </tr>
+        )}
         {entries?.map((logEntry) => (
           <tr key={logEntry.id}>
             <td>
@@ -136,6 +140,16 @@ const LogTable = ({ addButton, onEdit, className }) => {
             </td>
           </tr>
         ))}
+        {meta?.pagination && (
+          <tr>
+            <td colSpan={4} className="text-right">
+              <Paginator
+                pagination={meta.pagination}
+                onPage={(page) => setPage(page)}
+              />
+            </td>
+          </tr>
+        )}
       </tbody>
     </Table>
   )

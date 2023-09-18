@@ -29,9 +29,12 @@ const mapStrapiEntity = (entity) => {
 const parseResponse = async (response) => {
   const result = await response.json()
 
-  return Array.isArray(result.data)
-    ? result.data.map(mapStrapiEntity)
-    : mapStrapiEntity(result.data)
+  return {
+    data: Array.isArray(result.data)
+      ? result.data.map(mapStrapiEntity)
+      : mapStrapiEntity(result.data),
+    meta: result.meta,
+  }
 }
 
 export default parseResponse

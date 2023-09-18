@@ -14,7 +14,7 @@ const useFetch = (endpoint, shouldFetch = true) => {
   if (data?.type === 'cors') {
     return {}
   }
-  return { data, mutate }
+  return { data: data?.data, meta: data?.meta, mutate }
 }
 
 export default useFetch

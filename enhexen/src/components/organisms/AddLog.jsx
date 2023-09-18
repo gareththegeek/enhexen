@@ -15,8 +15,12 @@ const AddLog = ({ data, onDismiss, className }) => {
   const isNew = !data
 
   const handleSaveClick = async (log) => {
-    const tagTexts = log.tags.split(',').map((x) => x.trim())
+    const tagTexts = log.tags
+      .split(',')
+      .map((x) => x.trim())
+      .filter((x) => x !== '')
     const tags = await Promise.all(tagTexts.map((x) => postTag({ text: x })))
+    
     if (isNew) {
       postLog({
         text: log.text,

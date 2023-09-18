@@ -23,7 +23,7 @@ const usePost = () => {
 
   return async (endpoint, entity) => {
     const response = await post(endpoint, entity, user?.jwt)
-    return parseResponse(response)
+    return parseResponse(response)?.data
   }
 }
 
