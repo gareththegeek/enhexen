@@ -6,7 +6,14 @@ import Section from '../atoms/Section'
 import Button from '../atoms/Button'
 import Placeholder from '../atoms/Placeholder'
 
-const RandomTable = ({ items, onRoll, heading, placeholder, className }) => {
+const RandomTable = ({
+  items,
+  onRoll,
+  heading,
+  placeholder,
+  className,
+  includeParent,
+}) => {
   const [selected, setSelected] = useState()
   const [isSelected, setIsSelected] = useState(false)
   const [expanded, setExpanded] = useState(false)
@@ -22,9 +29,10 @@ const RandomTable = ({ items, onRoll, heading, placeholder, className }) => {
     }
   }
 
-  const renderRow = ({ id, roll, description }, i) => (
+  const renderRow = ({ id, roll, description, parent }, i) => (
     <tr key={`${id}`} className={i === selected ? 'selected-tr' : ''}>
       <td>{roll}</td>
+      {includeParent && <td>{parent}</td>}
       <td>{description}</td>
     </tr>
   )
@@ -41,7 +49,7 @@ const RandomTable = ({ items, onRoll, heading, placeholder, className }) => {
     <Table className={className}>
       <thead>
         <tr>
-          <th colSpan={2}>
+          <th colSpan={includeParent ? 3 : 2}>
             <div className="flex justify-between">
               <span className="me-4">{heading}</span>
               <div>
@@ -77,6 +85,7 @@ RandomTable.propTypes = {
   placeholder: PropTypes.string.isRequired,
   items: PropTypes.array,
   onRoll: PropTypes.func,
+  includeParent: PropTypes.bool,
 }
 
 export default RandomTable

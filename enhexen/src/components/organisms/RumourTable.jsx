@@ -16,10 +16,12 @@ const RumourTable = ({ reference, className }) => {
       onRoll={handleRoll}
       heading="Rumour"
       placeholder="There are no credible rumours in this place only idle gossip"
-      items={rumours?.map(({ id, roll, text }) => ({
+      includeParent
+      items={rumours?.map(({ id, roll, text, adventure }) => ({
         id,
         roll,
         description: text,
+        parent: adventure.name,
       }))}
     />
   )

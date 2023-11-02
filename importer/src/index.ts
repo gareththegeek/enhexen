@@ -268,6 +268,9 @@ const processEncounterSheet = async (
   records: EncounterRecord[],
   region: StrapiEntity
 ) => {
+  if  (!region) {
+    console.log(records)
+  }
   const encounters = await insertEncounters(records, region.id)
   return mergeDeepRight(region, {
     attributes: {

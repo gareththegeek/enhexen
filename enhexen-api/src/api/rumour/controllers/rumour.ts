@@ -6,12 +6,14 @@ import { factories } from "@strapi/strapi";
 import {
   equals,
   map,
+  max,
   mergeLeft,
   mergeRight,
   none,
   pick,
   pluck,
   prop,
+  reduce,
   reduceWhile,
   sum,
 } from "ramda";
@@ -66,16 +68,19 @@ interface Candidate {
   adventure?: AdventureWithDistance;
 }
 
-const getRandomRumourForAdventure = (adventure: Adventure) =>
-  adventure.rumours[randomInteger(0, adventure.rumours.length - 1)];
+const getRandomRumourForAdventure = (adventure: Adventure) => ({
+  ...adventure.rumours[randomInteger(0, adventure.rumours.length - 1)],
+  adventure,
+});
 
 const createGetRumour =
-  (withDistances: AdventureWithDistance[], total: number) => () => {
+  (withDistances: AdventureWithDistance[], total: number, max: number) =>
+  () => {
     const random = randomInteger(0, total - 1);
     const chosenAdventure = reduceWhile(
       (x) => x.count <= random,
       (a, c) => ({
-        count: a.count + c.distance,
+        count: a.count + (max - c.distance),
         adventure: c,
       }),
       { count: 0 } as Candidate,
@@ -91,7 +96,12 @@ const buildRumourTable = (
 ): Rumour[] => {
   const withDistances = map(withDistance(reference), adventures);
   const total = sum(pluck("distance", withDistances));
-  const getRumour = createGetRumour(withDistances, total);
+  const maxDistance = reduce(
+    max,
+    -1,
+    pluck("distance", withDistances)
+  ) as number;
+  const getRumour = createGetRumour(withDistances, total, maxDistance);
   let i = 0;
   let j = 0;
   const results: Rumour[] = [];
