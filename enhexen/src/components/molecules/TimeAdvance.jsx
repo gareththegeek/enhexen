@@ -11,7 +11,7 @@ import Label from '../atoms/Label'
 const explorationToWildernessSpeedQuotient = 5
 const standardHexesPerDay = 12
 
-const TimeAdvance = ({ options, applyTravelSpeed, speed }) => {
+const TimeAdvance = ({ options, applyTravelSpeed, speed, untilMorning }) => {
   const { now, setNow } = useContext(ClockContext)
   const { putClock } = useClock()
   const publish = usePublish('CLOCK_CHANGE')
@@ -25,7 +25,10 @@ const TimeAdvance = ({ options, applyTravelSpeed, speed }) => {
 
   const handleClick = (amount) => {
     const duration = getDuration(amount)
-    const nextNow = now.plus(duration)
+    const nextNow =
+      untilMorning && duration >= Duration.fromObject({ days: 1 })
+        ? now.startOf('day').plus({ days: 1, hours: 7 })
+        : now.plus(duration)
 
     setNow(nextNow)
     putClock(nextNow).then(publish({ duration }))
@@ -69,6 +72,7 @@ TimeAdvance.propTypes = {
   options: PropTypes.array,
   applyTravelSpeed: PropTypes.bool,
   speed: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  untilMorning: PropTypes.bool,
 }
 
 export default TimeAdvance

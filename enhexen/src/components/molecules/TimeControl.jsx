@@ -65,6 +65,7 @@ const TimeControl = ({ type }) => {
       )}
       <TimeAdvance
         options={options}
+        untilMorning={type === 'settlement'}
         applyTravelSpeed={type === 'hexes'}
         speed={speed}
       />
