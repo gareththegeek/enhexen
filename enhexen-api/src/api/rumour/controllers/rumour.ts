@@ -3,20 +3,7 @@
  */
 
 import { factories } from "@strapi/strapi";
-import {
-  equals,
-  map,
-  max,
-  mergeLeft,
-  mergeRight,
-  none,
-  pick,
-  pluck,
-  prop,
-  reduce,
-  reduceWhile,
-  sum,
-} from "ramda";
+import { head, map, mergeLeft, pipe, pluck, sort, take } from "ramda";
 
 interface Rumour {
   id: number;
@@ -52,80 +39,41 @@ const getDistance = (referenceA: string, referenceB: string) => {
   return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 };
 
-const withDistance = (reference: string) => (adventure: Adventure) =>
-  mergeLeft(
-    { distance: getDistance(adventure.hex.reference, reference) },
-    adventure
-  );
+type AdventureWithDistance = Adventure & { distance: number };
+
+const withDistance =
+  (reference: string) =>
+  (adventure: Adventure): AdventureWithDistance =>
+    mergeLeft(
+      { distance: getDistance(adventure.hex.reference, reference) },
+      adventure
+    );
 
 const randomInteger = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
-type AdventureWithDistance = Adventure & { distance: number };
-
-interface Candidate {
-  count: number;
-  adventure?: AdventureWithDistance;
-}
-
-const getRandomRumourForAdventure = (adventure: Adventure) => ({
-  ...adventure.rumours[randomInteger(0, adventure.rumours.length - 1)],
-  adventure,
-});
-
-const createGetRumour =
-  (withDistances: AdventureWithDistance[], total: number, max: number) =>
-  () => {
-    const random = randomInteger(0, total - 1);
-    const chosenAdventure = reduceWhile(
-      (x) => x.count <= random,
-      (a, c) => ({
-        count: a.count + (max - c.distance),
-        adventure: c,
-      }),
-      { count: 0 } as Candidate,
-      withDistances
-    );
-    return getRandomRumourForAdventure(chosenAdventure.adventure!);
-  };
+const takeRandom = (rumours: Rumour[]): Rumour =>
+  rumours[randomInteger(0, rumours.length - 1)];
 
 const buildRumourTable = (
   adventures: Adventure[],
   reference: string,
   tableSize = 8
 ): Rumour[] => {
-  const withDistances = map(withDistance(reference), adventures);
-  const total = sum(pluck("distance", withDistances));
-  const maxDistance = reduce(
-    max,
-    -1,
-    pluck("distance", withDistances)
-  ) as number;
-  const getRumour = createGetRumour(withDistances, total, maxDistance);
-  let i = 0;
-  let j = 0;
-  const results: Rumour[] = [];
-  const maxTries = 10;
-  while (results.length < tableSize) {
-    var rumour = getRumour();
-    if (none(equals(rumour.id), pluck("id", results))) {
-      j = 0;
-      results.push(mergeRight(rumour, { roll: (++i).toString() }));
-    } else {
-      j += 1;
-      if (j > maxTries) {
-        break;
-      }
-    }
-  }
-  return results;
+  return pipe(
+    map(withDistance(reference)),
+    sort((a: AdventureWithDistance, b) => a.distance - b.distance),
+    take(tableSize),
+    pluck("rumours"),
+    map(takeRandom)
+  )(adventures);
 };
 
 const getAdventuresWithRumours = async () => {
   const { results: adventures } = await strapi.services[
     "api::adventure.adventure"
   ].find({
-    populate: ["rumours", "hex"],
+    populate: ["rumours", "hex", "rumours.adventure"],
     filters: {
       done: false,
       rumours: {

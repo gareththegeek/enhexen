@@ -1,7 +1,7 @@
-import useFetch from '../useFetch'
+import { useFetchImmutable } from '../useFetch'
 
 const useFetchRumours = (reference) => {
-  const { data, mutate } = useFetch(
+  const { data, mutate } = useFetchImmutable(
     `rumours?reference=${reference}`,
     !!reference
   )
